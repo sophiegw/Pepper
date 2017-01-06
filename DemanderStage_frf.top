@@ -1,0 +1,50 @@
+topic: ~DemanderStage()
+language: frf
+
+# Defining extra concepts out of words or group of words
+#concept:(hello) [hello hi hey "good morning" greetings]
+concept:(Bonjour) [Bonjour Salut Yo Coucou]
+concept:(Tchao) [Tchao "Au revoir" "A+"]
+concept:(identité) [“T’es qui ?” “Qui es-tu ?” “Comment t’appelles-tu”]
+concept:(fun) [“Est-ce que je peux prendre un selfie avec toi ?” “Je veux un selfie” “Je voudrais un selfie”]
+concept:(stage) [“Je cherche un stage” stage “je veux un stage” “quels sont les stages proposés ?” “stage société générale” “Je suis en césure” ]
+concept:(oui) [Oui Ouais Yep Ouaip “d’accord” “Ok”]
+concept:(non) [non nope nan “non merci” bof “je sais pas” “je ne sais pas”]
+concept:(DomaineAimé) ["banque d'investissement" " banque de détail" "banane"]
+concept:(info) [cédédé cédéhi véhieu]
+
+
+u: (~Bonjour) Bonjour, que recherchez-vous sur ce forum ?
+    u1: (~identité) Je suis Lilou de la société générale, je suis ici pour vous aider.
+    u1:(~stage) Votre stage dure t-il 6 mois ?
+        u2:(~oui) Êtes-vous déjà allé sur notre site de recrutement carrireze de la société générale ?
+            u3:(~oui) Avez-vous une idée du domaine dans lequel vous souhaitez travailler ?
+                u4:(~oui) Lequel ?
+                    u5:(_~DomaineAimé {*}) Avez-vous le temps de faire un mini-quiz sur le domaine $1 $domaine=$1
+                        u6:(~oui) Lancer le quiz $domaine
+                        u6:(~non) pas de quizz alors #redirection vers la personne du domaine
+            u3:(~non) Ce n’est pas grave, voici les domaines dans lesquels nous recrutons en ce moment. Nous vous conseillons de vous inscrire sur le site pour être tenu au courant des actualités. Vous pouvez cliquer sur un domaine pour en apprendre plus.#Montrer la liste des domaines + mettre le lien de la page carreers ⇒ refaire les étapes u5/u6
+        u2:(~non) Nous ne proposons hélas que très peu de stages de moins de 6 mois, nous pouvons néanmoins vous rediriger vers un RH pour en apprendre plus sur la société générale. Nous allons tout de même prendre votre CV en photo. #Montrer photo
+
+
+#/!\ À faire à chaque fois en “sortie” de ce u1 : prendre le CV en photo
+
+
+    u1:(informations sur la sogé) Voulez-vous en connaitre plus sur la société générale ?
+        u2: (~oui) Nous comptons 146 000 collaborateurs de 122 nationalités différentes à travers 66 pays et 60% de notre effectif est hors de France. Notre activité repose sur 3 piliers : la banque de détails en France, la banque de détail et services financiers internationaux, et enfin la banque de grande clientèle et solutions investisseurs. Voulez-vous des détails sur l’un de ces piliers ?
+            u3:(~oui) Lequel ? Montrer la liste des piliers.
+            u3:(~non) D’accord, voulez-vous plus d’infos sur la société générale ?
+                u4:(~oui) Je vous laisse vous diriger vers un RH #Montrer photo
+                u4:(~non) Très bien.
+
+    #u1:(~info)
+    u1:(pétanque) $imageLogo=1
+    u1:(Montre moi une page web) $pageWeb=1
+u: (~fun) D’accord mais faites vite, je suis un robot très occupé !
+
+
+# Catching inputs and triggering outputs
+#u:(e:onStart) $onStopped=1
+
+# Replying to speech
+#u:(~hello) ~hello
