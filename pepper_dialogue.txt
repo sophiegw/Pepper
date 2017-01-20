@@ -1,7 +1,7 @@
 topic: ~DemanderStage()
 language: frf
 
-say box Bonjour bienvenue sur ce forum 
+#say box Bonjour bienvenue sur ce forum 
 
 
 # Defining extra concepts out of words or group of words
