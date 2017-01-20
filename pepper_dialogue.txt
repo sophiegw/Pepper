@@ -1,0 +1,194 @@
+topic: ~DemanderStage()
+language: frf
+
+say box Bonjour bienvenue sur ce forum 
+
+
+# Defining extra concepts out of words or group of words
+#concept:(hello) [hello hi hey "good morning" greetings]
+
+concept:(Bonjour) [Bonjour Salut Yo Coucou bienvenue]
+concept:(Tchao) [Tchao "Au revoir" "A+"]
+concept:(oui) [Oui Ouais Yep Ouaip “d’accord” “Ok”]
+concept:(non) [non nope nan “non merci” bof “je sais pas” “je ne sais pas”]
+concept:(identité) [“T’es qui ?” “Qui es-tu ?” “Comment t’appelles-tu”]
+concept:(fun) [“Est-ce que je peux prendre un selfie avec toi ?” “Je veux un selfie” “Je voudrais un selfie”]
+concept:(musique) [“Est-ce que tu peut nous jouer un morceau ?” “musique” “Je voudrais que tu joue un morceau”]
+concept:(stage) [“Je cherche un stage” stage “je veux un stage” “quels sont les stages proposés ?” “stage société générale” “Je suis en césure” “Je cherche une césure” ]
+concept:(césure) [“quelles sont les césures proposés par la société générale?” “quelles sont les césures proposés à la société générale?”  “je veux une césure” “quelles sont les césures proposés ?” “césure société générale” “Je suis en césure” “Je cherche une césure” ]
+concept:(CDI) [“Je cherche un cédéhi” cédéhi “je veux un cédéhi” “quels sont les cédéhi proposés ?” “cédéhi société générale”]
+concept:(VIE) [“Je cherche une véhieu” véhieu “je veux une véhieu” “quels sont les véhieu proposés ?” “véhieu société générale”]
+concept:(DirectRH) [“Je cherche un cédédé” cédédé “je veux un cédédé” “quels sont les cédédé proposés ?” “cédédé société générale”“Je fais une thèse” thèse “je veux une thèse” “quels sont les thèse proposés ?” “thèse société générale”“Je cherche une summer” summer “je veux une summer” “quels sont les summer proposés ?” “summer société générale”“Je cherche une criffheu” criffheu “je veux une criffheu” “quels sont les criffheu proposés ?” “criffheu société générale”]
+concept:(Alternance) [“Je cherche une alternance” alternance “je veux une alternance” “quels sont les alternance proposés ?” “alternance société générale”]
+concept:(jeune diplômé) [“jeune diplômé” junior]
+concept:(senior) [“senior” expérimenté ]
+concept:(DomaineAimé) [“Achat” “Audit” “Back-Office” “Middle Office” “Opérations” “Finance de marché” “Finance d'entreprise” “Risques” “Communication” “RH” “Comptabilité” “Contrôle de Gestion” “Droit” “Fiscalité” “Conformité” “Marketing BFI” “Marketing en Banque de Détail” “Banque de Détail” “Assurance” “Immobilier” “IT” “Management de Projet ” “Processus” “Banque de Détail” “Banque Privée” “Autres” ]
+concept:(international) [“à l’international” “à l’étranger” “international" “étranger”]
+
+(e:Dialog/NotUnderstood) # 
+(e:Dialog/répète) # 
+
+u: (~Bonjour) bonjour est ce que vous allez bien ?
+
+	u1: (~oui) parfait je suis contente. ^wait(5)  D'ailleurs Que recherchez-vous sur ce forum ?
+
+	u1: (~non) ooohh c’est dommage j’espère que ça ira mieux après notre discussion. ^wait(5) D’ailleurs que recherchez-vous sur ce forum ?
+
+
+		u2:(~identité) Je suis Lilou de la société générale, je suis ici pour vous aider.
+    
+		u2:(~DirectRH) je vous conseille d’aller voir un rh pour en apprendre plus sur nos opportunités dans ce domaine.
+	
+	
+	
+		u2:(~alternance) Êtes-vous déjà inscrit sur notre site de recrutement carrireze de la société générale ?
+			u3:(~oui) Avez-vous une idée du domaine dans lequel vous souhaitez travailler ?
+					u4:(~oui) Lequel ?
+						u5:(_~DomaineAimé {*}) Avez-vous le temps de faire un mini-quiz sur le domaine $1 $domaine=$1
+							u6:(~oui) Lancer le quiz $domaine
+							u6:(~non) pas de quizz alors #redirection vers la personne du domaine ou RH
+
+					u4:(~non) Ce n’est pas grave, voici les domaines dans lesquels nous recrutons en ce moment.Vous pouvez cliquer sur un domaine pour en apprendre plus. Voyez-vous un  domaine dans lequel vous souhaitez travailler ? #Montrer la liste des domaines + mettre le lien de la page carreers 
+						u5:(~oui) Lequel ?
+						u6:(_~DomaineAimé {*}) Avez-vous le temps de faire un mini-quiz sur le domaine $1 $domaine=$1
+							u7:(~oui) Lancer le quiz $domaine
+							u7:(~non) pas de quizz alors #redirection vers la personne du domaine ou RH
+						u5:(~non) Dommage un RH pourra surement vous renseigner plus précisément #redirection vers  RH
+						
+			u3:(~non)Ce n’est pas grave Nous vous conseillons de vous inscrire sur le site pour être tenu au courant des offres d’alternance  elle sont disponibles en majorités entre mars et juin. Voici les domaines dans lesquels nous recrutons en ce moment. Vous pouvez cliquer sur un domaine pour en apprendre plus. Voyez-vous un  domaine dans lequel vous souhaitez travailler ? #Montrer la liste des domaines + mettre le lien de la page carreers 
+					u4:(~oui) Lequel ?
+						u5:(_~DomaineAimé {*}) Avez-vous le temps de faire un mini-quiz sur le domaine $1 $domaine=$1
+							u6:(~oui) Lancer le quiz $domaine
+							u6:(~non) pas de quizz alors #redirection vers la personne du domaine ou RH
+					u4:(~non) Dommage un RH pourra surement vous renseigner plus précisément #redirection vers  RH
+						
+						
+		u2:(~CDI) Êtes vous jeune diplômé ou sénior ?
+		
+			u3:(~jeune diplômé) Êtes-vous déjà inscrit sur notre site de recrutement carrireze de la société générale ?
+				u4:(~oui) Avez-vous une idée du domaine dans lequel vous souhaitez travailler ?
+						u5:(~oui) Lequel ?
+							u6:(_~DomaineAimé {*}) Avez-vous le temps de faire un mini-quiz sur le domaine $1 $domaine=$1
+								u7:(~oui) Lancer le quiz $domaine
+								u7:(~non) pas de quizz alors #redirection vers la personne du domaine ou RH
+						
+						u5:(~non) Ce n’est pas grave, voici les domaines dans lesquels nous recrutons en ce moment.Vous pouvez cliquer sur un domaine pour en apprendre plus. Voyez-vous un  domaine dans lequel vous souhaitez travailler ? #Montrer la liste des domaines + mettre le lien de la page carreers 
+							u6:(~oui) Lequel ?
+								u7:(_~DomaineAimé {*}) Avez-vous le temps de faire un mini-quiz sur le domaine $1 $domaine=$1
+									u8:(~oui) Lancer le quiz $domaine
+									u8:(~non) pas de quizz alors #redirection vers la personne du domaine ou RH
+							u6:(~non) Dommage un RH pourra surement vous renseigner plus précisément #redirection vers  RH
+				u4:(~non)Ce n’est pas grave Nous vous conseillons de vous inscrire sur le site pour être tenu au courant des offres de cédéhi. Voici les domaines dans lesquels nous recrutons en ce moment. Vous pouvez cliquer sur un domaine pour en apprendre plus. Voyez-vous un  domaine dans lequel vous souhaitez travailler ? #Montrer la liste des domaines + mettre le lien de la page carreers 
+						u5:(~oui) Lequel ?
+							u6:(_~DomaineAimé {*}) Avez-vous le temps de faire un mini-quiz sur le domaine $1 $domaine=$1
+								u7:(~oui) Lancer le quiz $domaine
+								u7:(~non) pas de quizz alors #redirection vers la personne du domaine ou RH
+						u5:(~non) Dommage un RH pourra surement vous renseigner plus précisément #redirection vers  RH
+				
+
+			u3:(~sénior) Êtes-vous déjà inscrit sur notre site de recrutement carrireze de la société générale ?
+				u4:(~oui) Avez-vous une idée du domaine dans lequel vous souhaitez travailler ?
+						u5:(~oui) Lequel ?
+							 #redirection vers la personne du domaine ou RH
+
+						u5:(~non) Ce n’est pas grave, voici les domaines dans lesquels nous recrutons en ce moment.Vous pouvez cliquer sur un domaine pour en apprendre plus. Voyez-vous un  domaine dans lequel vous souhaitez travailler ? #Montrer la liste des domaines + mettre le lien de la page carreers 
+							u6:(~oui) Lequel ?
+								u7:(_~DomaineAimé {*})  #redirection vers la personne du domaine ou RH
+						    u6:(~non) Dommage un RH pourra surement vous renseigner plus précisément #redirection vers  RH
+				u4:(~non)Ce n’est pas grave Nous vous conseillons de vous inscrire sur le site pour être tenu au courant des offres de cédéhi. Voici les domaines dans lesquels nous recrutons en ce moment. Vous pouvez cliquer sur un domaine pour en apprendre plus. Voyez-vous un  domaine dans lequel vous souhaitez travailler ? #Montrer la liste des domaines + mettre le lien de la page carreers 
+						u5:(~oui) Lequel ?
+							#redirection vers la personne du domaine ou RH
+						u5:(~non) Dommage un RH pourra surement vous renseigner plus précisément #redirection vers  RH
+			
+	
+
+	
+		u2:(~césure) Vous cherchez une césure  en France ou à l’international ?
+		
+			u3:(~International) je vous conseille d’aller voir un RH pour en apprendre plus sur nos opportunités de césures à l'international.  
+		
+			u3:(~France)  très bien Votre césure dure t-elle 6 mois ?
+				u4:(~oui) Êtes-vous déjà allé sur notre site de recrutement carrireze de la société générale ?
+					u5:(~oui) Avez-vous une idée du domaine dans lequel vous souhaitez travailler ?
+						u6:(~oui) Lequel ?
+							u7:(_~DomaineAimé {*}) Avez-vous le temps de faire un mini-quiz sur le domaine $1 $domaine=$1
+								u8:(~oui) Lancer le quiz $domaine
+								u8:(~non) pas de quizz alors #redirection vers la personne du domaine
+						u6:(~non) Dommage un RH pourra surement vous renseigner plus précisément #redirection vers  RH	
+					u5:(~non) Ce n’est pas grave, voici les domaines dans lesquels nous recrutons en ce moment. Nous vous conseillons de vous inscrire sur le site pour être tenu au courant des actualités. Vous pouvez cliquer sur un domaine pour en apprendre plus. Voyez-vous un  domaine dans lequel vous souhaitez travailler ?#Montrer la liste des domaines + mettre le lien de la page carreers 
+						u6:(~oui) Lequel ?
+										u7:(_~DomaineAimé {*}) Avez-vous le temps de faire un mini-quiz sur le domaine $1 $domaine=$1
+											u8:(~oui) Lancer le quiz $domaine
+											u8:(~non) pas de quizz alors #redirection vers la personne du domaine ou RH
+						u6:(~non) Dommage un RH pourra surement vous renseigner plus précisément #redirection vers  RH
+				u4:(~non) Nous ne proposons hélas que très peu de stages de moins de 6 mois, nous pouvons néanmoins vous rediriger vers un RH pour en apprendre plus sur la société générale. Nous allons tout de même prendre votre CV en photo. #Montrer photo
+				
+		
+
+
+
+		
+		u2:(~stage) Vous cherchez un stage en France ou à l’international ? 
+
+			u3:(~International) je vous conseille d’aller voir un RH pour en apprendre plus sur nos opportunités de stages à l'international.
+			
+			u3:(~France)  très bien Votre stage dure t-il 6 mois ?
+				u4:(~oui) Êtes-vous déjà allé sur notre site de recrutement carrireze de la société générale ?
+					u5:(~oui) Avez-vous une idée du domaine dans lequel vous souhaitez travailler ?
+						u6:(~oui) Lequel ?
+							u7:(_~DomaineAimé {*}) Avez-vous le temps de faire un mini-quiz sur le domaine $1 $domaine=$1
+								u8:(~oui) Lancer le quiz $domaine
+								u8:(~non) pas de quizz alors #redirection vers la personne du domaine
+						u6:(~non) Dommage un RH pourra surement vous renseigner plus précisément #redirection vers  RH	
+					u5:(~non) Ce n’est pas grave, voici les domaines dans lesquels nous recrutons en ce moment. Nous vous conseillons de vous inscrire sur le site pour être tenu au courant des actualités. Vous pouvez cliquer sur un domaine pour en apprendre plus. Voyez-vous un  domaine dans lequel vous souhaitez travailler ?#Montrer la liste des domaines + mettre le lien de la page carreers 
+						u6:(~oui) Lequel ?
+										u7:(_~DomaineAimé {*}) Avez-vous le temps de faire un mini-quiz sur le domaine $1 $domaine=$1
+											u8:(~oui) Lancer le quiz $domaine
+											u8:(~non) pas de quizz alors #redirection vers la personne du domaine ou RH
+						u6:(~non) Dommage un RH pourra surement vous renseigner plus précisément #redirection vers  RH
+				u4:(~non) Nous ne proposons hélas que très peu de stages de moins de 6 mois, nous pouvons néanmoins vous rediriger vers un RH pour en apprendre plus sur la société générale. Nous allons tout de même prendre votre CV en photo. #Montrer photo
+			
+			
+
+#/!\ À faire à chaque fois en “sortie” de ce u1 : prendre le CV en photo
+
+
+    u2:(informations sur la sogé) Voulez-vous en connaitre plus sur la société générale ?
+        u3: (~oui) Nous comptons 146 000 collaborateurs de 122 nationalités différentes à travers 66 pays et 60% de notre effectif est hors de France. Notre activité repose sur 3 piliers : la banque de détails en France, la banque de détail et services financiers internationaux, et enfin la banque de grande clientèle et solutions investisseurs. Voulez-vous des détails sur l’un de ces piliers ?
+            u4:(~oui) Lequel ? Montrer la liste des piliers.
+            u4:(~non) D’accord, voulez-vous plus d’infos sur la société générale ?
+                u5:(~oui) Je vous laisse vous diriger vers un RH #Montrer photo
+                u5:(~non) Très bien. voulez vous des informations sur les stages proposées par la sociéré générale ?
+				
+					u6:(~oui) Vous cherchez un stage en France ou à l’international ? 
+
+							u7:(~International) je vous conseille d’aller voir un RH pour en apprendre plus sur nos opportunités de stages à l'international.
+							
+							u7:(~France)  très bien Votre stage dure t-il 6 mois ?
+								u8:(~oui) Êtes-vous déjà allé sur notre site de recrutement carrireze de la société générale ?
+									u9:(~oui) Avez-vous une idée du domaine dans lequel vous souhaitez travailler ?
+										u10:(~oui) Lequel ?
+											u11:(_~DomaineAimé {*}) Avez-vous le temps de faire un mini-quiz sur le domaine $1 $domaine=$1
+												u12:(~oui) Lancer le quiz $domaine
+												u12:(~non) pas de quizz alors #redirection vers la personne du domaine
+										u10:(~non) Dommage un RH pourra surement vous renseigner plus précisément #redirection vers  RH	
+									u9:(~non) Ce n’est pas grave, voici les domaines dans lesquels nous recrutons en ce moment. Nous vous conseillons de vous inscrire sur le site pour être tenu au courant des actualités. Vous pouvez cliquer sur un domaine pour en apprendre plus. Voyez-vous un  domaine dans lequel vous souhaitez travailler ?#Montrer la liste des domaines + mettre le lien de la page carreers 
+										u10:(~oui) Lequel ?
+											u11:(_~DomaineAimé {*}) Avez-vous le temps de faire un mini-quiz sur le domaine $1 $domaine=$1
+												u12:(~oui) Lancer le quiz $domaine
+												u12:(~non) pas de quizz alors #redirection vers la personne du domaine ou RH
+										u10:(~non) Dommage un RH pourra surement vous renseigner plus précisément #redirection vers  RH
+							u8:(~non) Nous ne proposons hélas que très peu de stages de moins de 6 mois, nous pouvons néanmoins vous rediriger vers un RH pour en apprendre plus sur la société générale. Nous allons tout de même prendre votre CV en photo. #Montrer photo
+					u6:(~non) très bien je vous souhaite une bonne fin de visite
+				
+    #u2:(~info)
+    u2:(pétanque) $imageLogo=1
+    u2:(Montre moi une page web) $pageWeb=1
+u1: (~fun) D’accord mais faites vite, je suis un robot très occupé !
+u1 : (~musique) bien sur !
+# Catching inputs and triggering outputs
+#u:(e:onStart) $onStopped=1
+
+# Replying to speech
+#u:(~hello) ~hello
+
