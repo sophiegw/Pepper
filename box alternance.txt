@@ -1,6 +1,7 @@
 topic: ~Alternance()
 language: frf
 
+
 concept:(Bonjour) [Bonjour Salut Yo Coucou bienvenue]
 concept:(Tchao) [Tchao "Au revoir" "A+"]
 concept:(oui) [Oui Ouais Yep Ouaip “d’accord” “Ok”]
@@ -14,29 +15,29 @@ concept:(CDI) [“Je cherche un cédéhi” cédéhi “je veux un cédéhi” �
 concept:(VIE) [“Je cherche une véhieu” véhieu “je veux une véhieu” “quels sont les véhieu proposés ?” “véhieu société générale”]
 concept:(DirectRH) [“Je cherche un cédédé” cédédé “je veux un cédédé” “quels sont les cédédé proposés ?” “cédédé société générale”“Je fais une thèse” thèse “je veux une thèse” “quels sont les thèse proposés ?” “thèse société générale”“Je cherche une summer” summer “je veux une summer” “quels sont les summer proposés ?” “summer société générale”“Je cherche une criffheu” criffheu “je veux une criffheu” “quels sont les criffheu proposés ?” “criffheu société générale”]
 concept:(Alternance) [“Je cherche une alternance” alternance “je veux une alternance” “quels sont les alternance proposés ?” “alternance société générale”]
-concept:(jeune diplômé) [“jeune diplômé” junior]
+concept:(jeune) [“jeune diplômé” junior]
 concept:(senior) [“senior” expérimenté ]
 concept:(DomaineAimé) [“Achat” “Audit” “Back-Office” “Middle Office” “Opérations” “Finance de marché” “Finance d'entreprise” “Risques” “Communication” “RH” “Comptabilité” “Contrôle de Gestion” “Droit” “Fiscalité” “Conformité” “Marketing BFI” “Marketing en Banque de Détail” “Banque de Détail” “Assurance” “Immobilier” “IT” “Management de Projet ” “Processus” “Banque de Détail” “Banque Privée” “Autres” ]
-concept:(international) [“à l’international” “à l’étranger” “international" “étranger”]
+concept:(international) [“à l’international” “à l’étranger” “international” “étranger”]
 
 
 u:(~oui) Avez-vous une idée du domaine dans lequel vous souhaitez travailler ?
-	u1:(~oui) Lequel ?
-		u2:(_~DomaineAimé {*}) Avez-vous le temps de faire un mini-quiz sur le domaine $1 $domaine=$1
-			u3:(~oui) Lancer le quiz $domaine
-			u3:(~non) pas de quizz alors #redirection vers la personne du domaine ou RH
+    u1:(~oui) Lequel ?
+        u2:(_~DomaineAimé {*}) Avez-vous le temps de faire un mini-quiz sur le domaine $1 $domaine=$1
+            u3:(~oui) Lancer le quiz $domaine
+            u3:(~non) pas de quizz alors #redirection vers la personne du domaine ou RH
 
-	u1:(~non) Ce n’est pas grave, voici les domaines dans lesquels nous recrutons en ce moment.Vous pouvez cliquer sur un domaine pour en apprendre plus. Voyez-vous un  domaine dans lequel vous souhaitez travailler ? #Montrer la liste des domaines + mettre le lien de la page carreers 
-		u2:(~oui) Lequel ?
-			u3:(_~DomaineAimé {*}) Avez-vous le temps de faire un mini-quiz sur le domaine $1 $domaine=$1
-				u4:(~oui) Lancer le quiz $domaine
-				u4:(~non) pas de quizz alors #redirection vers la personne du domaine ou RH
-		u2:(~non) Dommage un RH pourra surement vous renseigner plus précisément #redirection vers  RH
-						
+    u1:(~non) Ce n’est pas grave, voici les domaines dans lesquels nous recrutons en ce moment.Vous pouvez cliquer sur un domaine pour en apprendre plus. Voyez-vous un  domaine dans lequel vous souhaitez travailler ? #Montrer la liste des domaines + mettre le lien de la page carreers 
+        u2:(~oui) Lequel ?
+            u3:(_~DomaineAimé {*}) Avez-vous le temps de faire un mini-quiz sur le domaine $1 $domaine=$1
+                u4:(~oui) Lancer le quiz $domaine
+                u4:(~non) pas de quizz alors #redirection vers la personne du domaine ou RH
+        u2:(~non) Dommage un RH pourra surement vous renseigner plus précisément #redirection vers  RH
+                        
 u:(~non)Ce n’est pas grave Nous vous conseillons de vous inscrire sur le site pour être tenu au courant des offres d’alternance  elle sont disponibles en majorités entre mars et juin. Voici les domaines dans lesquels nous recrutons en ce moment. Vous pouvez cliquer sur un domaine pour en apprendre plus. Voyez-vous un  domaine dans lequel vous souhaitez travailler ? #Montrer la liste des domaines + mettre le lien de la page carreers 
-	u1:(~oui) Lequel ?
-		u2:(_~DomaineAimé {*}) Avez-vous le temps de faire un mini-quiz sur le domaine $1 $domaine=$1
-			u3:(~oui) Lancer le quiz $domaine
-			u3:(~non) pas de quizz alors #redirection vers la personne du domaine ou RH
-	u1:(~non) Dommage un RH pourra surement vous renseigner plus précisément #redirection vers  RH
-	
+    u1:(~oui) Lequel ?
+        u2:(_~DomaineAimé {*}) Avez-vous le temps de faire un mini-quiz sur le domaine $1 $domaine=$1
+            u3:(~oui) Lancer le quiz $domaine
+            u3:(~non) pas de quizz alors #redirection vers la personne du domaine ou RH
+    u1:(~non) Dommage un RH pourra surement vous renseigner plus précisément #redirection vers  RH
+    
