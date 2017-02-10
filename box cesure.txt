@@ -1,9 +1,6 @@
 topic: ~Cesure()
 language: frf
 
-# Defining extra concepts out of words or group of words
-#concept:(hello) [hello hi hey "good morning" greetings]
-
 concept:(Bonjour) [Bonjour Salut Yo Coucou bienvenue]
 concept:(Tchao) [Tchao "Au revoir" "A+"]
 concept:(oui) [Oui Ouais Yep Ouaip “d’accord” “Ok”]
