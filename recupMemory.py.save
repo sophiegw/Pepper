@@ -1,0 +1,9 @@
+from naoqi import ALProxy
+IP="192.168.8.101"
+tts = ALProxy("ALTextToSpeech", IP, 9559)
+listening = ALProxy("ALSpeechRecognition", IP, 9559)
+memory = ALProxy("ALMemory",IP, 9559)
+tts.say("Hello")
+listening.subscribe("testsay")
+extractedtext = memory.getData("WordRecognized")
+print extractedtext
