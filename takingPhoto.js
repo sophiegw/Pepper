@@ -1,29 +1,42 @@
 var session;
+var IP = "192.168.8.101";
+// var IP = "local";
+function disconnected() {
+  console.log("disconnected");
+}
 
 $(document).ready(function(){
-	try {
+    createSession( function(){
+        startSubscribe();
+    });
+});
+
+function createSession(callback) {
+    try {
 		QiSession( function (s) {
 			console.log('connected!');
 			session = s;
-		});
-	} catch (err) {
+            callback();
+		},disconnected,IP);
+	}catch (err) {
 	  console.log("Error when initializing QiSession: " + err.message);
 	  console.log("Make sure you load this page from the robots server.");
 	}
-    
-    startSubscribe();
-});
-
+}
 
 function toTabletHandler(value) {
+    console.log("leftbumperPressed");
     console.log("PepperQiMessaging/totablet: " + value);
     document.getElementById('image').src = "../output.jpg?random="+new Date().getTime();
 }
 
 function startSubscribe() {
+    // window.alert("startsubscribe")
     session.service("ALMemory").then(function (ALMemory) {
-      console.log("ALMemory");
-      ALMemory.subscriber("PepperQiMessaging/totablet").then(function(subscriber) {
+      console.log("service ALMemory");
+      ALMemory.subscriber("PepperQiMessaging/toTablet").then(function(subscriber) {
+      // ALMemory.subscriber("LeftBumperPressed").then(function(subscriber) {
+        console.log("Subscribed");
         subscriber.signal.connect(toTabletHandler);
       });
     });
@@ -31,9 +44,9 @@ function startSubscribe() {
 
 function sampleButtonClicked() {
         session.service("ALMemory").then(function (ALMemory) {
-          window.alert("ALMemory connected");
-          console.log("ALMemory event raised");
-          ALMemory.raiseEvent("PepperQiMessaging/fromtablet", "");
+            window.alert("ALMemory connected");
+            ALMemory.raiseEvent("PepperQiMessaging/fromtablet", "1");
+            console.log("ALMemory event raised");
   }, function (error) {
     console.log(error);
   })
