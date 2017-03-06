@@ -25,7 +25,7 @@ function createSession(callback) {
 }
 
 function toTabletHandler(value) {
-    console.log("leftbumperPressed");
+    // console.log("leftbumperPressed");
     console.log("PepperQiMessaging/totablet: " + value);
     document.getElementById('image').src = "../output.jpg?random="+new Date().getTime();
 }
@@ -44,8 +44,8 @@ function startSubscribe() {
 
 function sampleButtonClicked() {
         session.service("ALMemory").then(function (ALMemory) {
-            window.alert("ALMemory connected");
-            ALMemory.raiseEvent("PepperQiMessaging/fromtablet", "1");
+            // window.alert("ALMemory connected");
+            ALMemory.raiseEvent("PepperQiMessaging/fromTablet", "1");
             console.log("ALMemory event raised");
   }, function (error) {
     console.log(error);
