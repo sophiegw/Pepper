@@ -1,0 +1,82 @@
+    import time
+    import os
+except Exception as e:
+    self.onError(e)
+
+from naoqi import ALProxy
+
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+        self.resolutionMap = {
+            '160 x 120': 0,
+            '320 x 240': 1,
+            '640 x 480': 2,
+            '1280 x 960': 3
+        }
+        self.cameraMap = {
+            'Top': 0,
+            'Bottom': 1
+        }
+        self.recordFolder = "/home/nao/recordings/cameras/"
+
+    def onLoad(self):
+        try:
+            self.frameManager = ALProxy('ALFrameManager')
+            self.photoCapture = ALProxy( "ALPhotoCapture")
+            self.awareness = ALProxy("ALBasicAwareness")
+        except Exception as e:
+            self.photoCapture = None
+            self.logger.error(e)
+            self.onError(e)
+
+    def onUnload(self):
+        self.frameManager = None
+
+    def onInput_onStart(self):
+        fileName = "output.jpg"
+        old_path_file= os.path.join(self.recordFolder, fileName)
+        new_path_project = os.path.abspath(
+                    os.path.join(self.frameManager.getBehaviorPath(self.behaviorId), '../'))
+        new_path_html = os.path.join(new_path_project,'html')
+        new_path_file = os.path.join(new_path_html,fileName)
+
+        resolution = 3
+        cameraID = 0
+        if self.photoCapture:
+            #self.logger.info("prend photo")
+            self.photoCapture.setResolution(resolution)
+            self.photoCapture.setCameraID(cameraID)
+            self.photoCapture.setPictureFormat("jpg")
+            self.awareness.pauseAwareness()
+            self.photoCapture.takePicture( self.recordFolder, fileName )
+            self.awareness.resumeAwareness()
+            #self.logger.info(" list IF PHOTO: %s" %os.listdir(self.recordFolder))
+        # Move photo from /home/nao/recordings/cameras to lastUploadedChoregrapheBehavior/html
+
+            #self.logger.info(" OLDPATH : %s " % old_path)
+            #self.logger.info(" NEWPATH : %s " % new_path_project)
+            #self.logger.info(" NEWPATH HTML : %s " % new_path_html)
+            #("/home/nao/.local/share/PackageManager/apps/.lastUploadedChoregrapheBehavior/")
+            #self.logger.info(" list directories: %s" %os.listdir(new_path_project))
+        try:
+            if not(os.path.exists(new_path_html)):
+                #self.logger.info("no path present")
+                os.mkdir(new_path_html)
+            else:
+                if (os.path.isfile(new_path_file)):
+                    #self.logger.info("file already present")
+                    os.remove(new_path_file)
+            #self.logger.info("AFTER HTML: %s" %os.listdir(new_path_html))
+            if (os.path.isfile(old_path_file)):
+                #self.logger.info("Moving file")
+                os.rename(old_path_file, new_path_file)
+            #self.logger.info("AFTER HTML: %s" %os.listdir(new_path_html))
+        except Exception as e:
+            self.onError(e)
+        self.onStopped()
+        #pass
+
+    def onInput_onStop(self):
+        self.onUnload() #it is recommended to reuse the clean-up as the box is stopped
+        self.onStopped() #activate the output of the box

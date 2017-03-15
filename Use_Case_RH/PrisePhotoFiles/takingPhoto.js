@@ -4,13 +4,14 @@ var IP = "192.168.8.101";
 function disconnected() {
   console.log("disconnected");
 }
-
+// Call createSession and then startSubscribe
 $(document).ready(function(){
     createSession( function(){
         startSubscribe();
     });
 });
 
+// Connect to the robot through QiSession
 function createSession(callback) {
     try {
 		QiSession( function (s) {
@@ -24,12 +25,14 @@ function createSession(callback) {
 	}
 }
 
+// Refresh Image when called
 function toTabletHandler(value) {
     // console.log("leftbumperPressed");
     console.log("PepperQiMessaging/totablet: " + value);
-    document.getElementById('image').src = "../output.jpg?random="+new Date().getTime();
+    document.getElementById('image').src = "output.jpg?random="+new Date().getTime();
 }
 
+// Start subsribing to event "PepperQiMessaging/toTablet" and callback "toTabletHandler"
 function startSubscribe() {
     // window.alert("startsubscribe")
     session.service("ALMemory").then(function (ALMemory) {
@@ -42,6 +45,7 @@ function startSubscribe() {
     });
 }
 
+// Raise Event "PepperQiMessaging/fromTablet" (which trigger the box TakePicture and save it to local output.jpg)
 function sampleButtonClicked() {
         session.service("ALMemory").then(function (ALMemory) {
             // window.alert("ALMemory connected");
@@ -52,6 +56,7 @@ function sampleButtonClicked() {
   })
 };
 
+// Nothing but saying chocolat
 function speech() {
     session.service("ALTextToSpeech").then(function (tts) {
         tts.say("Chocolat");
@@ -60,7 +65,8 @@ function speech() {
   })
 };
 
+// Force image reload manually
 function forceReload() {
     //Change name of the src to force image to be reload even if cached by changing name
-    document.getElementById('image').src = "../output.jpg?random="+new Date().getTime();
+    document.getElementById('image').src = "output.jpg?random="+new Date().getTime();
 }
