@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheProject xmlns="http://www.aldebaran-robotics.com/schema/choregraphe/project.xsd" xar_version="3">
+    <Box name="root" id="-1" localization="8" tooltip="Root box of Choregraphe&apos;s behavior. Highest level possible." x="0" y="0">
+        <bitmap>media/images/box/root.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+        <Input name="BackBumperPressed" type="0" type_size="1" nature="4" stm_value_name="BackBumperPressed" inner="1" tooltip="BackBumperPressed desc" id="4" />
+        <Input name="LeftBumperPressed" type="0" type_size="1" nature="4" stm_value_name="LeftBumperPressed" inner="1" tooltip="LeftBumperPressed desc" id="5" />
+        <Input name="HandRightBackTouched" type="0" type_size="1" nature="4" stm_value_name="HandRightBackTouched" inner="1" tooltip="HandRightBackTouched desc" id="6" />
+        <Input name="HandLeftBackTouched" type="0" type_size="1" nature="4" stm_value_name="HandLeftBackTouched" inner="1" tooltip="HandLeftBackTouched desc" id="7" />
+        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="8" />
+        <Timeline enable="0">
+            <BehaviorLayer name="behavior_layer1">
+                <BehaviorKeyframe name="keyframe1" index="1">
+                    <Diagram scale="100">
+                        <Box name="Greet" id="11" localization="8" tooltip="Greet people and m anage behavior" x="303" y="44">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        ## Proxies
+        try:
+            import time
+            import os
+            #import qi
+            #s = qi.Session()
+            #s.connect("tcp://127.0.0.1:9559")
+            #self.session = qi.Session("tcp://127.0.0.1:9559")
+            #self.TabletService = self.session().service("ALTabletService")
+            self.TabletService = self.session().service("ALTabletService")
+            self.AutonomousLife = ALProxy("ALAutonomousLife")
+            self.RobotPosture = ALProxy("ALRobotPosture")
+            self.FrameManager = ALProxy("ALFrameManager")
+            self.UserSession = ALProxy("ALUserSession")
+            self.Zone = ALProxy("ALEngagementZones")
+            self.Speech = ALProxy("ALTextToSpeech")
+            self.Tracker = ALProxy("ALTracker")
+            self.Memory = ALProxy("ALMemory")
+            self.People = ALProxy("ALPeoplePerception")
+            self.Awareness = ALProxy("ALBasicAwareness")
+            self.Dialog = ALProxy("ALDialog")
+        except Exception as e:
+            self.logger.error("Proxies initialization failed")
+            self.logger.error(e)
+
+        ## Initialization
+
+        self.uid = self.packageUid()
+        self.ip = self.session().service('ALTabletService').robotIp()
+        #self.url = 'http://' + self.ip + '/apps/' + self.uid + '/' + 'choixProspect.html'
+        # uid = self.packageUid()
+        # # method2: use loadUrl
+        # ip = self.session().service('ALTabletService').robotIp()
+        # url = 'http://' + ip + '/apps/' + uid + '/listeDomaine.html'
+        # self.session().service('ALTabletService').loadUrl(url)
+        # self.session().service('ALTabletService').showWebview(url)
+
+        # self.TabletService.loadUrl(self.url)
+        # if self.TabletService.showWebview(self.url):
+           # self.logger.info("SUCCEEDED")
+        # else:
+           # self.logger.info("FAIL")
+
+        self.RobotPosture.setMaxTryNumber(5)
+        self.RobotPosture.goToPosture("Stand",0.5)
+        self.AutonomousLife.setAutonomousAbilityEnabled("AutonomousBlinking", True)
+        self.AutonomousLife.setAutonomousAbilityEnabled("BackgroundMovement", True)
+        self.AutonomousLife.setAutonomousAbilityEnabled("ListeningMovement", True)
+        self.AutonomousLife.setAutonomousAbilityEnabled("SpeakingMovement", True)
+        self.peopleToGreet = list()
+        self.People.resetPopulation()
+        self.People.setMaximumDetectionRange(2)
+        self.Zone.setFirstLimitDistance(0.90)
+        #self.Dialog.setLanguage("French")
+        self.isRunningAwareness = False
+        self.isRunningDialog = 0
+        self.stopAllDialog()
+        self.Memory.declareEvent('dialogEngaged')
+        self.Memory.declareEvent('dialogURL')
+        self.Memory.declareEvent('robotState')
+        self.Memory.subscribeToEvent('dialogEngaged', self.getName(), 'managerDialog')
+        self.Memory.subscribeToEvent('dialogURL', self.getName(), 'managerURL')
+        self.Memory.subscribeToEvent('robotState', self.getName(), 'managerState')
+        #self.Memory.subscribeToEvent('Dialog/NoOneSpeak20', self.getName(), 'noDialog')
+
+        self.Memory.subscribeToEvent('RightBumperPressed', self.getName(), 'testScript')
+
+
+        self.waving()
+        self.startAwareness()
+        #self.Memory.raiseEvent("dialogURL","1;ecranAccueilAppli.html")
+        self.Memory.raiseEvent("dialogURL","1;Mood.html")
+
+        #self.TabletService.showWebview("http://www.google.com")
+        #import json
+        # import requests
+        # data = {'temperature':'24.3'}
+        # data_json = json.dumps(data)
+        # payload = {'json_payload': data_json, 'apikey': 'YOUR_API_KEY_HERE'}
+        # r = requests.get('http://myserver/emoncms2/api/post', data=payload)
+
+
+        # url = 'http://google.com'
+        # payload = {'some': 'data'}
+        # headers = {'content-type': 'application/json'}
+        # response = requests.post(url, data=json.dumps(payload), headers=headers)
+        # self.logger.info()
+        pass
+    def testScript(self):
+        self.logger.info("testScript raised")
+        url = 'http://' + self.ip + '/apps/' + self.uid + '/' + 'Mood.html'
+        script = """popupConnexion()"""
+        self.logger.info("testage: %s", script)
+        self.TabletService.executeJS(script)
+    def onInput_onStart(self):
+
+        #self.Memory.subscribeToEvent('PeoplePerception/PeopleList', self.getName(), 'people')
+        #self.Memory.subscribeToEvent('PeoplePerception/VisiblePeopleList', self.getName(), 'visiblePeople')
+        #humanID = self.Memory.getData('ALBasicAwareness/HumanTracked')
+        #self.logger.info("humanID: %s", humanID)
+        #self.onStopped() #activate the output of the box
+        pass
+
+    def onUnload(self):
+        #put clean-up code here
+        if self.isRunningDialog >= 1:
+            self.stopAllDialog()
+
+        if self.isRunningAwareness:
+            if self.Awareness:
+                self.Awareness.stopAwareness()
+            self.isRunningAwareness = False
+        pass
+
+    def onInput_onStop(self):
+        self.onUnload() #it is recommended to reuse the clean-up as the box is stopped
+        self.onStopped() #activate the output of the box
+
+    ## Callback of event: robotState, change state of robot
+    def managerState(self):
+        #self.Memory.unsubscribeToEvent('robotState','managerState')
+        self.logger.info("managerState %s", self.Memory.getData('robotState'))
+        key = self.Memory.getData('robotState').split(";")
+        self.logger.info("managerState key: %s", key)
+        ## 0 = Stopped, nothing
+        if (key[0] == "0"):
+            self.Awareness.setStimulusDetectionEnabled('Sound', False)
+            self.unwaving()
+        ## 1 = Welcome mode, waiting for people
+        elif(key[0] == "1"):
+            self.stopAllDialog()
+            self.loadURL("ecranAccueilAppli.html")
+            self.RobotPosture.goToPosture("Stand",0.5)
+            self.Awareness.setStimulusDetectionEnabled('Sound', True)
+            self.waving()
+        #self.Memory.subscribeToEvent('robotState', self.getName(), 'managerState')
+
+    ## Callback of event: dialogEngaged, manage subscribing/dialogs
+    def managerDialog(self):
+        #self.Memory.unsubscribeToEvent('dialogEngaged','managerDialog')
+        self.logger.info("managerDialog %s", self.Memory.getData('dialogEngaged'))
+        key = self.Memory.getData('dialogEngaged').split(";")
+        self.logger.info("managerDialog key: %s", key)
+        ## 00/topicToStop = Dialog ended, end dialog and NO tracking
+        if(key[0] == "00"):
+            self.stopDialog(key[1])
+            self.Memory.raiseEvent("robotState","0")
+        ## 01/topicToStop = Dialog ended, end dialog and restart tracking
+        elif(key[0] == "01"):
+            self.stopDialog(key[1])
+            self.Memory.raiseEvent("robotState","1")
+        ## 1/pathToLaunch = Dialog launch called, then stop tracking and start dialog
+        elif (key[0] == "1"):
+            self.Memory.raiseEvent("robotState","0")
+            self.startDialog(key[1])
+        ## 2/topicToStop/pathTolaunch = stop previous dialog, launch the new one
+        elif(key[0] == "2"):
+            self.stopDialog(key[1])
+            self.startDialog(key[2])
+        ## 666 = stop all loaded dialogs
+        elif(key[0] == "666"):
+            self.stopAllDialog()
+        #self.Memory.subscribeToEvent('dialogEngaged', self.getName(), 'managerDialog')
+
+    def managerURL(self):
+        #self.Memory.unsubscribeToEvent('dialogURL','managerURL')
+        self.logger.info("managerURL event: %s", self.Memory.getData('dialogURL'))
+        key = self.Memory.getData('dialogURL').split(";")
+        #self.logger.info("managerURL key: %s", key)
+        ## 0 = ? stop ?
+        if(key[0] == "0"):
+            self.loadURL("choixProspect.html")
+        ## 1 = Load URL
+        if(key[0] == "1"):
+            #if (key[1] == "listeDomaine.html"):
+                #if(VersionForum == "1"):
+                    #self.loadURL("listeDomaineV1.html")
+                #else:
+                    #self.loadURL("listeDomaineV2.html")
+            self.loadURL(key[1])
+        ## 2 = Load Video ?
+        #self.Memory.subscribeToEvent('dialogURL', self.getName(), 'managerURL')
+
+    def loadURL(self, path):
+        self.url = 'http://' + self.ip + '/apps/' + self.uid + '/' + path
+        try:
+            if not self.TabletService.showWebview(self.url):
+                raise ValueError('LoadURL: TabletService.ShowWebView %s Failed', self.url)
+        except Exception as e:
+            # ? call stopAllDialog ?
+            self.logger.warning("Load URL failed")
+            self.logger.warning(e)
+
+    def changeURL(self, url):
+        try:
+            self.logger.info("changeURL")
+        except Exception as e:
+            # ? call stopAllDialog ?
+            self.logger.warning("Load URL failed")
+            self.logger.warning(e)
+
+### DIALOG ###
+
+    ## Start dialog from path
+    def startDialog(self, path):
+        self.logger.info("startDialog")
+        self.dialog_path = os.path.abspath(
+                        os.path.join(self.FrameManager.getBehaviorPath(self.behaviorId), '../' + path))
+        try:
+            self.dialog_topic = self.Dialog.runTopics([str(self.dialog_path)])
+            self.isRunningDialog += 1
+            self.logger.info("DIALOG STARTED %s", self.Dialog.getAllLoadedTopics())
+        except Exception as e:
+            # ? call stopAllDialog ?
+            self.logger.warning("Start dialog failed")
+            self.logger.warning(e)
+
+
+    ## Stop dialog where topic is
+    def stopDialog(self, topic):
+        self.logger.info("DIALOG STOPPED %s", topic)
+    # "getFocus()" topic and stop it ?
+        try:
+            self.dialog_topic = self.Dialog.stopTopics([str(topic)])
+            self.isRunningDialog -= 1
+        except Exception as e:
+            self.logger.warning("Stop dialog failed")
+            self.logger.warning(e)
+
+
+    def stopAllDialog(self):
+        self.logger.info("StopAllDialog before: %s", self.Dialog.getAllLoadedTopics())
+        for topic in self.Dialog.getAllLoadedTopics():
+            try:
+                self.Dialog.stopTopics([str(topic)])
+                self.isRunningDialog = 0
+            except Exception as e:
+                self.logger.warning("Could not unload %s", topic)
+                self.logger.warning(e)
+        self.logger.info("StopAllDialog after: %s", self.Dialog.getAllLoadedTopics())
+
+
+### DETECTION ###
+
+
+    ## Subscribing events
+    def waving(self):
+        self.logger.info("waving")
+        self.Memory.subscribeToEvent('PeoplePerception/JustArrived', self.getName(), 'hello')
+        self.Memory.subscribeToEvent('EngagementZones/PersonEnteredZone1', self.getName(), 'onEnteredZone1')
+        self.Memory.subscribeToEvent('PeoplePerception/JustLeft', self.getName(), 'bye')
+
+
+    ## Unsubscribing events
+    def unwaving(self):
+        self.logger.info("unwaving")
+        self.Memory.unsubscribeToEvent('PeoplePerception/JustArrived', self.getName())
+        self.Memory.unsubscribeToEvent('EngagementZones/PersonEnteredZone1', self.getName())
+        self.Memory.unsubscribeToEvent('PeoplePerception/JustLeft', self.getName())
+
+    ## Triggered when someone enter in the maximum range detection, add this person to a list to be greeted if they come closer
+    def hello(self):
+        peopleArrivedID = self.Memory.getData('PeoplePerception/JustArrived')
+        self.peopleToGreet.append(peopleArrivedID)
+        ## Sample to collect datas with the ID
+        #peopleArrivedKeyDistance = 'PeoplePerception/Person/'+ str(peopleArrivedID) +'/Distance'
+        #distance = self.Memory.getData(peopleArrivedKeyDistance)
+        #self.logger.info("to greet %s", self.peopleToGreet)
+        #self.logger.info("distance %s", distance)
+
+
+    ## Triggered when entering the closer zone, check if the person has to be greeted and remove it from the list
+    def onEnteredZone1(self):
+        personID = self.Memory.getData('EngagementZones/PersonEnteredZone1')
+        if (personID in self.peopleToGreet):
+            #self.logger.info("to greet %s", self.peopleToGreet)
+            #self.Speech.say("Bonjour vous pouvez cliquez sur ma tablette !")
+            self.peopleToGreet.remove(personID)
+            #self.Memory.raiseEvent("dialogEngaged","1;Accueil/Accueil_frf.top")
+
+
+    ## Triggered when lost the tracked people, remove it from the list
+    def bye(self):
+        peopleID = self.Memory.getData('PeoplePerception/JustLeft')
+        #self.logger.info("bye %s", peopleID)
+        self.Speech.say("Aurevoir")
+        self.peopleToGreet.remove(peopleID)
+
+    ## Possibly triggered by NoOneSpeak20
+    def noDialog(self):
+        self.Memory.insertData('dialogEngaged',1)
+        self.waving()
+
+    ## Start Awareness
+    def startAwareness(self):
+        if self.isRunningAwareness:
+            return # already running, nothing to do
+        self.isRunningAwareness = True
+
+        if self.Awareness:
+            self.Awareness.setEngagementMode('FullyEngaged')
+            self.Awareness.setTrackingMode('Head')
+            self.Awareness.setStimulusDetectionEnabled('Sound', False)
+            self.Awareness.setStimulusDetectionEnabled('Movement', True)
+            self.Awareness.setStimulusDetectionEnabled('People', True)
+            self.Awareness.setStimulusDetectionEnabled('Touch', True)
+            self.Awareness.startAwareness()
+
+
+
+
+    #### Unusued attempt to track currently visible person (eg: if 2 person are visible don't greet)
+    def visiblePeople(self):
+        peopleList = self.Memory.getData('PeoplePerception/VisiblePeopleList')
+        self.logger.info("visible: %s", peopleList)
+        if (self.nbVisible == 0):
+            self.Speech.say("Salut")
+            self.logger.info("visible people: %s", self.nbVisible)
+        else:
+            self.nbVisible = len(peopleList)
+            self.logger.info("visible people: %s", self.nbVisible)
+
+    def people(self):
+        peopleList = self.Memory.getData('PeoplePerception/PeopleList')
+        self.logger.info("people %s", peopleList)]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                        </Box>
+                        <Box name="Set Speaker Vol." id="1" localization="8" tooltip="Set the sound volume between 0 (mute) and 100 (max).&#x0A;&#x0A;V1.1.0&#x0A;" x="413" y="141">
+                            <bitmap>media/images/box/interaction/processing_sound.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onInput_onSet(self):
+        try:
+            self.audiodevice = ALProxy("ALAudioDevice")
+            self.audiodevice.setOutputVolume(self.getParameter("Volume (%)"))
+        except Exception as e:
+            self.logger.error(e)
+
+        self.onReady() # activate output of the box]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
+                            <Input name="onSet" type="1" type_size="1" nature="1" inner="0" tooltip="The data is set when a signal is received on this input." id="2" />
+                            <Output name="onReady" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent when the data has been set." id="3" />
+                            <Parameter name="Volume (%)" inherits_from_parent="0" content_type="1" value="0" default_value="50" min="0" max="100" tooltip="Percentage of maximum output volume." id="4" />
+                        </Box>
+                        <Box name="Set Speaker Vol. (1)" id="2" localization="8" tooltip="Set the sound volume between 0 (mute) and 100 (max).&#x0A;&#x0A;V1.1.0&#x0A;" x="294" y="222">
+                            <bitmap>media/images/box/interaction/processing_sound.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onInput_onSet(self):
+        try:
+            self.audiodevice = ALProxy("ALAudioDevice")
+            self.audiodevice.setOutputVolume(self.getParameter("Volume (%)"))
+        except Exception as e:
+            self.logger.error(e)
+
+        self.onReady() # activate output of the box]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
+                            <Input name="onSet" type="1" type_size="1" nature="1" inner="0" tooltip="The data is set when a signal is received on this input." id="2" />
+                            <Output name="onReady" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent when the data has been set." id="3" />
+                            <Parameter name="Volume (%)" inherits_from_parent="0" content_type="1" value="41" default_value="50" min="0" max="100" tooltip="Percentage of maximum output volume." id="4" />
+                        </Box>
+                        <Box name="Only Once" id="4" localization="8" tooltip="This box&apos;s output is stimulated only the first time the onSignal input is.&#x0A;&#x0A;Note: It is reset when the diagram containing the box is unloaded." x="314" y="429">
+                            <bitmap>media/images/box/loop.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        self.bFirstTime = True
+
+    def onUnload(self):
+        self.bFirstTime = True
+
+    def onInput_onSignal(self):
+        if( self.bFirstTime ):
+            self.bFirstTime = False
+            self.firstTime()]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onSignal" type="1" type_size="1" nature="1" inner="0" tooltip="The signal that must pass only once." id="2" />
+                            <Output name="firstTime" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent first time the onSignal input is stimulated." id="3" />
+                        </Box>
+                        <Box name="Only Once (1)" id="5" localization="8" tooltip="This box&apos;s output is stimulated only the first time the onSignal input is.&#x0A;&#x0A;Note: It is reset when the diagram containing the box is unloaded." x="279" y="569">
+                            <bitmap>media/images/box/loop.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        self.bFirstTime = True
+
+    def onUnload(self):
+        self.bFirstTime = True
+
+    def onInput_onSignal(self):
+        if( self.bFirstTime ):
+            self.bFirstTime = False
+            self.firstTime()]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onSignal" type="1" type_size="1" nature="1" inner="0" tooltip="The signal that must pass only once." id="2" />
+                            <Output name="firstTime" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent first time the onSignal input is stimulated." id="3" />
+                        </Box>
+                        <Box name="Wait For Signals" id="6" localization="8" tooltip="Wait for both inputs to be stimulated before stimulating its output." x="473" y="512">
+                            <bitmap>media/images/box/wait.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        self.ok = [False]*2
+
+    def onUnload(self):
+        #puts code for box cleanup here
+        ""
+
+    def onStart(self, nInput):
+        self.ok[nInput-1] = True
+        bOutput = True
+        for bOk in self.ok:
+            bOutput = bOutput and bOk
+        if( bOutput ):
+            self.ok = [False]*2
+            self.signalsReceived()
+
+    def onInput_signal1(self):
+        self.onStart(1)
+
+    def onInput_signal2(self):
+        self.onStart(2)]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
+                            <Input name="signal1" type="1" type_size="1" nature="1" inner="0" tooltip="First signal to wait." id="2" />
+                            <Input name="signal2" type="1" type_size="1" nature="1" inner="0" tooltip="Second signal to wait." id="3" />
+                            <Output name="signalsReceived" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent when both inputs have been stimulated." id="4" />
+                        </Box>
+                        <Link inputowner="11" indexofinput="2" outputowner="0" indexofoutput="2" />
+                        <Link inputowner="1" indexofinput="2" outputowner="0" indexofoutput="4" />
+                        <Link inputowner="2" indexofinput="2" outputowner="0" indexofoutput="5" />
+                        <Link inputowner="6" indexofinput="2" outputowner="4" indexofoutput="3" />
+                        <Link inputowner="6" indexofinput="3" outputowner="5" indexofoutput="3" />
+                        <Link inputowner="4" indexofinput="2" outputowner="0" indexofoutput="6" />
+                        <Link inputowner="5" indexofinput="2" outputowner="0" indexofoutput="7" />
+                        <Link inputowner="0" indexofinput="8" outputowner="6" indexofoutput="4" />
+                    </Diagram>
+                </BehaviorKeyframe>
+            </BehaviorLayer>
+        </Timeline>
+    </Box>
+</ChoregrapheProject>

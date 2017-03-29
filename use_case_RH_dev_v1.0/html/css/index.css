@@ -1,0 +1,24 @@
+body{
+	background-color: lightgray;
+}
+.menuEntree, .boutonChoix{
+	display: inline-block;
+}
+
+.menuEntree{
+	border: 5px solid white;
+	border-radius: 50%;
+	padding: 50px;
+}
+
+.boutonChoix{
+	margin-left: 10%;
+	text-align: center;
+	font-size: 3em;
+	margin-top: 10%;
+	color: white;
+}
+
+.menuId{
+	margin-top: 35%;
+}

@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package uuid="use_case_rh" version="0.0.0">
+ <names>
+  <name lang="en_US">use_case_RH</name>
+  <name lang="fr_FR">use_case_rh</name>
+ </names>
+ <supportedLanguages>
+  <language>fr_FR</language>
+ </supportedLanguages>
+ <descriptionLanguages>
+  <language>fr_FR</language>
+ </descriptionLanguages>
+ <contents>
+  <behaviorContent path="behavior_1">
+   <userRequestable/>
+   <nature>interactive</nature>
+   <triggerSentences>
+    <sentence lang="fr_FR">lancer youz caiz air ache</sentence>
+    <sentence lang="fr_FR">lancer youz caiz R H</sentence>
+    <sentence lang="fr_FR">lancer R H</sentence>
+    <sentence lang="fr_FR">lancer air ache</sentence>
+   </triggerSentences>
+   <permissions/>
+  </behaviorContent>
+ </contents>
+</package>

@@ -1,0 +1,23 @@
+topic: ~Bonjour()
+language: frf
+
+
+#say box Bonjour bienvenue sur ce forum 
+
+concept:(Bonjour) [Bonjour Salut Yo Coucou bienvenue]
+concept:(Tchao) [Tchao "Au revoir" "A+"]
+concept:(oui) [Oui Ouais Yep Ouaip “d’accord” “Ok”]
+concept:(non) [non nope nan “non merci” bof “je sais pas” “je ne sais pas”]
+
+concept:(stage) [“Je cherche un stage” stage “je veux un stage” “quels sont les stages proposés ?” “stage société générale” “Je suis en césure” “Je cherche une césure” ]
+concept:(banane)[bananes]
+concept:(chantilly)[chantilly]
+concept:(chocolat) [chocolat "cho co lat"]
+#(e:Dialog/NotUnderstood)
+#(e:Dialog/répète)
+
+u:(~Bonjour) $dialogURL=[1;OuiNon.html] Bienvenue à ce programme de test, êtes-vous prêt ? 
+    u1: (~oui) $dialogURL=[1;OuiNon.html] Formidable, que les expériences commencent ! Dites Cho co lat
+        u2: (~chocolat) $dialogURL=[1;index.html] Bien, test suivant : Dites Banane $dialogEngaged=[2;Bonjour;Informations/Experience1.top]
+
+   

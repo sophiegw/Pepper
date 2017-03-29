@@ -1,0 +1,22 @@
+topic: ~Experience1()
+language: frf
+
+
+#say box Bonjour bienvenue sur ce forum 
+
+concept:(Bonjour) [Bonjour Salut Yo Coucou bienvenue]
+concept:(Tchao) [Tchao "Au revoir" "A+"]
+concept:(oui) [Oui Ouais Yep Ouaip “d’accord” “Ok”]
+concept:(non) [non nope nan “non merci” bof “je sais pas” “je ne sais pas”]
+
+concept:(stage) [“Je cherche un stage” stage “je veux un stage” “quels sont les stages proposés ?” “stage société générale” “Je suis en césure” “Je cherche une césure” ]
+concept:(banane)[bananes "ba na ne"]
+concept:(chantilly)[chantilly]
+concept:(chocolat) [chocolat "cho co lat"]
+#(e:Dialog/NotUnderstood)
+#(e:Dialog/répète)
+
+u:(~banane) Excellent, humain... Désormais : Touchez ma tête.
+    u1: (e:FrontTactilTouched) Splendide vous êtes fonctionnel, Cobaye suivant. $dialogEngaged=[0;Experience1]
+
+   

@@ -1,0 +1,79 @@
+body{
+	background:url(test.png) no-repeat center center fixed;
+}
+
+
+.question{
+	margin-top:0;
+	margin-bottom:0.6em;
+	color: white;
+	font-size: 55pt;
+	text-align: center;
+}
+
+#selonVous, .nextQuestion{
+	display: inline-block;
+	margin-left: 20%;
+}
+
+.roundedImage{
+	display: inline-block;
+    overflow:hidden;
+    -webkit-border-radius:100px;
+    -moz-border-radius:100px;
+    border-radius:100px;
+    width:180px;
+    height:180px;
+	background-color: white;
+}
+
+.bulle1{
+	margin-left: 5%;
+	display:inline-block;
+}
+
+.bulle2{
+	margin-left: 25%;
+	display:inline-block;
+}
+
+.bulle3{
+	margin-left: 30%;
+	display:inline-block;
+}
+
+.choixReponse{
+	font-weight:bold;
+	font-size: 40pt;
+    margin-top: 32%;
+    text-align: center;
+}
+
+.incubateur{
+	font-weight:bold;
+	font-size: 20pt;
+    margin-top: 35%;
+    text-align: center;	
+}
+
+.ruche{
+	margin-top: 40%;
+}
+
+#next, #out{
+	display:none;
+	margin-left:92%;
+}
+
+.icon{
+	visibility:hidden;
+	margin-left:30%;
+}
+
+.sortieQuestionnaire{
+	display: inline;
+	transform: scale(0.5);
+	transform-origin: 60% 15%;
+	float: left;
+	cursor: pointer;
+}

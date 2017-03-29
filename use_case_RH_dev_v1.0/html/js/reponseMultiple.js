@@ -1,0 +1,107 @@
+var session;
+var nbQuestions;
+var bonneRep = 0;
+var nbClick = 0;
+
+$(document).ready(function(){
+	nbQuestions = $('body').data('nbquestions');
+	init();
+	try {
+		QiSession( function (s) {
+			console.log('connected!');
+			session = s;
+		});
+	}catch (err) {
+	  console.log("Error when initializing QiSession: " + err.message);
+	  console.log("Make sure you load this page from the robots server.");
+	}
+});
+
+function init(){
+	
+	$('.squaredImage').on('click', function(){
+			var _this = $(this);
+			_this.find("img").toggle();
+		});
+		
+	$('.sortieQuestionnaire').on('click', function(){
+		var currentQuizz = $(this).data('quizz');
+		window.location.href = "../domaines/infos/" + currentQuizz + ".html";
+	});
+	
+	$('.submitAnswers').on('click', function(){
+		nbClick++;
+		
+		var bonnesReponsesSoumises = 0;
+		var mauvaiseRep = false;
+		var _this = $(this);
+		var derniereQuestion = _this.parent().data('derniere-question');
+		var reponses = _this.parent('div').find('.coche:visible');
+				
+		var discours = _this.parent().find('[data-reponse=vrai]').data('value');
+		var bonnesReponses = _this.parent().find('[data-reponse=vrai]');
+		var nbBonnesRep = bonnesReponses.length;
+		
+		if(nbClick%2 === 1){
+			_this.parent().find('.squaredImage').unbind('click');
+			$.each(reponses, function(reponses, reponse){
+				var rep = $(reponse);
+				rep.parent().siblings('img').css('visibility', 'visible');
+				if(rep.parent().data("reponse") === "vrai"){
+					bonnesReponsesSoumises++;
+				}else{
+					mauvaiseRep = true;
+				}
+			});
+			
+			$.each(bonnesReponses, function(bonnesReponses, bonneReponse){
+				var bRep = $(bonneReponse);
+				bRep.siblings('img').css('visibility', 'visible');
+			});
+
+			if((!mauvaiseRep) && (bonnesReponsesSoumises === nbBonnesRep)){
+				bonneRep++;
+			}
+			sayAnswer(discours);
+		}
+		else{			
+			$('#next').click();
+		}
+		if(derniereQuestion){
+			$('#out').css('display', 'inline');
+			$('.redirection').css('display', 'inline-block');
+			_this.hide();
+		}
+	});
+	
+	$('#next').on('click', function(){
+		var currentBlock = $('.propositionVisible:visible');
+		var classes = currentBlock.attr('class').split(' ');
+		var currentBlockNumber = getIntFromString(classes[1]);
+		currentBlock.hide();
+		nextBlockNumber = currentBlockNumber + 1;
+		$('.question' + nextBlockNumber).show();
+		if(nextBlockNumber === nbQuestions){
+			$(this).hide();
+		}
+		window.scrollTo(0,0);
+	});
+	
+	$('#out').on('click', function(){	
+		sayAnswer("Vous avez répondu correctement à " + bonneRep + " sur " + nbQuestions + "questions, soit un résultat de " + ((bonneRep/nbQuestions) * 100).toFixed(2) + " pourcents");
+	});
+	
+	$('.redirection').on('click', function(){
+		var metier = $('body').data("metier");
+		window.location.href = "redirectionRH.html?" + metier;
+	});
+};
+
+
+function sayAnswer(answer) {
+  session.service('ALTextToSpeech').then(function (tts) {
+    tts.say(answer);
+  }, function (error) {
+    console.log(error);
+  });
+};

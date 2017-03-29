@@ -1,0 +1,38 @@
+topic: ~Stage()
+language: frf
+#include: lexicon_frf.top cf. DirTelechargements
+# include: monDialog.top
+
+concept:(Bonjour) [Bonjour Salut Yo Coucou bienvenue] # = (~hello)
+concept:(Tchao) [Tchao "Au revoir" "A+"] # = (~bye)
+concept:(oui) [Oui Ouais Yep Ouaip “d’accord” “Ok”]#idem cf lexicon
+concept:(non) [non nope nan “non merci” bof “je sais pas” “je ne sais pas”]#idem cf lexicon
+concept:(identité) [“T’es qui ?” “Qui es-tu ?” “Comment t’appelles-tu”]
+concept:(fun) [“Est-ce que je peux prendre un selfie avec toi ?” “Je veux un selfie” “Je voudrais un selfie”]
+concept:(musique) [“Est-ce que tu peux nous jouer un morceau ?” “musique” “Je voudrais que tu joues un morceau”]
+concept:(stage) [“Je cherche un stage” stage “je veux un stage” “quels sont les stages proposés ?” “stage société générale” “Je suis en césure” “Je cherche une césure” ]
+concept:(césure) [“quelles sont les césures proposés par la société générale?” “quelles sont les césures proposés à la société générale?”  “je veux une césure” “quelles sont les césures proposés ?” “césure société générale” “Je suis en césure” “Je cherche une césure” ]
+# concept:(CDI) ["Je [veux cherche] {un} cédéhi" cédéhi “quels sont les cédéhi proposés ?” “cédéhi société générale”]
+concept:(CDI) [“Je cherche un cédéhi” cédéhi “je veux un cédéhi” “quels sont les cédéhi proposés ?” “cédéhi société générale”]
+concept:(VIE) [“Je cherche une véhieu” véhieu “je veux une véhieu” “quels sont les véhieu proposés ?” “véhieu société générale”]
+concept:(DirectRH) [“Je cherche un cédédé” cédédé “je veux un cédédé” “quels sont les cédédé proposés ?” “cédédé société générale”“Je fais une thèse” thèse “je veux une thèse” “quels sont les thèse proposés ?” “thèse société générale”“Je cherche une summer” summer “je veux une summer” “quels sont les summer proposés ?” “summer société générale”“Je cherche une criffheu” criffheu “je veux une criffheu” “quels sont les criffheu proposés ?” “criffheu société générale”]
+concept:(Alternance) [“Je cherche une alternance” alternance “je veux une alternance” “quels sont les alternance proposés ?” “alternance société générale”]
+concept:(jeune) [“jeune diplômé” junior]
+concept:(senior) [“senior” expérimenté ]
+concept:(DomaineAimé) [“Achat” “Audit” “Back-Office” “Middle Office” “Opérations” “Finance de marché” “Finance d'entreprise” “Risques” “Communication” “RH” “Comptabilité” “Contrôle de Gestion” “Droit” “Fiscalité” “Conformité” “Marketing BFI” “Marketing en Banque de Détail” “Banque de Détail” “Assurance” “Immobilier” “IT” “Management de Projet ” “Processus” “Banque de Détail” “Banque Privée” “Autres” ]
+concept:(international) [“à l’international” “à l’étranger” “international” “étranger”]
+concept:(France) [“en France” “France” “ici”]
+concept:(video) [video]
+
+u:(~international) je vous conseille d’aller voir un RH pour en apprendre plus sur nos opportunités de stages à l'international. $dialogEngaged=[01;Stage]
+
+u:(~France) $dialogURL=[1;OuiNon.html] très bien Votre stage dure t-il 6 mois ?
+    u1:(~oui) $dialogURL=[1;OuiNon.html] Êtes-vous déjà allé sur notre site de recrutement carrireze de la société générale ?
+        u2:(~oui) $dialogURL=[1;OuiNon.html] Avez-vous une idée du domaine dans lequel vous souhaitez travailler ?
+            u3:(~oui) $dialogURL=[1;listeDomaine.html] Parfait voici les domaines dans lesquels nous recrutons en ce moment. $dialogEngaged=[00;Stage]
+            u3:(~non) $dialogURL=[1;listeDomaine.html] Ce n’est pas grave, voici les domaines dans lesquels nous recrutons en ce moment.$dialogEngaged=[00;Stage]
+        u2:(~non) $dialogURL=[1;listeDomaine.html] Ce n’est pas grave, voici les domaines dans lesquels nous recrutons en ce moment.$dialogEngaged=[00;Stage]
+           
+            
+    u1:(~non) $dialogURL=[1;listeDomaine.html] Nous ne proposons hélas que très peu de stages de moins de 6 mois, nous pouvons néanmoins vous rediriger vers un RH pour en apprendre plus sur la société générale.$dialogEngaged=[01;Stage]
+# à l'affichage de la liste des dommaine dire "si rien ne vous interesse un RH pourra vous renseigner plus précisément"      

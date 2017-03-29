@@ -1,0 +1,189 @@
+﻿ <! DOCTYPE html>
+ <html lang = "fr">
+	 <head>
+		<meta charset="UTF-8"/>
+		<script src="../js/jquery-3.1.1.min.js"></script>
+		<script src = "../js/reponseMultiple.js"></script>
+		<script src = "../js/tools.js"></script>
+		<script src="/libs/qimessaging/2/qimessaging.js"></script>
+		<link rel="stylesheet" type="text/css" href="../css/commun.css">
+		<link rel="stylesheet" type="text/css" href="../css/quizzDataScience.css">
+	 </head>
+	 <title>Quizz modélisateur</title>
+	 <body data-nbquestions="2" data-metier="modelisateur">
+		<img id="selonVous" src="../images/entete.png"></img>
+		<img data-quizz="modelisateur" class="sortieQuestionnaire" src="../images/out.png"></img>
+		<div class="propositionVisible question1">
+			<p class="question">Quel est le nombre de modèles traités dans l’équipe de modélisation des risques SG?</p>
+			<div class="jeuReponse" data-derniere-question="false">
+				<div class="choixMultiple choix1">
+					<div class="squaredImage" data-reponse="vrai" data-value="80 modèles réglementaires et 200 modèles dans la banque">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">280</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				</br>
+				<div class="choixMultiple choix2">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">75</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				</br>
+				<div class="choixMultiple choix3">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">157</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				</br>
+				<div class="choixMultiple choix4">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">360</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<img class="submitAnswers" src="../images/enter-arrow.png"></img>
+			</div>
+		</div>
+		
+		<div class="propositionVisible question2">
+		
+			<p class="question">Quels sont les usages des modèles développés par nos équipes?</p>
+			<div class="jeuReponse" data-derniere-question="true">
+				<div class="choixMultiple choix1">
+					<div class="squaredImage" data-reponse="vrai" data-value="Nous faisons tout sauf du pricing">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Estimer le capital réglementaire</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix2">
+					<div class="squaredImage" data-reponse="vrai">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Faire du pilotage financier</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix3">
+					<div class="squaredImage" data-reponse="vrai">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Apporter des solutions dans la gestion opérationnelle des risques</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix4">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Faire du pricing</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix5">
+					<div class="squaredImage" data-reponse="vrai">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Fournir des outils utiles à la stratégie du Groupe</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				<img class="submitAnswers" src="../images/enter-arrow.png"></img>
+			</div>
+		</div>
+		
+	<!--	<div class="propositionVisible question3">
+			<p class="question">Quels sont les métiers avec lesquels les modélisateurs interagissent?</p>
+			<div class="jeuReponse" data-derniere-question="true">
+				<div class="choixMultiple choix1">
+					<div class="squaredImage" data-reponse="vrai" data-value="Toutes les réponses sont vraies, mais la première est la plus importante">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Des référentiels à jour, on ne sécurise bien que ce que l’on connait (© Sun Tzu, L’art de la guerre)</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix2">
+					<div class="squaredImage" data-reponse="vrai">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Ça n’existe pas, la sécurité est vouée à l’échec c’est bien connu </span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix3">
+					<div class="squaredImage" data-reponse="vrai">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Une bonne protection périmétrique, des firewall partout</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix4">
+					<div class="squaredImage" data-reponse="vrai">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Des patchs déployés régulièrement, bouchez  ces trous que je ne saurais voir</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				<img data-quizz="securite" class="sortieQuestionnaire" src="../images/out.png"></img>
+				<img class="submitAnswers" src="../images/enter-arrow.png"></img>
+			</div>
+		</div>
+		
+		
+		<div class="propositionVisible question4">
+			<p class="question">Combien d'équipements (serveurs, équipements réseau) sont analysés automatiquement chaque mois à la recherche de vulnérabilités ?</p>
+			<div class="jeuReponse" data-derniere-question="true">
+				<div class="choixMultiple choix1">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">~500 : on n’analyse que nos serveurs sur internet (les hackers ne sont que sur internet après tout)</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix2">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">~2000 : On choisit aléatoirement quelques cibles pour nos analyses et on change tous les mois</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix3">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">~20000 c’est suffisant pour avoir une idée du risque pesant sur notre infrastructure</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix4">
+					<div class="squaredImage" data-reponse="vrai" data-value="Pas de repos pour la sécurité">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">~ 100 000 : Full scans FTW</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				<img data-quizz="securite" class="sortieQuestionnaire" src="../images/out.png"></img>
+				<img class="submitAnswers" src="../images/enter-arrow.png"></img>
+			</div>
+		</div>-->
+		<span id="next"></span>
+		<a href="../redirectionRH.html?modelisateur">
+			<div class="redirection">
+				Rencontrer un spécialiste de ce domaine
+			</div>
+		</a>
+		<a href="../listeDomaine.html">
+			<img id="out" src="../images/logout.png"></img>
+		</a>
+	 </body>
+ </html>

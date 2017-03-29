@@ -1,0 +1,62 @@
+topic: ~listeDomaine()
+language: frf
+
+
+#say box Bonjour bienvenue sur ce forum
+
+concept:(~securite) ["Sécurité"]
+concept:(~dataScientist) ["Data scientist", "data saille en tiste"]
+concept:(~quizzSG) ["Quizz sur la société générale", "quizz societe Generale"]
+concept:(~modelisateur)["Modélisateur", "modelisateur"]
+concept:(~IT) ["IT", "aye ti", "ail ti" , "aille ti"]
+concept:(~calculette) ["Test : suis-je prêt(e) pour un entretient d'embauche ?", "calculette", "entretient d'embauche", "test prêt"]
+concept:(~autre) ["je cherche autre chose", "autre chose"]
+concept:(~careers) ["vers careers.com","car irze","carirze" "carirze point comme"]
+
+
+#(e:Dialog/NotUnderstood)
+#(e:Dialog/répète)
+
+u:(~securite) $dialogURL=[1;quizzs/securite.html] Je vous lance le quizz sécurité ! $dialogEngaged=[00;listeDomaine]
+u:(~dataScientist) $dialogURL=[1;quizzs/dataScientist.html] Je vous lance le data saille en tiste ! $dialogEngaged=[00;listeDomaine]
+u:(~quizzSG) $dialogURL=[1;quizzs/soge/Soge1.html] Je vous lance le quizz société générale ! $dialogEngaged=[00;listeDomaine]
+u:(~modelisateur) $dialogURL=[1;quizzs/dataScientist.html]
+u:(~IT) $dialogURL=[1;quizzs/dataScientist.html]
+u:(~calculette)
+u:(~autre)
+u:(~careers)
+
+    u1: (~oui) $dialogURL=[1;choixProspect.html] parfait je suis contente. ^wait(5)  D'ailleurs Que recherchez-vous sur ce forum ?
+        ## REQUIERT URL
+        u2:(informations sur la sogé) Voulez-vous en connaitre plus sur la société générale ? $dialogEngaged=[2;Accueil;Informations/Informations_frf.top]
+        ## REQUIERT URL ? RH ?
+        u2:(~DirectRH) je vous conseille d’aller voir un rh pour en apprendre plus sur nos opportunités dans ce domaine.$dialogEngaged=[01;Accueil]
+        u2:(~alternance) $dialogURL=[1;OuiNon.html] Êtes-vous déjà inscrit sur notre site de recrutement carrireze de la société générale ? $dialogEngaged=[2;Accueil;Alternance/Alternance_frf.top]
+        ## REQUIERT URL JEUNE/SENIOR
+        u2:(~CDI) Êtes vous jeune diplômé ou sénior ? $dialogEngaged=[2;Accueil;CDI/CDI_frf.top]
+        u2:(~césure) $dialogURL=[1;franceInternational.html] Vous cherchez une césure  en France ou à l’international ? $dialogEngaged=[2;Accueil;Cesure/Cesure_frf.top]
+        u2:(~stage) $dialogURL=[1;franceInternational.html]Vous cherchez un stage en France ou à l’international ? $dialogEngaged=[2;Accueil;Stage/Stage_frf.top]
+        #u2:(~fun) D’accord mais faites vite, je suis un robot très occupé !
+        #u2:(~musique) bien sur !
+        #u2:(~video) Voilà # $video=1
+
+    u1: (~non) $dialogURL=[1;choixProspect.html] ooohh c’est dommage j’espère que ça ira mieux après notre discussion. ^wait(5) D’ailleurs que recherchez-vous sur ce forum ?
+        u2:(informations sur la sogé) Voulez-vous en connaitre plus sur la société générale ? $dialogEngaged=[2;Accueil;Informations/Informations_frf.top]
+        ## REQUIERT URL ? RH ?
+        u2:(~DirectRH) je vous conseille d’aller voir un rh pour en apprendre plus sur nos opportunités dans ce domaine. 
+        u2:(~alternance) $dialogURL=[1;OuiNon.html] Êtes-vous déjà inscrit sur notre site de recrutement carrireze de la société générale ? $dialogEngaged=[2;Accueil;Alternance/Alternance_frf.top]
+        ## REQUIERT URL JEUNE/SENIOR
+        u2:(~CDI) Êtes vous jeune diplômé ou sénior ? $dialogEngaged=[2;Accueil;CDI/CDI_frf.top]
+        u2:(~césure)$dialogURL=[1;franceInternational.html] Vous cherchez une césure  en France ou à l’international ? $dialogEngaged=[2;Accueil;Cesure/Cesure_frf.top]
+        u2:(~stage) $dialogURL=[1;franceInternational.html] Vous cherchez un stage en France ou à l’international ? $dialogEngaged=[2;Accueil;Stage/Stage_frf.top]
+        #u2:(~fun) D’accord mais faites vite, je suis un robot très occupé !
+        #u2:(~musique) bien sur !
+        ## REQUIERT URL VIDEO
+        #u2:(~video) Voilà
+    
+    
+# Catching inputs and triggering outputs
+#u:(e:onStart) $onStopped=1
+
+# Replying to speech
+#u:(~hello) ~hello

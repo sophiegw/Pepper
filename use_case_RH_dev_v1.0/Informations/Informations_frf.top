@@ -1,0 +1,37 @@
+topic: ~Informations()
+language: frf
+
+concept:(Bonjour) [Bonjour Salut Yo Coucou bienvenue]
+concept:(Tchao) [Tchao "Au revoir" "A+"]
+concept:(oui) [Oui Ouais Yep Ouaip “d’accord” “Ok”]
+concept:(non) [non nope nan “non merci” bof “je sais pas” “je ne sais pas”]
+concept:(identité) [“T’es qui ?” “Qui es-tu ?” “Comment t’appelles-tu”]
+concept:(fun) [“Est-ce que je peux prendre un selfie avec toi ?” “Je veux un selfie” “Je voudrais un selfie”]
+concept:(musique) [“Est-ce que tu peut nous jouer un morceau ?” “musique” “Je voudrais que tu joue un morceau”]
+concept:(stage) [“Je cherche un stage” stage “je veux un stage” “quels sont les stages proposés ?” “stage société générale” “Je suis en césure” “Je cherche une césure” ]
+concept:(césure) [“quelles sont les césures proposés par la société générale?” “quelles sont les césures proposés à la société générale?”  “je veux une césure” “quelles sont les césures proposés ?” “césure société générale” “Je suis en césure” “Je cherche une césure” ]
+concept:(CDI) [“Je cherche un cédéhi” cédéhi “je veux un cédéhi” “quels sont les cédéhi proposés ?” “cédéhi société générale”]
+concept:(VIE) [“Je cherche une véhieu” véhieu “je veux une véhieu” “quels sont les véhieu proposés ?” “véhieu société générale”]
+concept:(DirectRH) [“Je cherche un cédédé” cédédé “je veux un cédédé” “quels sont les cédédé proposés ?” “cédédé société générale”“Je fais une thèse” thèse “je veux une thèse” “quels sont les thèse proposés ?” “thèse société générale”“Je cherche une summer” summer “je veux une summer” “quels sont les summer proposés ?” “summer société générale”“Je cherche une criffheu” criffheu “je veux une criffheu” “quels sont les criffheu proposés ?” “criffheu société générale”]
+concept:(Alternance) [“Je cherche une alternance” alternance “je veux une alternance” “quels sont les alternance proposés ?” “alternance société générale”]
+concept:(jeune) [“jeune diplômé” junior]
+concept:(senior) [“senior” expérimenté ]
+concept:(DomaineAimé) [“Achat” “Audit” “Back-Office” “Middle Office” “Opérations” “Finance de marché” “Finance d'entreprise” “Risques” “Communication” “RH” “Comptabilité” “Contrôle de Gestion” “Droit” “Fiscalité” “Conformité” “Marketing BFI” “Marketing en Banque de Détail” “Banque de Détail” “Assurance” “Immobilier” “IT” “Management de Projet ” “Processus” “Banque de Détail” “Banque Privée” “Autres” ]
+concept:(international) [“à l’international” “à l’étranger” “international” “étranger”]
+concept:(video) [video]
+
+
+
+
+    
+u: (~oui) $dialogURL=[1;OuiNon.html] Nous comptons 146 000 collaborateurs de 122 nationalités différentes à travers 66 pays et 60% de notre effectif est hors de France. Notre activité repose sur 3 piliers : la banque de détails en France, la banque de détail et services financiers internationaux, et enfin la banque de grande clientèle et solutions investisseurs. Voulez-vous des détails sur l’un de ces piliers ?
+    u1:(~oui) Lequel ? Montrer la liste des piliers. $dialogEngaged=[01;Informations] ## REQUIERT LISTE DES PILIERS ET DIALOGUE ASSOCIER
+    u1:(~non) $dialogURL=[1;OuiNon.html] D’accord, voulez-vous plus d’infos sur la société générale ?
+        u2:(~oui) $dialogURL=[1;OuiNon.html] Je vous laisse vous diriger vers un RH $dialogEngaged=[01;Informations] #Montrer photo WAIT IMAGE AVANT REBOOT TRACKING
+        u2:(~non) $dialogURL=[1;OuiNon.html] Très bien. voulez vous des informations sur les stages proposées par la sociéré générale ?
+                ## REQUIERT PAGE HTML FRANCE OU INTERNATIONAL
+            u3:(~oui)$dialogURL=[1;franceInternational.html]  Vous cherchez un stage en France ou à l’international ? $dialogEngaged=[2;Accueil;Stage/Stage_frf.top]
+
+                        
+            u3:(~non) très bien je vous souhaite une bonne fin de visite $dialogEngaged=[01;Informations]
+            
