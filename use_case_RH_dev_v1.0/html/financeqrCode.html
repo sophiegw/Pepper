@@ -1,0 +1,36 @@
+<! DOCTYPE html>
+ <html lang = "fr">
+ <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<script src="js/jquery-3.1.1.min.js"></script>
+	<script src = "js/qrcode.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/commun.css">
+	<link rel="stylesheet" type="text/css" href="css/infosQuizzs.css">
+	<link rel="stylesheet" type="text/css" href="css/careersLink.css">
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var qrcode = new QRCode(document.getElementById("qrcode"), {
+				width : 500,
+				height : 500
+			});
+			makeCode(qrcode);
+		});
+		function makeCode (qrcode){		
+			qrcode.makeCode("https://careers.societegenerale.com/");
+		};
+	</script>
+ </head>
+ <title>QRcode Careers</title>
+ <body>
+	<a href="listeDomainefinance.html">
+		<div id="lienRetour">
+				<img id="leftArrow" class="back" src="images/leftArrow.png" />
+				<span class="back">Retour</span>
+		</div>
+	</a>
+	<div id="qrcode">
+		Vers careers.com
+	</div>
+	
+ </body>
+ </html>
