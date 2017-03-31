@@ -7,10 +7,10 @@
     <Dialogs>
         <Dialog name="Informations" src="Informations/Informations.dlg" />
         <Dialog name="Alternance" src="Alternance/Alternance.dlg" />
-        <Dialog name="CDI" src="CDI/CDI.dlg" />
         <Dialog name="Cesure" src="Cesure/Cesure.dlg" />
         <Dialog name="Stage" src="Stage/Stage.dlg" />
         <Dialog name="Accueil" src="Accueil/Accueil.dlg" />
+        <Dialog name="CDI" src="CDI_CDD/CDI.dlg" />
     </Dialogs>
     <Resources>
         <File name="calculatrice" src="html/calculatrice.html" />
@@ -116,19 +116,25 @@
         <File name="connexion" src="html/js/connexion.js" />
         <File name="connexion" src="html/connexion.html" />
         <File name="connexion" src="html/css/connexion.css" />
+        <File name="Soge1" src="html/quizzs/soge/Soge1.html" />
+        <File name="Soge2" src="html/quizzs/soge/Soge2.html" />
+        <File name="Soge3" src="html/quizzs/soge/Soge3.html" />
+        <File name="Soge4" src="html/quizzs/soge/Soge4.html" />
+        <File name="Soge5" src="html/quizzs/soge/Soge5.html" />
+        <File name="Soge6" src="html/quizzs/soge/Soge6.html" />
+        <File name="Soge7" src="html/quizzs/soge/Soge7.html" />
     </Resources>
     <Topics>
         <Topic name="Informations_frf" src="Informations/Informations_frf.top" topicName="Informations" language="fr_FR" />
         <Topic name="Alternance_frf" src="Alternance/Alternance_frf.top" topicName="Alternance" language="fr_FR" />
-        <Topic name="CDI_frf" src="CDI/CDI_frf.top" topicName="CDI" language="fr_FR" />
         <Topic name="Cesure_frf" src="Cesure/Cesure_frf.top" topicName="Cesure" language="fr_FR" />
         <Topic name="Stage_frf" src="Stage/Stage_frf.top" topicName="Stage" language="fr_FR" />
         <Topic name="Accueil_frf" src="Accueil/Accueil_frf.top" topicName="Accueil" language="fr_FR" />
-        <Topic name="Accueil_enu" src="Accueil/Accueil_enu.top" topicName="Accueil" language="en_US" />
         <Topic name="concept_frf" src="Alternance/concept_frf.top" topicName="Concept" language="fr_FR" />
         <Topic name="Bonjour" src="Accueil/Bonjour.top" topicName="Bonjour" language="fr_FR" />
         <Topic name="Experience1" src="Informations/Experience1.top" topicName="Experience1" language="fr_FR" />
-        <Topic name="listeDomaine" src="Accueil/listeDomaine.top" topicName="" language="" />
+        <Topic name="listeDomaine" src="Accueil/listeDomaine.top" topicName="" language="C" />
+        <Topic name="CDI_CDD_frf" src="CDI_CDD/CDI_CDD_frf.top" topicName="CDI_CDD" language="fr_FR" />
     </Topics>
     <IgnoredPaths />
 </Package>
