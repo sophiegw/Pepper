@@ -1,7 +1,6 @@
 $('document').ready(function(){
-	$('.pastilleChoix').on('click touchstart', function(){
+	$('.pastilleChoix').on('click', function(){
 		var _this = $(this);
-        alert(_this.text());
 		createSession( function(){
 			lancerDialogue(_this.text());
 		});

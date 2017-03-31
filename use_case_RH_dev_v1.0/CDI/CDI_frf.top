@@ -1,4 +1,4 @@
-topic: ~CDI_CDD()
+topic: ~CDI()
 language: frf
 
 
@@ -15,21 +15,21 @@ concept:(CDI) [“Je cherche un cédéhi” cédéhi “je veux un cédéhi” �
 concept:(VIE) [“Je cherche une véhieu” véhieu “je veux une véhieu” “quels sont les véhieu proposés ?” “véhieu société générale”]
 concept:(DirectRH) [“Je cherche un cédédé” cédédé “je veux un cédédé” “quels sont les cédédé proposés ?” “cédédé société générale”“Je fais une thèse” thèse “je veux une thèse” “quels sont les thèse proposés ?” “thèse société générale”“Je cherche une summer” summer “je veux une summer” “quels sont les summer proposés ?” “summer société générale”“Je cherche une criffheu” criffheu “je veux une criffheu” “quels sont les criffheu proposés ?” “criffheu société générale”]
 concept:(Alternance) [“Je cherche une alternance” alternance “je veux une alternance” “quels sont les alternance proposés ?” “alternance société générale”]
-concept:(jeune) ["Jeune diplômé" junior]
-concept:(senior) ["Sénior" expérimenté ]
+concept:(jeune) [“jeune diplômé” jeune diplômé junior]
+concept:(senior) [“senior” expérimenté ]
 concept:(DomaineAimé) [“Achat” “Audit” “Back-Office” “Middle Office” “Opérations” “Finance de marché” “Finance d'entreprise” “Risques” “Communication” “RH” “Comptabilité” “Contrôle de Gestion” “Droit” “Fiscalité” “Conformité” “Marketing BFI” “Marketing en Banque de Détail” “Banque de Détail” “Assurance” “Immobilier” “IT” “Management de Projet ” “Processus” “Banque de Détail” “Banque Privée” “Autres” ]
 concept:(international) [“à l’international” “à l’étranger” “international” “étranger”]
 concept:(video) [video]
 
 u:(~jeune) $dialogURL=[1;OuiNon.html] Êtes-vous déjà inscrit sur notre site de recrutement carrireze de la société générale ?
     u1:(~oui) $dialogURL=[1;OuiNon.html] Avez-vous une idée du domaine dans lequel vous souhaitez travailler ?
-        u2:(~oui) $dialogURL=[1;listeDomaine.html] Parfait voici les domaines dans lesquels nous recrutons en ce moment.$dialogEngaged=[00;CDI_CDD]
+        u2:(~oui) $dialogURL=[1;listeDomaine.html] Parfait voici les domaines dans lesquels nous recrutons en ce moment.$dialogEngaged=[00;CDI]
 #Montrer la liste des domaines 
         
-        u2:(~non) $dialogURL=[1;listeDomaine.html] Ce n’est pas grave,voici les domaines dans lesquels nous recrutons en ce moment.$dialogEngaged=[00;CDI_CDD] #Montrer la liste des domaines
+        u2:(~non) $dialogURL=[1;listeDomaine.html] Ce n’est pas grave,voici les domaines dans lesquels nous recrutons en ce moment.$dialogEngaged=[00;CDI] #Montrer la liste des domaines
         
            
-    u1:(~non)$dialogURL=[1;listeDomaine.html] Ce n’est pas grave Nous vous conseillons de vous inscrire sur le site pour être tenu au courant des offres de cédéhi. voici les domaines dans lesquels nous recrutons en ce moment. $dialogEngaged=[00;CDI_CDD] #Montrer la liste des domaines + mettre le lien de la page carreers 
+    u1:(~non)$dialogURL=[1;listeDomaine.html] Ce n’est pas grave Nous vous conseillons de vous inscrire sur le site pour être tenu au courant des offres de cédéhi. voici les domaines dans lesquels nous recrutons en ce moment. $dialogEngaged=[00;CDI] #Montrer la liste des domaines + mettre le lien de la page carreers 
  
  # à l'affichage de la liste des dommaine dire "si rien ne vous interesse un RH pourra vous renseigner plus précisément"        
               
@@ -37,8 +37,8 @@ u:(~jeune) $dialogURL=[1;OuiNon.html] Êtes-vous déjà inscrit sur notre site d
         
 u:(~senior) $dialogURL=[1;OuiNon.html] Êtes-vous déjà inscrit sur notre site de recrutement carrireze de la société générale ?
 
-    u1:(~non) $dialogURL=[1;listeDomaine.html] Ce n’est pas grave Nous vous conseillons de vous inscrire sur le site pour être tenu au courant des offres de cédéhi. Voici les domaines dans lesquels nous recrutons en ce moment.$dialogEngaged=[00;CDI_CDD] #Montrer la liste des domaines + mettre le lien de la page carreers 
+    u1:(~non) $dialogURL=[1;listeDomaine.html] Ce n’est pas grave Nous vous conseillons de vous inscrire sur le site pour être tenu au courant des offres de cédéhi. Voici les domaines dans lesquels nous recrutons en ce moment.$dialogEngaged=[00;CDI] #Montrer la liste des domaines + mettre le lien de la page carreers 
         
     u1:(~oui) $dialogURL=[1;OuiNon.html] Avez-vous une idée du domaine dans lequel vous souhaitez travailler ?
-        u2:(~oui) $dialogURL=[1;listeDomaine.html] Parfait voici les domaines dans lesquels nous recrutons en ce moment. $dialogEngaged=[00;CDI_CDD]#Montrer la liste des domaines 
-        u2:(~non) $dialogURL=[1;listeDomaine.html] D'accord, voici les domaines dans lesquels nous recrutons et qui pourrait vous intéresser. $dialogEngaged=[00;CDI_CDD]
+        u2:(~oui) $dialogURL=[1;listeDomaine.html] Parfait voici les domaines dans lesquels nous recrutons en ce moment. $dialogEngaged=[00;CDI]#Montrer la liste des domaines 
+        u2:(~non) $dialogURL=[1;listeDomaine.html] D'accord, voici les domaines dans lesquels nous recrutons et qui pourrait vous intéresser. $dialogEngaged=[00;CDI]

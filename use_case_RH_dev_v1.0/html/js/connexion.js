@@ -17,21 +17,42 @@ $(document).ready(function(){
 
 function init(){
 	$('#adminConnection').show();
-    // $('#body').show();
-    
     
 	$('input').on('keydown', function(e) {
         if (e.which == 13) { // Check for "Enter"
+            console.log("Enter pressed")
             e.preventDefault();
+            // eventKeyPress = jQuery.Event("keypress");
+            // eventKeyPress.which = 9; // trigger "Tab"
+            // $('#idUser').trigger(eventKeyPress);
+            // $('#motDePasse').focus();
             var focus = $(document.activeElement)
-            focusNext = focus.findNext("input")
-            if(focusNext.length == "0")
-                focus.blur(); // Leave input
-            else
-                focusNext.focus(); // Go to next input
+            // console.log("focused : " + focus.get(0))
+            focus.css("background-color", "red");
+            focus.findNext("*").css("background-color", "green");
+
+            // $(focus).next("tr").css("background-color", "yellow");
+            // if ($(focus)next.length === 0)
+                
+            // $(focus).next('*.input').css("background-color", "green");
+            // $(focus).next('input').focus();
         }
     });
-
+    
+    $.fn.findNextAll = function( selector ){
+      var that = this[ 0 ],
+        selection = $( selector ).get();
+      return this.pushStack(
+        !that && selection || $.grep( selection, function(n){
+           return that.compareDocumentPosition(n) & (1<<2);
+           // if you are looking for previous elements it should be & (1<<1);
+        })
+      );
+    }
+    
+    $.fn.findNext = function( selector ){
+      return this.pushStack( this.findNextAll( selector ).first() );
+    }
     
 	$('.close').on('click', function(){
 		$('.inputUser').val('');
@@ -57,20 +78,5 @@ function init(){
 				window.location.href = "index.html";
 			}
 		}
-	});
-
-    $.fn.findNextAll = function( selector ){
-      var that = this[ 0 ],
-        selection = $( selector ).get();
-      return this.pushStack(
-        !that && selection || $.grep( selection, function(n){
-           return that.compareDocumentPosition(n) & (1<<2);
-           // if you are looking for previous elements it should be & (1<<1);
-        })
-      );
-    }
-    
-    $.fn.findNext = function( selector ){
-      return this.pushStack( this.findNextAll( selector ).first() );
-    }
+	});	
 };
