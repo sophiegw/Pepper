@@ -20,6 +20,8 @@
     <sentence lang="fr_FR">lancer R H</sentence>
     <sentence lang="fr_FR">lancer air ache</sentence>
    </triggerSentences>
+   <loadingResponses/>
+   <autonomous/>
    <permissions/>
   </behaviorContent>
  </contents>

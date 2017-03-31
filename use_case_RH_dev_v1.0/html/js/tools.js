@@ -43,11 +43,6 @@ function raiseEvent(key,value){
   });
 };
 
-function popupConnexion(){
-    console.log("popupConnexion triggered")
-    $("#popup").load("connexion.html");
-};
-
 function isInArray(value, array) {
   return array.indexOf(value) > -1;
 };

@@ -3,7 +3,8 @@
 }
 
 .pastilleChoix{
-    background-color: rgba(255, 0, 0, 0.6);
+    /* background-color: rgba(255, 0, 0, 0.6); */
+    background-color: #E60028 ;
     display: table;
     border: 5px solid black;
     padding: 50px;

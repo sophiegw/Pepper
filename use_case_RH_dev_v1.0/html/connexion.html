@@ -1,31 +1,39 @@
-<link rel="stylesheet" type="text/css" href="css/connexion.css">
-<script src = "js/connexion.js"></script>
+<! DOCTYPE html>
+ <html lang = "fr">
+  <head>
+  	<script src = "js/tools.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/connexion.css">
+    <script src = "js/connexion.js"></script>
+ </head>
+ <title>Connection</title>
 
-<div id="adminConnection">
-		<div class="modalContent">
-		 <span class="close">X</span>
-         </br>
-			<table id="identification">
-				<tr>
-					<th colspan="2">Veuillez vous connecter</th>
-				</tr>
-				<tr>
-					<td class="infos pwd" colspan="2">Mot de passe incorrect</td>
-				</tr>
-				<tr>
-					<td class="infos ident" colspan="2">Identifiant incorrect</td>
-				</tr>
-				<tr>
-					<td class="cell"><label for="idUser">Identifiant : </label></td>
-					<td class="cell"><input id="idUser" type="text" class="inputUser"/></td>
-				</tr>
-				<tr>
-					<td class="cell"><label for="motDePasse">Mot de passe : </label></td>
-					<td class="cell"><input id="motDePasse" type="password" class="inputUser"/></td>
-				</tr>
-			</table>
-			<a id="submit">
-				Se connecter
-			</a>
-		</div>
+<div id="wrapIgnore">
+    <div id="adminConnection">
+            <div class="modalContent">
+             <span class="close">X</span>
+             </br>
+                <table id="identification">
+                    <tr>
+                        <th colspan="2">Veuillez vous connecter</th>
+                    </tr>
+                    <tr>
+                        <td class="infos pwd" colspan="2">Mot de passe incorrect</td>
+                    </tr>
+                    <tr>
+                        <td class="infos ident" colspan="2">Identifiant incorrect</td>
+                    </tr>
+                    <tr>
+                        <td class="cell"><label for="idUser">Identifiant : </label></td>
+                        <td class="cell"><input id="idUser" type="text" class="inputUser"/></td>
+                    </tr>
+                    <tr>
+                        <td class="cell"><label for="motDePasse">Mot de passe : </label></td>
+                        <td class="cell"><input id="motDePasse" type="password" class="inputUser"/></td>
+                    </tr>
+                </table>
+                <a id="submit">
+                    Se connecter
+                </a>
+            </div>
+    </div>
 </div>

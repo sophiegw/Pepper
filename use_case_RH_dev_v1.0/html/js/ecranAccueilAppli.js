@@ -108,7 +108,8 @@ $(document).ready(function(){
         if (alreadyPressed == '0'){
             alreadyPressed = '1'
             createSession(function(){
-                raiseEvent("dialogEngaged","1;Accueil/Accueil_frf.top")
+                // raiseEvent("dialogEngaged","1;Accueil/Accueil_frf.top")
+                raiseEvent("dialogEngaged","1;Accueil")
                 setTimeout(function(){
                     lancerDialogue("Bonjour");
                 }, 2000);

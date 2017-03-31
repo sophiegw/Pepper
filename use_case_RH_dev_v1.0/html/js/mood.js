@@ -14,7 +14,7 @@ $('document').ready(function(){
 		var _this = $(this);
         var aDire = "\""+ _this.attr("name") + "\"";
 		createSession( function(){
-			lancerDialogue(_this.text());
+			lancerDialogue(aDire);
 		});
 	});
     
