@@ -21,8 +21,6 @@ concept:(international) [“à l’international” “à l’étranger” “in
 concept:(video) [video]
 
 
-
-
     
 u: (~oui) $dialogURL=[1;OuiNon.html] Nous comptons 146 000 collaborateurs de 122 nationalités différentes à travers 66 pays et 60% de notre effectif est hors de France. Notre activité repose sur 3 piliers : la banque de détails en France, la banque de détail et services financiers internationaux, et enfin la banque de grande clientèle et solutions investisseurs. Voulez-vous des détails sur l’un de ces piliers ?
     u1:(~oui) Lequel ? Montrer la liste des piliers. $dialogEngaged=[01;Informations] ## REQUIERT LISTE DES PILIERS ET DIALOGUE ASSOCIER
@@ -30,8 +28,6 @@ u: (~oui) $dialogURL=[1;OuiNon.html] Nous comptons 146 000 collaborateurs de 122
         u2:(~oui) $dialogURL=[1;OuiNon.html] Je vous laisse vous diriger vers un RH $dialogEngaged=[01;Informations] #Montrer photo WAIT IMAGE AVANT REBOOT TRACKING
         u2:(~non) $dialogURL=[1;OuiNon.html] Très bien. voulez vous des informations sur les stages proposées par la sociéré générale ?
                 ## REQUIERT PAGE HTML FRANCE OU INTERNATIONAL
-            u3:(~oui)$dialogURL=[1;franceInternational.html]  Vous cherchez un stage en France ou à l’international ? $dialogEngaged=[2;Accueil;Stage/Stage_frf.top]
-
-                        
+            u3:(~oui)$dialogURL=[1;franceInternational.html]  Vous cherchez un stage en France ou à l’international ? $dialogEngaged=[2;Accueil;Stage]
             u3:(~non) très bien je vous souhaite une bonne fin de visite $dialogEngaged=[01;Informations]
             

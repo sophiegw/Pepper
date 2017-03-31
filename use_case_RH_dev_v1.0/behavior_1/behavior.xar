@@ -28,6 +28,10 @@
         GeneratedClass.__init__(self)
 
     def onLoad(self):
+
+
+        ## Topics
+        self.allTopics = ["Accueil/Accueil_frf.top","Cesure/Cesure_frf.top","Stage/Stage_frf.top","Alternance/Alternance_frf.top","CDI_CDD/CDI_CDD_frf.top"]
         ## Proxies
         try:
             import time
@@ -49,6 +53,7 @@
             self.People = ALProxy("ALPeoplePerception")
             self.Awareness = ALProxy("ALBasicAwareness")
             self.Dialog = ALProxy("ALDialog")
+            self.Watcher = ALProxy("ALExpressionWatcher")
         except Exception as e:
             self.logger.error("Proxies initialization failed")
             self.logger.error(e)
@@ -84,6 +89,7 @@
         #self.Dialog.setLanguage("French")
         self.isRunningAwareness = False
         self.isRunningDialog = 0
+        self.isLoadedTopic = 0
         self.stopAllDialog()
         self.Memory.declareEvent('dialogEngaged')
         self.Memory.declareEvent('dialogURL')
@@ -93,13 +99,16 @@
         self.Memory.subscribeToEvent('robotState', self.getName(), 'managerState')
         #self.Memory.subscribeToEvent('Dialog/NoOneSpeak20', self.getName(), 'noDialog')
 
-        self.Memory.subscribeToEvent('RightBumperPressed', self.getName(), 'testScript')
+        #self.Memory.subscribeToEvent('RightBumperPressed', self.getName(), 'testScript')
+
+        self.loadAllTopics(self.allTopics)
+
 
 
         self.waving()
         self.startAwareness()
-        #self.Memory.raiseEvent("dialogURL","1;ecranAccueilAppli.html")
-        self.Memory.raiseEvent("dialogURL","1;Mood.html")
+        self.Memory.raiseEvent("dialogURL","1;ecranAccueilAppli.html")
+        #self.Memory.raiseEvent("dialogURL","1;listeDomaine.html")
 
         #self.TabletService.showWebview("http://www.google.com")
         #import json
@@ -116,12 +125,23 @@
         # response = requests.post(url, data=json.dumps(payload), headers=headers)
         # self.logger.info()
         pass
+
+
+    ## How to trigger javascript from loaded html and then .js page
+    ## INACTIVE
     def testScript(self):
         self.logger.info("testScript raised")
         url = 'http://' + self.ip + '/apps/' + self.uid + '/' + 'Mood.html'
         script = """popupConnexion()"""
         self.logger.info("testage: %s", script)
         self.TabletService.executeJS(script)
+
+    ## Add a trigger condition: 5sec on pepper's head, callback on this signal
+    ## http://doc.aldebaran.com/2-4/naoqi/core/alexpressionwatcher.html#example-expressionwatcher
+    def panelAdmin(self):
+        report_mode = 2;
+        condition = "!'MiddleTactileTouched' && ('MiddleTactileTouched' ~ 5 @ 0.1)"
+        #self.Watcher
     def onInput_onStart(self):
 
         #self.Memory.subscribeToEvent('PeoplePerception/PeopleList', self.getName(), 'people')
@@ -134,8 +154,9 @@
     def onUnload(self):
         #put clean-up code here
         if self.isRunningDialog >= 1:
-            self.stopAllDialog()
-
+            self.stopAllTopics()
+            self.unloadAllTopics()
+            #self.stopAllDialog()
         if self.isRunningAwareness:
             if self.Awareness:
                 self.Awareness.stopAwareness()
@@ -173,23 +194,29 @@
         self.logger.info("managerDialog key: %s", key)
         ## 00/topicToStop = Dialog ended, end dialog and NO tracking
         if(key[0] == "00"):
-            self.stopDialog(key[1])
+            self.stopTopic(key[1])
+            #self.stopDialog(key[1])
             self.Memory.raiseEvent("robotState","0")
         ## 01/topicToStop = Dialog ended, end dialog and restart tracking
         elif(key[0] == "01"):
-            self.stopDialog(key[1])
+            self.stopTopic(key[1])
+            #self.stopDialog(key[1])
             self.Memory.raiseEvent("robotState","1")
         ## 1/pathToLaunch = Dialog launch called, then stop tracking and start dialog
         elif (key[0] == "1"):
             self.Memory.raiseEvent("robotState","0")
-            self.startDialog(key[1])
+            #self.startDialog(key[1])
+            self.startTopic(key[1])
         ## 2/topicToStop/pathTolaunch = stop previous dialog, launch the new one
         elif(key[0] == "2"):
-            self.stopDialog(key[1])
-            self.startDialog(key[2])
+            self.stopTopic(key[1])
+            self.startTopic(key[2])
+            #self.stopDialog(key[1])
+            #self.startDialog(key[2])
         ## 666 = stop all loaded dialogs
         elif(key[0] == "666"):
-            self.stopAllDialog()
+            self.stopAllTopics()
+            #self.stopAllDialog()
         #self.Memory.subscribeToEvent('dialogEngaged', self.getName(), 'managerDialog')
 
     def managerURL(self):
@@ -231,7 +258,74 @@
 
 ### DIALOG ###
 
+    def loadTopic(self, path):
+        self.logger.info("LoadTopic %s", path)
+        self.dialog_path = os.path.abspath(
+                        os.path.join(self.FrameManager.getBehaviorPath(self.behaviorId), '../' + path))
+        self.logger.info("LoadTopic dialog path %s", self.dialog_path)
+        try:
+            self.dialog_topic = self.Dialog.loadTopic(str(self.dialog_path))
+            self.isLoadedTopic += 1
+        except Exception as e:
+            self.logger.warning("loadTopic failed for %s", path)
+            self.logger.warning(e)
+
+    def startTopic(self, topic):
+        self.logger.info("startTopic %s", topic)
+        loadedtopics = self.Dialog.getAllLoadedTopics()
+        if (topic in loadedtopics == True):
+            try:
+                self.dialog_topic = self.Dialog.activateTopic(topic)
+                self.isRunningTopic += 1
+            except Exception as e:
+                self.logger.warning("startTopic failed")
+                self.logger.warning(e)
+        else:
+            self.logger.warning("startTopic failed, topic not pre-loaded")
+            self.logger.warning(e)
+
+    def unloadTopic(self, topic):
+        self.logger.info("unloadTopic %s", topic)
+        try:
+            self.dialog_topic = self.Dialog.unloadTopic(topic)
+            self.isLoadedTopic -= 1
+        except Exception as e:
+            self.logger.warning("unloadTopic failed for %s", topic)
+            self.logger.warning(e)
+
+    def stopTopic(self, topic):
+        self.logger.info("stopTopic %s", topic)
+        activatedtopics = self.Dialog.getActivatedTopics()
+        if (topic in activatedtopics == True):
+            try:
+                self.dialog_topic = self.Dialog.deactivateTopic(topic)
+                self.isRunningTopic -= 1
+            except Exception as e:
+                self.logger.warning("stopTopic failed")
+                self.logger.warning(e)
+        else:
+            self.logger.warning("stopTopic failed, topic not active or loaded")
+            self.logger.warning(e)
+
+    def loadListTopics(self, pathslist):
+        for path in pathslist :
+            self.loadTopic(path)
+
+    def unloadAllTopics(self):
+        self.logger.info("unloadAllTopics")
+        topicslist = self.Dialog.getLoadedTopics()
+        for topic in topicslist
+            self.unloadTopic(topic)
+
+    def stopAllTopics(self):
+        self.logger.info("stopAllTopics")
+        topicslist = self.Dialog.getActivatedTopics()
+        for topic in topicslist:
+            self.stopTopic(topic)
+
+
     ## Start dialog from path
+    ## UNUSUED (to slow to load and start on the fly; prefer start pre-loaded topic)
     def startDialog(self, path):
         self.logger.info("startDialog")
         self.dialog_path = os.path.abspath(
@@ -245,8 +339,8 @@
             self.logger.warning("Start dialog failed")
             self.logger.warning(e)
 
-
     ## Stop dialog where topic is
+    ## UNUSUED
     def stopDialog(self, topic):
         self.logger.info("DIALOG STOPPED %s", topic)
     # "getFocus()" topic and stop it ?
@@ -257,7 +351,7 @@
             self.logger.warning("Stop dialog failed")
             self.logger.warning(e)
 
-
+    ## UNUSUED
     def stopAllDialog(self):
         self.logger.info("StopAllDialog before: %s", self.Dialog.getAllLoadedTopics())
         for topic in self.Dialog.getAllLoadedTopics():

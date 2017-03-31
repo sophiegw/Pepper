@@ -1,5 +1,6 @@
 
-#adminConnection{
+
+#adminConnection {
 	display: none;
     position: fixed;
     z-index: 1;
@@ -11,7 +12,8 @@
     background-color: rgba(0,0,0,0.4);
 }
 
-.modalContent {
+#adminConnection .modalContent {
+    
     background-color: #fefefe;
     border-radius: 8px;
     margin: 10% auto;
@@ -20,11 +22,15 @@
     width: 63%;
 }
 
-.close {
+#adminConnection .close {
 	float: right;
-    color: #aaa;
+    color: #E60028;
     font-size: 3em;
     font-weight: bold;
+    border: 3px solid #E60028;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 50%;
 }
 
 #identification, .inputUser/*, #submit*/{
@@ -35,12 +41,17 @@
 	table-layout: fixed;
 }
 
-.inputUser, .inpuUser:focus{
+.inputUser{
 	border-left: 0;
 	border-top: 0;
 	border-right: 0;
 	outline: none;
 }
+
+.inputUser:focus {
+    background: #FCE4E8;
+}
+
 #identification th{
 	text-align: center;
 }
