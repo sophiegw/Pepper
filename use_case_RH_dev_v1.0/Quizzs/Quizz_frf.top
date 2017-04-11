@@ -1,0 +1,7 @@
+topic: ~Informations()
+language: frf
+
+concept:(réponse)["reponse", "numero", "choix", "vignette", "ligne"]
+concept:(réponse1) [ [~reponse un]]
+
+

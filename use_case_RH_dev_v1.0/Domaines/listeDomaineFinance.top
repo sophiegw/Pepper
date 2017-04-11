@@ -1,0 +1,40 @@
+topic: ~listeDomaineFinance()
+language: frf
+
+
+concept:(careers) ["careers" "vers careers.com" "car irze" "carirze" "carirze point comme" "lien carirze" "carirze"]
+concept:(dataScientist) ["datascientist" "Data scientist" "data saille en tiste"]
+concept:(analysequantitative) ["analysequantitative" "analyse" "analyse quantitative"]
+concept:(structuration) ["structuration" "praille sigue" "praille sigue" "Pricing"]
+concept:(trading) ["trading" "trèdigue" "traille digue" "très dinegue"]
+concept:(ventemarche) ["ventemarche" "Vente Marchés Financiers" "vente" "marchés financiers"]
+concept:(financements) ["financements" "Financements structurés"]
+concept:(fusions) ["fusions" "Fusions Acquisitions" "e c m"]
+concept:(gestionactif) ["gestionactif" "Gestion d'actifs" "gestion" "actif"]
+concept:(risques) ["risques"]
+concept:(audit) ["audit" "Audit interne"]
+concept:(conseil) [ "conseil" "Conseil interne" "Inspection Générale"]
+concept:(autre) ["autrechose" "je cherche autre chose" "autre chose" "autre"]
+concept:(retour) ["retour"]
+
+
+## Repondre au quizz à l'oral, proposer un retour dialogue (ou ne pas le quitter ?)??????
+u:(~careers) $dialogURL=[1;domaines/careersLink.html] Vous pouvez flasher ce q r code !
+    u1:(~retour) $dialogURL=[1;domaines/listeDomaineFinance.html]
+
+u:(~dataScientist) $dialogURL=[1;domaines/infos/dataScientistfinance.html] Voici le domaine data saille en tiste $dialogEngaged=[00;listeDomaineFinance]
+## REQUIERT TOUS LES LIENS
+u:(~analysequantitative) Voici le domaine d'analyse quantitative
+u:(~structuration) Voici le domaine de structuration
+u:(~trading) Voici le domaine du très dinegue
+u:(~ventemarche) Voici le domaine des ventes sur marchés financiers
+u:(~financements) Voici le domaine des financements structurés
+u:(~fusions) Voici le domaine des fusions et acquisitions # ou ECM
+u:(~gestionactif) Voici le domaine de gestion d'actifs
+u:(~risques) Voici le domaine des risques
+u:(~audit) Voici le domaine de l'audit interne
+u:(~conseil) Voici le domaine de conseil interne
+
+    
+u:(~autre) $dialogURL=[1;exempleRH.html] Vous pouvez rencontrez ces personnes $dialogEngaged=[00;listeDomaineIT]
+

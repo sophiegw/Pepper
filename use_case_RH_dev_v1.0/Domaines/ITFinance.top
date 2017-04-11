@@ -1,0 +1,12 @@
+topic: ~ITFinance()
+language: frf
+
+
+concept:(IT) ["IT" "aye ti" "ail ti"  "aille ti"]
+concept:(Finance) ["finance" "fi nance"]
+
+
+u:(~IT) $dialogURL=[1;domaines/listeDomaineIT.html] Voici les domaines aille ti $dialogEngaged=[2;ITFinance;listeDomaineIT]
+
+#u:(~Finance) $dialogURL=[1;domaines/listeDomaineFinance.html]Voici les domaines en finance $dialogEngaged=[2;ITFinance;listeDomaineFinance]
+u:(~Finance) $dialogURL=[1;travaux.html] Oops vous n'avez pas mis votre casque pour rentrez sur ce chantier en cours de développement !  $dialogURL=[1;domaines/ItFinance.html]

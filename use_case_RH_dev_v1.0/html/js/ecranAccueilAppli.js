@@ -106,15 +106,21 @@ $(document).ready(function(){
     var alreadyPressed = '0'
 	$('body').on('click', function(){
         if (alreadyPressed == '0'){
+            // $('#loader').show();
             alreadyPressed = '1'
             createSession(function(){
                 // raiseEvent("dialogEngaged","1;Accueil/Accueil_frf.top")
                 raiseEvent("dialogEngaged","1;Accueil")
                 setTimeout(function(){
                     lancerDialogue("Bonjour");
-                }, 2000);
-                
+                    alreadyPressed = 0;
+                }, 500);
             });
+            // setTimeout(function(){
+                    // console.log("hellooooo")
+                    // alreadyPressed = 0;
+                // }, 500);
+            // $('#loader').hide();
         }
 	});
 	

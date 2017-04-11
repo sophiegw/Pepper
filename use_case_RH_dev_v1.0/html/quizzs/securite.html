@@ -12,7 +12,7 @@
 	 <title>Quizz sécurité</title>
 	 <body data-nbquestions="4" data-metier="securite">
 		<img id="selonVous" src="../images/entete.png"></img>
-		<img data-quizz="securite" class="sortieQuestionnaire" src="../images/out.png"></img>
+		<img data-quizz="securite" class="sortieQuestionnaire" redirection="domaines/listeDomaineIT.html" dialog="listeDomaineIT" src="../images/out.png"></img>
 		<div class="propositionVisible question1">
 			<p class="question">Qu'est ce qu'une "APT" ?</p>
 			<div class="jeuReponse" data-derniere-question="false">
@@ -167,13 +167,13 @@
 			</div>
 		</div>
 		<span id="next"></span>
-		<a href="../redirectionRH.html?securite">
-			<div class="redirection">
+		<!-- <a href="../redirectionRH.html?securite"> -->
+			<div class="redirection" redirection="domaines/listeDomaineIT.html" dialog="listeDomaineIT">
 				Rencontrer un spécialiste de ce domaine
 			</div>
-		</a>
-		<a href="../listeDomaine.html">
-			<img id="out" src="../images/logout.png"></img>
-		</a>
+		<!-- </a> -->
+		<!-- <a href="../listeDomaine.html"> -->
+			<img id="out" redirection="domaines/listeDomaineIT.html" dialog="listeDomaineIT" src="../images/logout.png"></img>
+		<!-- </a> -->
 	 </body>
  </html>

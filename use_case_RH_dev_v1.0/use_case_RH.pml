@@ -42,7 +42,6 @@
         <File name="qrcode" src="html/js/qrcode.js" />
         <File name="reponseMultiple" src="html/js/reponseMultiple.js" />
         <File name="tools" src="html/js/tools.js" />
-        <File name="listeDomaine" src="html/listeDomaine.html" />
         <File name="securite" src="html/domaines/infos/securite.html" />
         <File name="dataScientist" src="html/domaines/infos/dataScientist.html" />
         <File name="modelisateur" src="html/domaines/infos/modelisateur.html" />
@@ -86,7 +85,6 @@
         <File name="Jean-Eustache_De-la-Tourette_modelisateur" src="html/images/photos_RH/Jean-Eustache_De-la-Tourette_modelisateur.jpg" />
         <File name="cute_kitten_securite" src="html/images/photos_RH/cute_kitten_securite.jpg" />
         <File name="king_harambe_rh" src="html/images/photos_RH/king_harambe_rh.jpg" />
-        <File name="paola_pitault_rh" src="html/images/photos_RH/paola_pitault_rh.jpg" />
         <File name="stage" src="html/images/stage.png" />
         <File name="video" src="html/images/video.png" />
         <File name="vie" src="html/images/vie.png" />
@@ -109,20 +107,27 @@
         <File name="indifferent" src="html/images/indifferent.png" />
         <File name="mood" src="html/js/mood.js" />
         <File name="innovation" src="html/quizzs/innovation.html" />
-        <File name="sogé" src="html/quizzs/sogé.html" />
         <File name="choixProspect" src="html/choixProspect.html" />
-        <File name="informations" src="html/informations.html" />
         <File name="testage" src="html/testage.html" />
         <File name="connexion" src="html/js/connexion.js" />
         <File name="connexion" src="html/connexion.html" />
         <File name="connexion" src="html/css/connexion.css" />
-        <File name="Soge1" src="html/quizzs/soge/Soge1.html" />
-        <File name="Soge2" src="html/quizzs/soge/Soge2.html" />
-        <File name="Soge3" src="html/quizzs/soge/Soge3.html" />
-        <File name="Soge4" src="html/quizzs/soge/Soge4.html" />
-        <File name="Soge5" src="html/quizzs/soge/Soge5.html" />
-        <File name="Soge6" src="html/quizzs/soge/Soge6.html" />
-        <File name="Soge7" src="html/quizzs/soge/Soge7.html" />
+        <File name="Risquesredirection" src="html/Risquesredirection.html" />
+        <File name="dataScientistfinance" src="html/domaines/infos/dataScientistfinance.html" />
+        <File name="exempleRH" src="html/exempleRH.html" />
+        <File name="financeqrCode" src="html/financeqrCode.html" />
+        <File name="Thumbs" src="html/images/Thumbs.db" />
+        <File name="Thumbs" src="html/images/photos_RH/Thumbs.db" />
+        <File name="dataScientistfinance" src="html/quizzs/dataScientistfinance.html" />
+        <File name="listeInformations" src="html/listeInformations.html" />
+        <File name="ItFinance" src="html/domaines/ItFinance.html" />
+        <File name="listeDomaine" src="html/domaines/listeDomaine.html" />
+        <File name="listeDomaineFinance" src="html/domaines/listeDomaineFinance.html" />
+        <File name="listeDomaineIT" src="html/domaines/listeDomaineIT.html" />
+        <File name="soge" src="html/quizzs/soge.html" />
+        <File name="work_in_progress" src="html/images/work_in_progress.jpg" />
+        <File name="travaux" src="html/travaux.html" />
+        <File name="html" src="html.rar" />
     </Resources>
     <Topics>
         <Topic name="Informations_frf" src="Informations/Informations_frf.top" topicName="Informations" language="fr_FR" />
@@ -133,8 +138,13 @@
         <Topic name="concept_frf" src="Alternance/concept_frf.top" topicName="Concept" language="fr_FR" />
         <Topic name="Bonjour" src="Accueil/Bonjour.top" topicName="Bonjour" language="fr_FR" />
         <Topic name="Experience1" src="Informations/Experience1.top" topicName="Experience1" language="fr_FR" />
-        <Topic name="listeDomaine" src="Accueil/listeDomaine.top" topicName="" language="C" />
         <Topic name="CDI_CDD_frf" src="CDI_CDD/CDI_CDD_frf.top" topicName="CDI_CDD" language="fr_FR" />
+        <Topic name="listeInformation_frf" src="Informations/listeInformation_frf.top" topicName="listeInformation" language="fr_FR" />
+        <Topic name="listeDomaineFinance" src="Domaines/listeDomaineFinance.top" topicName="listeDomaineFinance" language="fr_FR" />
+        <Topic name="listeDomaineIT" src="Domaines/listeDomaineIT.top" topicName="listeDomaineIT" language="fr_FR" />
+        <Topic name="ITFinance" src="Domaines/ITFinance.top" topicName="ITFinance" language="fr_FR" />
+        <Topic name="choixProspect" src="Accueil/choixProspect.top" topicName="choixProspect" language="fr_FR" />
+        <Topic name="Quizz_frf" src="Quizzs/Quizz_frf.top" topicName="" language="C" />
     </Topics>
     <IgnoredPaths />
 </Package>

@@ -1,0 +1,31 @@
+topic: ~choixProspect()
+language: frf
+
+
+concept:(stage) ["stage" "Je cherche un stage" "je veux un stage" "quels sont les stages proposés ?" "stage société générale" ]
+concept:(CDD) ["Je cherche un cédédé" cédédé "je veux un cédédé" "quels sont les cédédé proposés ?" "cédédé société générale" "un CDD"]
+concept:(CDI) ["Je cherche un cédéhi" cédéhi "je veux un cédéhi" "quels sont les cédéhi proposés ?" "cédéhi société générale" "un CDI"]
+concept:(CDI/CDD) ["cdi_cdd" ~CDI ~CDD ]
+concept:(VIE) ["vie" "Je cherche une véhieu" véhieu "je veux une véhieu" "quels sont les véhieu proposés ?" "un VIE" ]
+concept:(Alternance) ["alternance" "Je cherche une alternance" alternance "je veux une alternance" "quels sont les alternance proposés ?" "alternance société générale" "une atlernance"]
+concept:(informations) ["informations" "informations société générale" "des informations" ]
+#concept:(DomaineAimé) ["Achat" "Audit" "Back-Office" "Middle Office" "Opérations" "Finance de marché" "Finance d'entreprise" "Risques" "Communication" "RH" "Comptabilité" "Contrôle de Gestion" "Droit" "Fiscalité" "Conformité" "Marketing BFI" "Marketing en Banque de Détail" "Banque de Détail" "Assurance" "Immobilier" "IT" "Management de Projet " "Processus" "Banque de Détail" "Banque Privée" "Autres" ]
+#concept:(international) ["à l’international" "à l’étranger" "international" "étranger"]
+#concept:(DirectRH) [~VIE "Je fais une thèse" thèse "je veux une thèse" "quels sont les thèse proposés ?" "thèse société générale""Je cherche une summer" summer "je veux une summer" "quels sont les summer proposés ?" "summer société générale""Je cherche une cifre" cifre "je veux une cifre" "quels sont les cifre proposés ?" "cifre société générale" "crif"]
+#concept:(césure) ["quelles sont les césures proposés par la société générale?" "quelles sont les césures proposés à la société générale?"  "je veux une césure" "quelles sont les césures proposés ?" "césure société générale" "Je suis en césure" "Je cherche une césure" "une césure"]
+
+u:(~informations) $dialogURL=[1;listeInformations.html] Voici les informations dont je dispose $dialogEngaged=[2;choixProspect;listeInformation]
+
+u:(~alternance) $dialogURL=[1;OuiNon.html] Êtes-vous déjà inscrit sur notre site de recrutement carrireze de la société générale ? $dialogEngaged=[2;choixProspect;Alternance]
+
+u:(~CDI/CDD) $dialogURL=[1;jeuneSenior.html] Êtes vous jeune diplômé ou sénior ? $dialogEngaged=[2;choixProspect;CDI_CDD]
+
+u:(~stage) $dialogURL=[1;franceInternational.html]Vous cherchez un stage en France ou à l’international ? $dialogEngaged=[2;choixProspect;Stage]
+
+## REQUIERT URL ? RH ?
+u:(~VIE) je vous conseille d’aller voir un rh pour en apprendre plus sur nos opportunités dans ce domaine. $dialogEngaged=[01;choixProspect]
+
+## REQUIERT URL ? RH ?
+#u:(~DirectRH) je vous conseille d’aller voir un rh pour en apprendre plus sur nos opportunités dans ce domaine. $dialogEngaged=[01;Accueil]
+
+#u:(~césure) $dialogURL=[1;franceInternational.html] Vous cherchez une césure en France ou à l’international ? $dialogEngaged=[2;Accueil;Cesure]

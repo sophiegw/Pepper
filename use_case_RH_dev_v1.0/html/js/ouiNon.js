@@ -10,13 +10,22 @@ $('document').ready(function(){
   // });
     //alert(param[1])
     
-	$('.choixProspect').on('click', function(){	
-		var _this = $(this);
-        var aDire = "\"" + _this.siblings('span').text() + "\"";
-		createSession( function(){
-			lancerDialogue(_this.text());
-		});
+    var locked = false;
+    $('.dialogable').on('click touchstart', function(){
+        if (!locked) {
+            locked = true;
+            var _this = $(this);
+            var aDire = "\""+ _this.attr("name") + "\"";
+            createSession( function(){
+                lancerDialogue(aDire);
+            });
+            setTimeout(unlock, 2000);
+        }
 	});
+
+    function unlock () {
+        locked = false;
+    }
     
 	
 });

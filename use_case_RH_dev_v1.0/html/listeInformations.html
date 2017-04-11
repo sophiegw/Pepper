@@ -4,7 +4,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<script src="js/jquery-3.1.1.min.js"></script>
 	<script src = "js/listeDomaine.js"></script>
-	<script src = "js/tools.js"></script>
+	<script src="js/tools.js"></script>
+	<script src="/libs/qimessaging/2/qimessaging.js"></script>
     <script src="js/timer.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/commun.css">
 	<link rel="stylesheet" type="text/css" href="css/listeDomaine.css">
@@ -21,46 +22,40 @@
  <body>
     <div class="content">
 	
-		<a href="quizzs/sogé.html">
-			<div class="domaine left">
-				Quizz sur la société générale
+		<!-- <a href="quizzs/sogé.html"> -->
+			<div class="domaine left dialogable" name="quizzsg">
+				Quizz sur Société Générale
 				<br/>
 			</div>
-		</a>
+		<!-- </a> -->
 		
-		<a href="calculatrice.html">
-			<div class="domaine right">
-				Test : suis-je prêt(e) pour un entretient d'embauche ?
+		<!-- <a href="calculatrice.html"> -->
+			<div class="domaine right dialogable" name="calculatrice">
+				Test : suis-je prêt(e) pour un entretien d'embauche ?
 			</div>
-		</a>
-		
-		
-			<div class="domaine left">
-				informations sur la société générale 
+		<!-- </a> -->
+        
+			<div class="domaine left dialogable" name="informations">
+				Informations sur Société Générale 
 			</div>
 		
-		
-		
-			<div class="domaine right">
-				qui suis je ? 
+			<div class="domaine right dialogable" name="quiesttu">
+				Robot travailleur
 			</div>
-	
-		
 	</div>
-	
 
     <footer>
-        <div id="centered">
-            <a href="choixProspect.html">
+        <div id="centered" class="dialogable" name="autrechose">
+            <!-- <a class="dialog" href="choixProspect.html"> -->
                 <div id="autreChose">
                     Je cherche autre chose
                 </div>
-            </a>
+            <!-- </a> -->
         </div>
         </br>
-        <div id="video">	
+        <div id="video" class="dialogable" name="video">	
             <img id="videoSoge" src="images/video.png"/>
-            <span id="lienVideo">Vidéo de présentation de la société générale</span>
+            <span id="lienVideo">Vidéo de présentation de Société Générale</span>
         </div>
         <img id="logo" src="images/LogoSoge.png"></img>
     </footer>

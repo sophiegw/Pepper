@@ -12,7 +12,7 @@
 	 <title>Quizz IT</title>
 	 <body data-nbquestions="5" data-metier="it">
 		<img id="selonVous" src="../images/entete.png"></img>
-		<img data-quizz="it" class="sortieQuestionnaire" src="../images/out.png"></img>
+		<img data-quizz="it" class="sortieQuestionnaire" redirection="domaines/listeDomaineIT.html" dialog="listeDomaineIT" src="../images/out.png"></img>
 		<div class="propositionVisible question1">
 			<p class="question">Sur un total de 10, combien de logiciels utilisés par un trader sont entièrement développés en interne à la SGCIB ?</p>
 			<div class="jeuReponse" data-derniere-question="false">
@@ -72,7 +72,7 @@
 				</div>
 				<br/>
 				<div class="choixMultiple choix2">
-					<div class="squaredImage" data-reponse="vrai" data-value="50000 personnes, cela représente environ 25% de l'effectif total">
+					<div class="squaredImage" data-reponse="vrai" data-value="50000 personnes, cela représente environ 33% de l'effectif total">
 						<img class="coche" src="../images/circle.png"></img>
 					</div>
 					<span class="reponseMultiple">50000</span>
@@ -263,13 +263,13 @@
 		</div>
 		
 		<span id="next"></span>
-		<a href="../redirectionRH.html?it">
-			<div class="redirection">
+		<!-- <a href="../redirectionRH.html?it"> -->
+			<div class="redirection" redirection="domaines/listeDomaineIT.html" dialog="listeDomaineIT">
 				Rencontrer un spécialiste de ce domaine
 			</div>
-		</a>
-		<a href="../listeDomaine.html">
-			<img id="out" src="../images/logout.png"></img>
-		</a>
+		<!-- </a> -->
+		<!-- <a href="../listeDomaine.html"> -->
+			<img id="out" redirection="domaines/listeDomaineIT.html" dialog="listeDomaineIT" src="../images/logout.png"></img>
+		<!-- </a> -->
 	 </body>
  </html>

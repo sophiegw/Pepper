@@ -30,7 +30,7 @@ function lancerDialogue(aDire){
 	},function (error){
 		alert(error);
 		console.log(error);
-  });  
+  });
 };
 
 function raiseEvent(key,value){
@@ -46,3 +46,19 @@ function raiseEvent(key,value){
 function isInArray(value, array) {
   return array.indexOf(value) > -1;
 };
+
+// function backDialog(){
+    // if (!locked) {
+        // locked = true;
+        // var _this = $(this);
+        // var redirection = "1;" + _this.attr("redirection");
+        // var dialog = "20;" + _this.attr("dialog");
+        // session.service('ALMemory').then(function( memory) {
+            // memory.raiseEvent("dialogURL",redirection);
+            // memory.raiseEvent("dialogEngaged",dialog);
+        // }, function (error) {
+            // console.log(error);
+            // setTimeout(unlock, 2000);
+        // });
+    // }
+// };

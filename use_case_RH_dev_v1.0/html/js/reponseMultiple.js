@@ -5,7 +5,6 @@ var nbClick = 0;
 
 $(document).ready(function(){
 	nbQuestions = $('body').data('nbquestions');
-	init();
 	try {
 		QiSession( function (s) {
 			console.log('connected!');
@@ -15,6 +14,7 @@ $(document).ready(function(){
 	  console.log("Error when initializing QiSession: " + err.message);
 	  console.log("Make sure you load this page from the robots server.");
 	}
+    init();
 });
 
 function init(){
@@ -22,12 +22,8 @@ function init(){
 	$('.squaredImage').on('click', function(){
 			var _this = $(this);
 			_this.find("img").toggle();
-		});
-		
-	$('.sortieQuestionnaire').on('click', function(){
-		var currentQuizz = $(this).data('quizz');
-		window.location.href = "../domaines/infos/" + currentQuizz + ".html";
-	});
+    });
+    
 	
 	$('.submitAnswers').on('click', function(){
 		nbClick++;
@@ -87,14 +83,49 @@ function init(){
 		window.scrollTo(0,0);
 	});
 	
-	$('#out').on('click', function(){	
+	$('#out').on('click', function(){
 		sayAnswer("Vous avez répondu correctement à " + bonneRep + " sur " + nbQuestions + "questions, soit un résultat de " + ((bonneRep/nbQuestions) * 100).toFixed(2) + " pourcents");
-	});
+        backDialog( $(this) );
+    });
 	
 	$('.redirection').on('click', function(){
-		var metier = $('body').data("metier");
-		window.location.href = "redirectionRH.html?" + metier;
+		// var metier = $('body').data("metier");
+		// window.location.href = "redirectionRH.html?" + metier;
+        session.service('ALMemory').then(function( memory) {
+            memory.raiseEvent("robotState","1");
+            }, function (error) {
+            console.log(error);
+        });
+        // createSession(function(){
+            // // raiseEvent("dialogEngaged","1;Accueil/Accueil_frf.top")
+            // raiseEvent("robotState","1")
+        // });
 	});
+    
+    $('.sortieQuestionnaire').on('click', function(){
+        backDialog( $(this) );
+    });
+    
+    locked = false;
+    function backDialog(thisObj){
+        if (!locked) {
+            locked = true;
+            var _this = thisObj;
+            var redirection = "1;" + _this.attr("redirection");
+            var dialog = "1;" + _this.attr("dialog");
+            session.service('ALMemory').then(function( memory){
+                memory.raiseEvent("dialogURL",redirection);
+                memory.raiseEvent("dialogEngaged",dialog);
+            }, function (error) {
+                console.log(error);
+                setTimeout(unlock, 2000);
+            });
+        }
+    };
+    
+    function unlock () {
+    locked = false;
+    }
 };
 
 

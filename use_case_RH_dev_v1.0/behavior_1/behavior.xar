@@ -14,12 +14,13 @@
         <Input name="LeftBumperPressed" type="0" type_size="1" nature="4" stm_value_name="LeftBumperPressed" inner="1" tooltip="LeftBumperPressed desc" id="5" />
         <Input name="HandRightBackTouched" type="0" type_size="1" nature="4" stm_value_name="HandRightBackTouched" inner="1" tooltip="HandRightBackTouched desc" id="6" />
         <Input name="HandLeftBackTouched" type="0" type_size="1" nature="4" stm_value_name="HandLeftBackTouched" inner="1" tooltip="HandLeftBackTouched desc" id="7" />
-        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="8" />
+        <Input name="FrontTactilTouched" type="0" type_size="1" nature="4" stm_value_name="FrontTactilTouched" inner="1" tooltip="FrontTactilTouched desc" id="8" />
+        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="9" />
         <Timeline enable="0">
             <BehaviorLayer name="behavior_layer1">
                 <BehaviorKeyframe name="keyframe1" index="1">
                     <Diagram scale="100">
-                        <Box name="Greet" id="11" localization="8" tooltip="Greet people and m anage behavior" x="303" y="44">
+                        <Box name="Greet" id="11" localization="8" tooltip="Greet people and m anage behavior" x="387" y="14">
                             <bitmap>media/images/box/box-python-script.png</bitmap>
                             <script language="4">
                                 <content>
@@ -31,7 +32,16 @@
 
 
         ## Topics
-        self.allTopics = ["Accueil/Accueil_frf.top","Cesure/Cesure_frf.top","Stage/Stage_frf.top","Alternance/Alternance_frf.top","CDI_CDD/CDI_CDD_frf.top"]
+        self.allTopics = ["Accueil/Accueil_frf.top",
+                    "Accueil/choixProspect.top",
+                    "Alternance/Alternance_frf.top",
+                    "CDI_CDD/CDI_CDD_frf.top",
+                    "Domaines/ITFinance.top",
+                    "Domaines/listeDomaineFinance.top",
+                    "Domaines/listeDomaineIT.top",
+                    "Informations/listeInformation_frf.top",
+                    "Stage/Stage_frf.top",
+                    ]
         ## Proxies
         try:
             import time
@@ -42,8 +52,10 @@
             #self.session = qi.Session("tcp://127.0.0.1:9559")
             #self.TabletService = self.session().service("ALTabletService")
             self.TabletService = self.session().service("ALTabletService")
+
             self.AutonomousLife = ALProxy("ALAutonomousLife")
             self.RobotPosture = ALProxy("ALRobotPosture")
+            self.Motion = ALProxy("ALMotion")
             self.FrameManager = ALProxy("ALFrameManager")
             self.UserSession = ALProxy("ALUserSession")
             self.Zone = ALProxy("ALEngagementZones")
@@ -87,8 +99,10 @@
         self.People.setMaximumDetectionRange(2)
         self.Zone.setFirstLimitDistance(0.90)
         #self.Dialog.setLanguage("French")
+        self.isRunningTracking = False
         self.isRunningAwareness = False
-        self.isRunningDialog = 0
+        self.isSubscribed = False
+        self.isRunningTopic = 0
         self.isLoadedTopic = 0
         self.stopAllDialog()
         self.Memory.declareEvent('dialogEngaged')
@@ -97,18 +111,23 @@
         self.Memory.subscribeToEvent('dialogEngaged', self.getName(), 'managerDialog')
         self.Memory.subscribeToEvent('dialogURL', self.getName(), 'managerURL')
         self.Memory.subscribeToEvent('robotState', self.getName(), 'managerState')
+        self.Memory.subscribeToEvent('FrontTactilTouched', self.getName(), 'reboot')
         #self.Memory.subscribeToEvent('Dialog/NoOneSpeak20', self.getName(), 'noDialog')
 
         #self.Memory.subscribeToEvent('RightBumperPressed', self.getName(), 'testScript')
 
-        self.loadAllTopics(self.allTopics)
 
-
-
+        self.stopAutonomousLife()
+        self.loadListTopics(self.allTopics)
         self.waving()
         self.startAwareness()
+        self.panelAdminSignal = None
+        #self.panelAdminWatcher()
         self.Memory.raiseEvent("dialogURL","1;ecranAccueilAppli.html")
         #self.Memory.raiseEvent("dialogURL","1;listeDomaine.html")
+
+
+        #motion.wakeup
 
         #self.TabletService.showWebview("http://www.google.com")
         #import json
@@ -138,12 +157,20 @@
 
     ## Add a trigger condition: 5sec on pepper's head, callback on this signal
     ## http://doc.aldebaran.com/2-4/naoqi/core/alexpressionwatcher.html#example-expressionwatcher
-    def panelAdmin(self):
+    def panelAdminWatcher(self):
+        self.logger.warning("PanelAdminWatcher started")
         report_mode = 2;
         condition = "!'MiddleTactileTouched' && ('MiddleTactileTouched' ~ 5 @ 0.1)"
+        self.panelAdminSignal = self.Watcher.add(condition, report_mode)
+        signal_watcher = self.panelAdminSignal.signal.connect(self.panelAdminLaunch)
+        self.logger.warning("PanelAdminWatcher ended")
         #self.Watcher
-    def onInput_onStart(self):
+    def panelAdminLaunch(self):
+        self.logger.warning("5 sec head pressed")
+        self.Speech.say("panel admine")
 
+
+    def onInput_onStart(self):
         #self.Memory.subscribeToEvent('PeoplePerception/PeopleList', self.getName(), 'people')
         #self.Memory.subscribeToEvent('PeoplePerception/VisiblePeopleList', self.getName(), 'visiblePeople')
         #humanID = self.Memory.getData('ALBasicAwareness/HumanTracked')
@@ -153,7 +180,7 @@
 
     def onUnload(self):
         #put clean-up code here
-        if self.isRunningDialog >= 1:
+        if self.isRunningTopic >= 1:
             self.stopAllTopics()
             self.unloadAllTopics()
             #self.stopAllDialog()
@@ -172,18 +199,24 @@
         #self.Memory.unsubscribeToEvent('robotState','managerState')
         self.logger.info("managerState %s", self.Memory.getData('robotState'))
         key = self.Memory.getData('robotState').split(";")
-        self.logger.info("managerState key: %s", key)
         ## 0 = Stopped, nothing
         if (key[0] == "0"):
             self.Awareness.setStimulusDetectionEnabled('Sound', False)
-            self.unwaving()
         ## 1 = Welcome mode, waiting for people
         elif(key[0] == "1"):
-            self.stopAllDialog()
+            self.stopAllTopics()
+            #self.stopAllDialog()
+            self.startAwareness()
             self.loadURL("ecranAccueilAppli.html")
             self.RobotPosture.goToPosture("Stand",0.5)
             self.Awareness.setStimulusDetectionEnabled('Sound', True)
             self.waving()
+        ## Start listening
+        elif(key[0] == "2"):
+            self.unwaving()
+            self.Awareness.setStimulusDetectionEnabled('Sound', True)
+        elif(key[0] == "3"):
+            self.unwaving()
         #self.Memory.subscribeToEvent('robotState', self.getName(), 'managerState')
 
     ## Callback of event: dialogEngaged, manage subscribing/dialogs
@@ -204,9 +237,9 @@
             self.Memory.raiseEvent("robotState","1")
         ## 1/pathToLaunch = Dialog launch called, then stop tracking and start dialog
         elif (key[0] == "1"):
-            self.Memory.raiseEvent("robotState","0")
             #self.startDialog(key[1])
             self.startTopic(key[1])
+            self.Memory.raiseEvent("robotState","2")
         ## 2/topicToStop/pathTolaunch = stop previous dialog, launch the new one
         elif(key[0] == "2"):
             self.stopTopic(key[1])
@@ -229,11 +262,6 @@
             self.loadURL("choixProspect.html")
         ## 1 = Load URL
         if(key[0] == "1"):
-            #if (key[1] == "listeDomaine.html"):
-                #if(VersionForum == "1"):
-                    #self.loadURL("listeDomaineV1.html")
-                #else:
-                    #self.loadURL("listeDomaineV2.html")
             self.loadURL(key[1])
         ## 2 = Load Video ?
         #self.Memory.subscribeToEvent('dialogURL', self.getName(), 'managerURL')
@@ -273,15 +301,21 @@
     def startTopic(self, topic):
         self.logger.info("startTopic %s", topic)
         loadedtopics = self.Dialog.getAllLoadedTopics()
-        if (topic in loadedtopics == True):
+        #self.logger.info("startTopic ALLloadedTopic%s",self.Dialog.getAllLoadedTopics())
+        if topic in loadedtopics:
             try:
                 self.dialog_topic = self.Dialog.activateTopic(topic)
                 self.isRunningTopic += 1
+                if self.isSubscribed == False:
+                    self.Dialog.subscribe("speechRecoUser")
+                    self.logger.warning("SpeechReco Subscribed")
+                    self.isSubscribed = True
+
             except Exception as e:
-                self.logger.warning("startTopic failed")
+                self.logger.warning("startTopic %s failed", topic)
                 self.logger.warning(e)
         else:
-            self.logger.warning("startTopic failed, topic not pre-loaded")
+            self.logger.warning("startTopic failed, %s not pre-loaded",topic)
             self.logger.warning(e)
 
     def unloadTopic(self, topic):
@@ -289,6 +323,10 @@
         try:
             self.dialog_topic = self.Dialog.unloadTopic(topic)
             self.isLoadedTopic -= 1
+            if self.isSubscribed:
+                self.Dialog.unsubscribe("speechRecoUser")
+                self.logger.warning("SpeechReco UNsubscribed")
+                self.isSubscribed = False
         except Exception as e:
             self.logger.warning("unloadTopic failed for %s", topic)
             self.logger.warning(e)
@@ -296,7 +334,7 @@
     def stopTopic(self, topic):
         self.logger.info("stopTopic %s", topic)
         activatedtopics = self.Dialog.getActivatedTopics()
-        if (topic in activatedtopics == True):
+        if topic in activatedtopics:
             try:
                 self.dialog_topic = self.Dialog.deactivateTopic(topic)
                 self.isRunningTopic -= 1
@@ -313,8 +351,8 @@
 
     def unloadAllTopics(self):
         self.logger.info("unloadAllTopics")
-        topicslist = self.Dialog.getLoadedTopics()
-        for topic in topicslist
+        topicslist = self.Dialog.getAllLoadedTopics()
+        for topic in topicslist:
             self.unloadTopic(topic)
 
     def stopAllTopics(self):
@@ -407,7 +445,7 @@
     def bye(self):
         peopleID = self.Memory.getData('PeoplePerception/JustLeft')
         #self.logger.info("bye %s", peopleID)
-        self.Speech.say("Aurevoir")
+        #self.Speech.say("Aurevoir")
         self.peopleToGreet.remove(peopleID)
 
     ## Possibly triggered by NoOneSpeak20
@@ -419,17 +457,29 @@
     def startAwareness(self):
         if self.isRunningAwareness:
             return # already running, nothing to do
-        self.isRunningAwareness = True
-
         if self.Awareness:
-            self.Awareness.setEngagementMode('FullyEngaged')
+            self.Awareness.setEngagementMode('SemiEngaged')
             self.Awareness.setTrackingMode('Head')
-            self.Awareness.setStimulusDetectionEnabled('Sound', False)
+            self.Awareness.setStimulusDetectionEnabled('Sound', True)
             self.Awareness.setStimulusDetectionEnabled('Movement', True)
             self.Awareness.setStimulusDetectionEnabled('People', True)
             self.Awareness.setStimulusDetectionEnabled('Touch', True)
             self.Awareness.startAwareness()
+            self.isRunningAwareness = True
 
+    ## Start Tracking
+    def startTracking(self):
+        if self.isRunningTracking:
+            return
+        if self.Tracker:
+            self.Tracker.getMode();
+
+    def stopAutonomousLife(self):
+        if self.AutonomousLife.getState() != "disabled":
+            self.AutonomousLife.setState("disabled")
+        self.Motion.wakeUp()
+        if self.RobotPosture.getPosture() != "Stand":
+            self.RobotPosture.applyPosture("Stand", 0.5)
 
 
 
@@ -454,7 +504,7 @@
                             <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
                             <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
                         </Box>
-                        <Box name="Set Speaker Vol." id="1" localization="8" tooltip="Set the sound volume between 0 (mute) and 100 (max).&#x0A;&#x0A;V1.1.0&#x0A;" x="413" y="141">
+                        <Box name="Set Speaker Vol." id="1" localization="8" tooltip="Set the sound volume between 0 (mute) and 100 (max).&#x0A;&#x0A;V1.1.0&#x0A;" x="493" y="131">
                             <bitmap>media/images/box/interaction/processing_sound.png</bitmap>
                             <script language="4">
                                 <content>
@@ -477,7 +527,7 @@
                             <Output name="onReady" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent when the data has been set." id="3" />
                             <Parameter name="Volume (%)" inherits_from_parent="0" content_type="1" value="0" default_value="50" min="0" max="100" tooltip="Percentage of maximum output volume." id="4" />
                         </Box>
-                        <Box name="Set Speaker Vol. (1)" id="2" localization="8" tooltip="Set the sound volume between 0 (mute) and 100 (max).&#x0A;&#x0A;V1.1.0&#x0A;" x="294" y="222">
+                        <Box name="Set Speaker Vol. (1)" id="2" localization="8" tooltip="Set the sound volume between 0 (mute) and 100 (max).&#x0A;&#x0A;V1.1.0&#x0A;" x="354" y="185">
                             <bitmap>media/images/box/interaction/processing_sound.png</bitmap>
                             <script language="4">
                                 <content>
@@ -498,100 +548,66 @@
                             <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
                             <Input name="onSet" type="1" type_size="1" nature="1" inner="0" tooltip="The data is set when a signal is received on this input." id="2" />
                             <Output name="onReady" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent when the data has been set." id="3" />
-                            <Parameter name="Volume (%)" inherits_from_parent="0" content_type="1" value="41" default_value="50" min="0" max="100" tooltip="Percentage of maximum output volume." id="4" />
+                            <Parameter name="Volume (%)" inherits_from_parent="0" content_type="1" value="72" default_value="50" min="0" max="100" tooltip="Percentage of maximum output volume." id="4" />
                         </Box>
-                        <Box name="Only Once" id="4" localization="8" tooltip="This box&apos;s output is stimulated only the first time the onSignal input is.&#x0A;&#x0A;Note: It is reset when the diagram containing the box is unloaded." x="314" y="429">
-                            <bitmap>media/images/box/loop.png</bitmap>
+                        <Box name="Raise Event" id="3" localization="8" tooltip="Stores in NAOqi&apos;s shared memory the given value at the given key, and spreads the event to all its subscribers." x="372" y="613">
+                            <bitmap>media/images/box/sensors/STM.png</bitmap>
                             <script language="4">
                                 <content>
                                     <![CDATA[class MyClass(GeneratedClass):
     def __init__(self):
-        GeneratedClass.__init__(self, False)
+        GeneratedClass.__init__(self)
+        pass
 
     def onLoad(self):
-        self.bFirstTime = True
+        self.memory = ALProxy("ALMemory")
 
     def onUnload(self):
-        self.bFirstTime = True
+        self.memory = None
 
-    def onInput_onSignal(self):
-        if( self.bFirstTime ):
-            self.bFirstTime = False
-            self.firstTime()]]>
+    def onInput_onStart(self, p):
+        self.memory.raiseEvent(self.getParameter("key"), p)
+        self.onStopped(p)
+
+    def onInput_onStop(self):
+        self.onUnload() #~ it is recommended to call onUnload of this box in a onStop method, as the code written in onUnload is used to stop the box as well
+        pass]]>
 </content>
                             </script>
                             <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
-                            <Input name="onSignal" type="1" type_size="1" nature="1" inner="0" tooltip="The signal that must pass only once." id="2" />
-                            <Output name="firstTime" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent first time the onSignal input is stimulated." id="3" />
+                            <Input name="onStart" type="0" type_size="1" nature="2" inner="0" tooltip="Receives the value to be inserted as an event in ALMemory." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="0" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished. It contains the inserted value in ALMemory." id="4" />
+                            <Output name="onError" type="3" type_size="1" nature="1" inner="0" tooltip="Output when error is raised by the behavior. Contains the error message." id="5" />
+                            <Parameter name="key" inherits_from_parent="0" content_type="3" value="robotState" default_value="MyApplication/MyData" custom_choice="0" tooltip="" id="6" />
                         </Box>
-                        <Box name="Only Once (1)" id="5" localization="8" tooltip="This box&apos;s output is stimulated only the first time the onSignal input is.&#x0A;&#x0A;Note: It is reset when the diagram containing the box is unloaded." x="279" y="569">
-                            <bitmap>media/images/box/loop.png</bitmap>
+                        <Box name="Text Edit" id="21" localization="8" tooltip="Send the text you entered when the input is stimulated." plugin="textedit_plugin" x="121" y="604">
+                            <bitmap>media/images/box/interaction/vocabulary.png</bitmap>
                             <script language="4">
                                 <content>
-                                    <![CDATA[class MyClass(GeneratedClass):
-    def __init__(self):
-        GeneratedClass.__init__(self, False)
+                                    <![CDATA[# /!\ Generated content. Do not edit!
+class MyClass(GeneratedClass):
+	def __init__(self):
+		GeneratedClass.__init__(self)
 
-    def onLoad(self):
-        self.bFirstTime = True
-
-    def onUnload(self):
-        self.bFirstTime = True
-
-    def onInput_onSignal(self):
-        if( self.bFirstTime ):
-            self.bFirstTime = False
-            self.firstTime()]]>
+	def onInput_onStart(self):
+		self.onStopped("1")]]>
 </content>
                             </script>
-                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
-                            <Input name="onSignal" type="1" type_size="1" nature="1" inner="0" tooltip="The signal that must pass only once." id="2" />
-                            <Output name="firstTime" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent first time the onSignal input is stimulated." id="3" />
-                        </Box>
-                        <Box name="Wait For Signals" id="6" localization="8" tooltip="Wait for both inputs to be stimulated before stimulating its output." x="473" y="512">
-                            <bitmap>media/images/box/wait.png</bitmap>
-                            <script language="4">
-                                <content>
-                                    <![CDATA[class MyClass(GeneratedClass):
-    def __init__(self):
-        GeneratedClass.__init__(self, False)
-
-    def onLoad(self):
-        self.ok = [False]*2
-
-    def onUnload(self):
-        #puts code for box cleanup here
-        ""
-
-    def onStart(self, nInput):
-        self.ok[nInput-1] = True
-        bOutput = True
-        for bOk in self.ok:
-            bOutput = bOutput and bOk
-        if( bOutput ):
-            self.ok = [False]*2
-            self.signalsReceived()
-
-    def onInput_signal1(self):
-        self.onStart(1)
-
-    def onInput_signal2(self):
-        self.onStart(2)]]>
-</content>
-                            </script>
+                            <pluginContent>
+                                <text>
+                                    <![CDATA[1]]>
+</text>
+                            </pluginContent>
                             <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
-                            <Input name="signal1" type="1" type_size="1" nature="1" inner="0" tooltip="First signal to wait." id="2" />
-                            <Input name="signal2" type="1" type_size="1" nature="1" inner="0" tooltip="Second signal to wait." id="3" />
-                            <Output name="signalsReceived" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent when both inputs have been stimulated." id="4" />
+                            <Input name="onStart" type="1" type_size="1" nature="1" inner="0" tooltip="To send the text on the output." id="2" />
+                            <Output name="onStopped" type="3" type_size="1" nature="2" inner="0" tooltip="The text you entered." id="3" />
                         </Box>
                         <Link inputowner="11" indexofinput="2" outputowner="0" indexofoutput="2" />
                         <Link inputowner="1" indexofinput="2" outputowner="0" indexofoutput="4" />
                         <Link inputowner="2" indexofinput="2" outputowner="0" indexofoutput="5" />
-                        <Link inputowner="6" indexofinput="2" outputowner="4" indexofoutput="3" />
-                        <Link inputowner="6" indexofinput="3" outputowner="5" indexofoutput="3" />
-                        <Link inputowner="4" indexofinput="2" outputowner="0" indexofoutput="6" />
-                        <Link inputowner="5" indexofinput="2" outputowner="0" indexofoutput="7" />
-                        <Link inputowner="0" indexofinput="8" outputowner="6" indexofoutput="4" />
+                        <Link inputowner="21" indexofinput="2" outputowner="0" indexofoutput="8" />
+                        <Link inputowner="3" indexofinput="2" outputowner="21" indexofoutput="3" />
                     </Diagram>
                 </BehaviorKeyframe>
             </BehaviorLayer>

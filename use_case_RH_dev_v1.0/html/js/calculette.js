@@ -1,10 +1,19 @@
+var session;
 var totalNumberOfQuestion = 0;
 var visible = false;
 
-
 $(document).ready(function(){
 	totalNumberOfQuestion = $('.question').length;
-	init();
+    try {
+		QiSession( function (s) {
+			console.log('connected!');
+			session = s;
+		});
+	}catch (err) {
+	  console.log("Error when initializing QiSession: " + err.message);
+	  console.log("Make sure you load this page from the robots server.");
+	}
+    init();
 });
 
 function init(){
@@ -185,6 +194,38 @@ function init(){
 		}
 	});
 	
+    $('.sortieQuestionnaire').on('click', function(){
+        backDialog( $(this) );
+    });
+
+    locked = false;
+    function backDialog(thisObj){
+        if (!locked) {
+            locked = true;
+            var _this = thisObj;
+            var redirection = "1;" + _this.attr("redirection");
+            var dialog = "1;" + _this.attr("dialog");
+            alert("backdialog");
+            try {
+                session.service('ALMemory').then(function(memory){
+                    alert("session started");
+                    memory.raiseEvent("dialogURL",redirection);
+                    memory.raiseEvent("dialogEngaged",dialog);
+                }, function (error) {
+                    alert(error);
+                    console.log(error);
+                    setTimeout(unlock, 2000);
+                });
+            } catch(err){
+                alert(err);
+                alert(err.message);
+            }
+        }
+    };
+    
+    function unlock () {
+    locked = false;
+    }
 };
 
 

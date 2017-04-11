@@ -20,8 +20,12 @@
     <sentence lang="fr_FR">lancer R H</sentence>
     <sentence lang="fr_FR">lancer air ache</sentence>
    </triggerSentences>
-   <loadingResponses/>
-   <autonomous/>
+   <loadingResponses>
+    <sentence lang="fr_FR">Lancement de l'application</sentence>
+   </loadingResponses>
+   <autonomous>
+    <condition purpose="launchTrigger"><![CDATA['RightBumperPressed' ~ 3 @ 0.1]]></condition>
+   </autonomous>
    <permissions/>
   </behaviorContent>
  </contents>
