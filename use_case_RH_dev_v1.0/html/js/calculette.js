@@ -205,10 +205,8 @@ function init(){
             var _this = thisObj;
             var redirection = "1;" + _this.attr("redirection");
             var dialog = "1;" + _this.attr("dialog");
-            alert("backdialog");
             try {
                 session.service('ALMemory').then(function(memory){
-                    alert("session started");
                     memory.raiseEvent("dialogURL",redirection);
                     memory.raiseEvent("dialogEngaged",dialog);
                 }, function (error) {

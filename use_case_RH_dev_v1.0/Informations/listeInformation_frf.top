@@ -2,11 +2,11 @@ topic: ~listeInformation()
 language: frf
 
 
-concept:(quizzSG)  ["quizzsg" "quizz" "quizz sur société générale" "questionaire sur société générale" ]
+concept:(quizzSG)  ["quizzsg" "quizz" "quizz sur société générale" "questionaire sur société générale" "cuize" "couize"]
 concept:(calculatrice) ["calculatrice" "test" "test entretien" "test entretien d'embauche" "Test : suis-je prêt pour un entretient d'embauche ?" " suis-je prêt pour un entretient d'embauche" ]
-concept:(info) ["info" "information sur société générale" "information" "société générale"]
+concept:(info) ["info" "information sur société générale" "information"]
 concept:(robotRH) ["quiesttu" "qui est tu ?" "objectif du robot" "robot" "robot travailleur" ]
-concept:(autre) [ "autrechose" "autre" "je cherche autre chose"]
+concept:(autre) [ "autrechose" "autre" "je cherche autre chose" "retour"]
 concept:(video) ["video" "vidéo" "Vidéo de présentation de Société Générale" "video de présentation"]
 
 
@@ -22,7 +22,7 @@ u:(~calculatrice) $dialogURL=[1;calculatrice.html] Je vous lance le test $dialog
 u:(~info) Nous comptons 146 000 collaborateurs de 122 nationalités différentes à travers 66 pays \pau=150\ 60 pourcent de notre effectif est hors de France. \pau=150\
 Notre activité repose sur 3 PÔLES MÉTIERS COMPLÉMENTAIRES \pau=150\ la banque de détails en France \pau=150\ la banque de détail et services financiers internationaux \pau=150\ et enfin la banque de grande clientèle et solutions investisseurs. \pau=500\ en 2016 nous avions 25,6 milliards d'euro de produit net bancaire et \pau=150\ 4 milliards d'euro de résultat net dans le groupe
 \pau=150\ NOTRE AMBITION \pau=150\
-Être LA banque relationnelle de référence sur ses marchés \pau=150\ proche de ses clients \pau=150\ choisie pour la qualité et l’engagement de ses équipes.
+Être LA banque relationnelle de référence sur ses marchés \pau=150\ proche de ses clients \pau=150\ choisie pour la qualité et l’engagement de ses zéquipes.
 
 
 ## ISSUE , RETOUR sans dialogue

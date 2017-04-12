@@ -4,16 +4,16 @@ language: frf
 
 concept:(careers) ["vers careers.com" "car irze" "carirze" "carirze point comme" "lien carirze" "carirze" "careers"]
 concept:(securite) ["Sécurité" "securite"]
-concept:(BI) ["bi aye" "b i" "bi"]
+concept:(BI) ["bi aille" "b i" "bi"]
 concept:(dataScientist) ["Data scientist" "data saille en tiste" "datascientist"]
 concept:(IT) ["IT" "aye ti" "ail ti"  "aille ti"]
 concept:(innovation) ["inno vassion" "innovation"]
 concept:(infrastructure) ["infra" "infrastructure"]
 concept:(businnessAnalyst) ["business analiste" "business" "analiste" "businessanalyst"]
-concept:(MOAMOE) ["aime o a"  "aime o e" "m o a" "m o e" "moamoe"]
+concept:(MOAMOE) ["aime o a"  "aime o e" "m o a" "m o e" "moamoe" "aimoa" "aimoeu" "aimoa aimoeu"]
 concept:(autre) ["je cherche autre chose" "autre chose" autre "autrechose"]
 concept:(retour) ["retour" "précédent"]
-concept:(quizz) ["quizz" "cuize" "cuize"]
+concept:(quizz) ["quizz" "cuize" "cuize" "couize"]
 concept:(securiteQuizz)["securiteQuizz" ~quizz]
 concept:(dataScientistQuizz)["dataScientistQuizz" ~quizz]
 concept:(itQuizz)["itQuizz" ~quizz]
@@ -28,11 +28,11 @@ u:(~securite) $dialogURL=[1;domaines/infos/securite.html] Voici le domaine sécu
     u1:(~retour) $dialogURL=[1;domaines/listeDomaineIT.html] retour
     u1:(~securiteQuizz) $dialogURL=[1;quizzs/securite.html] Voici le quizz sécurité $dialogEngaged=[00;listeDomaineIT]
 ## REQUIERT QUIZZ BI
-u:(~bi) Voici le domaine bi aye
+u:(~bi) Voici le domaine bi aille
 
 u:(~dataScientist) $dialogURL=[1;domaines/infos/dataScientist.html]  Voici le domaine data saille en tiste !
     u1:(~retour) $dialogURL=[1;domaines/listeDomaineIT.html] retour
-    u1:(~dataScientistQuizz) $dialogURL=[1;quizzs/dataScientist.html] Voici le quizz sécurité $dialogEngaged=[00;listeDomaineIT]
+    u1:(~dataScientistQuizz) $dialogURL=[1;quizzs/dataScientist.html] Voici le quizz data saille en tiste $dialogEngaged=[00;listeDomaineIT]
     
 u:(~IT) $dialogURL=[1;domaines/infos/it.html] Voici le domaine aille ti !
     u1:(~retour) $dialogURL=[1;domaines/listeDomaineIT.html] retour
@@ -49,7 +49,7 @@ u:(~infrastructure)  Voici le domaine infrastructure
 u:(~businnessAnalyst)  Voici le domaine bize naisse analiste !
 
 ## REQUIERT QUIZZ MOAMOE
-u:(~MOAMOE) Voici le domaine aime o a e!
+u:(~MOAMOE) $dialogURL=[1;quizzs/moa.html] Voici le quizz aime o a e! $dialogEngaged=[00;listeDomaineIT]
 
 
 #u:(~modelisateur) $dialogURL=[1;quizzs/modelisateur.html] Je vous lance le quizz modélisateur ! $dialogEngaged=[00;listeDomaineFinance]
@@ -57,3 +57,5 @@ u:(~MOAMOE) Voici le domaine aime o a e!
 u:(~autre) $dialogURL=[1;exempleRH.html] Vous pouvez rencontrez ces personnes
     u1:(~retour) $dialogURL=[1;domaines/listeDomaineIT.html] retour
     u1:(~merci) A bientot ! $robotState=[1]
+
+u:(~retour) $dialogURL=[1;domaines/ItFinance.html] retour $dialogEngaged=[2;listeDomaineIT;ITFinance]

@@ -124,6 +124,8 @@
         self.panelAdminSignal = None
         #self.panelAdminWatcher()
         self.Memory.raiseEvent("dialogURL","1;ecranAccueilAppli.html")
+        #self.Memory.raiseEvent("dialogURL","1;domaines/listeDomaineIT.html")
+        #self.Memory.raiseEvent("dialogEngaged","1;listeDomaineIT")
         #self.Memory.raiseEvent("dialogURL","1;listeDomaine.html")
 
 

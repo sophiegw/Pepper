@@ -106,6 +106,7 @@ $(document).ready(function(){
     var alreadyPressed = '0'
 	$('body').on('click', function(){
         if (alreadyPressed == '0'){
+            // alert("started")
             // $('#loader').show();
             alreadyPressed = '1'
             createSession(function(){

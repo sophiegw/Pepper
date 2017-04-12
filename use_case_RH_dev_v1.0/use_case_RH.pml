@@ -128,6 +128,8 @@
         <File name="work_in_progress" src="html/images/work_in_progress.jpg" />
         <File name="travaux" src="html/travaux.html" />
         <File name="html" src="html.rar" />
+        <File name="verify" src="html/images/verify.png" />
+        <File name="moa" src="html/quizzs/moa.html" />
     </Resources>
     <Topics>
         <Topic name="Informations_frf" src="Informations/Informations_frf.top" topicName="Informations" language="fr_FR" />
@@ -144,7 +146,7 @@
         <Topic name="listeDomaineIT" src="Domaines/listeDomaineIT.top" topicName="listeDomaineIT" language="fr_FR" />
         <Topic name="ITFinance" src="Domaines/ITFinance.top" topicName="ITFinance" language="fr_FR" />
         <Topic name="choixProspect" src="Accueil/choixProspect.top" topicName="choixProspect" language="fr_FR" />
-        <Topic name="Quizz_frf" src="Quizzs/Quizz_frf.top" topicName="" language="C" />
+        <Topic name="Quizz_frf" src="Quizzs/Quizz_frf.top" topicName="" language="" />
     </Topics>
     <IgnoredPaths />
 </Package>

@@ -58,10 +58,12 @@ function init(){
 			if((!mauvaiseRep) && (bonnesReponsesSoumises === nbBonnesRep)){
 				bonneRep++;
 			}
+            $('.submitAnswers').attr('src','../images/enter-arrow.png');
 			sayAnswer(discours);
-		}
-		else{			
+		}   
+		else{
 			$('#next').click();
+            $('.submitAnswers').attr('src','../images/verify.png');
 		}
 		if(derniereQuestion){
 			$('#out').css('display', 'inline');
