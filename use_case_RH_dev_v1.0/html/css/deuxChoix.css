@@ -9,6 +9,7 @@
     border: 5px solid black;
     padding: 50px;
     text-align: center;
+    border-radius:25px;
 }
 
 .boutons{
@@ -27,4 +28,25 @@
 
 .itfinance{
     margin: 15% 7% 0 15%;
+}
+
+.header{
+    width: 100%;
+    height: 13%;
+    position: fixed;
+    top: 0;
+    margin-top:2%;
+    background-color: white;
+}
+
+
+#lienRetour{
+    display: flex;
+    align-items:center;
+    border: 5px solid #E52442;
+    border-radius: 5px;
+    font-size: 40px;
+    float:left;
+    margin: 0% 0% 1% 1%;
+    padding: 5px 10px 5px 0px;
 }

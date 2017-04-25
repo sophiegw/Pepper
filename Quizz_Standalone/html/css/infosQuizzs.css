@@ -1,0 +1,45 @@
+.left{
+	float: left;
+	width: 55%;
+	margin-left: 7%;
+}
+
+#lienRetour{
+	display: flex;
+	align-items:center;
+	border: 5px solid #E52442;
+    border-radius: 5px;
+    font-size: 40pt;
+    width:20%;
+}
+
+.back{
+	font-size: 40pt;
+	margin:5px;
+}
+
+.infos{
+	text-align: justify;
+	padding-top: 3%;
+	font-size: 45pt;
+}
+
+.navBar{
+	width: 100%;
+	height: 10%;
+	position: fixed;
+	top: 0;
+	background-color: white;
+}
+
+.quizzButton{
+	text-align:center;
+	font-size: 40pt;
+	padding: 10px 25px 10px 25px;
+	border: 4px solid #E52442;
+	border-radius: 15px;
+	position: fixed;
+	right:4%;
+	top:36%;
+	width: 25%;
+}

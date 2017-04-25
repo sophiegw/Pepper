@@ -1,0 +1,25 @@
+topic: ~listeInformation()
+language: frf
+
+
+concept:(quizzSG)  ["quizzsg" "quizz" "quizz sur société générale" "questionaire sur société générale" "cuize" "couize"]
+concept:(calculatrice) ["calculatrice" "test" "test entretien" "test entretien d'embauche" "Test : suis-je prêt pour un entretient d'embauche ?" " suis-je prêt pour un entretient d'embauche" ]
+concept:(light) ["light" "laillete" "laille teu"]
+concept:(full) [ "full" "foule" "fule" "fouleu"]
+concept:(retour)["reutour" "retour" "précédent" "arrière"]
+
+u:(~quizzSG) $dialogURL=[1;quizzs/soge.html] Je vous lance le quizz société générale ! $dialogEngaged=[00;listeInformation]
+
+u:(~careers) $dialogURL=[1;domaines/careersLink.html] Vous pouvez flashé ce q r code ! 
+    u1:(~retour) $dialogURL=[1;listeInformationsSG.html] retour
+
+u:(~calculatrice) $dialogURL=[1;calculetteChoix.html] Je vous laisse choisir la longueure du test
+    u1:(~retour)  $dialogURL=[1;listeInformationsSG.html] retour
+    u1:(~light) $dialogURL=[1;calculatriceLight.html] Entendu $dialogEngaged=[00;listeInformation]
+    u1:(~full) $dialogURL=[1;calculatrice.html] D'accord $dialogEngaged=[00;listeInformation]
+
+u:(~retour) $dialogURL=[1;domaines/ItFinance.html] retour $dialogEngaged=[2;listeInformation;ITFinance]
+
+u:(~quitter) $dialogURL=[1;OuiNon.html] Je vais fermer l'application vous êtes sur ?
+    u1:(~oui) Bien compris $robotState=777
+    u1:(~non) $dialogURL=[1;listeInformationsSG.html] Ok je te laisse continuer

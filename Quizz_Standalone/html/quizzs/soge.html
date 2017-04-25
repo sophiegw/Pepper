@@ -1,0 +1,274 @@
+ <! DOCTYPE html>
+ <html lang = "fr">
+	 <head>
+		<meta charset="UTF-8"/>
+		<script src="../js/jquery-3.1.1.min.js"></script>
+		<script src = "../js/reponseMultiple.js"></script>
+		<script src = "../js/tools.js"></script>
+		<script src="/libs/qimessaging/2/qimessaging.js"></script>
+		<link rel="stylesheet" type="text/css" href="../css/commun.css">
+		<link rel="stylesheet" type="text/css" href="../css/quizzDataScience.css">
+        <!-- CREDITS GOES TO: Icons made by http://www.flaticon.com/authors/eleonor-wang Eleonor Wang from http://www.flaticon.com Flaticon, licensed by http://creativecommons.org/licenses/by/3.0/ Creative Commons BY 3.0 -->
+	 </head>
+	 <title>Quizz Société Générale</title>
+	 <body data-nbquestions="7" data-metier="sogé">
+		<!-- <a href="../informations.html"> -->
+			<img data-quizz="sogé" class="sortieQuestionnaire" redirection="listeInformationsSG.html" dialog="listeInformation" src="../images/out.png"></img>
+		<!-- </a> -->
+		<img id="selonVous" src="../images/entete.png"></img>
+		
+
+		<div class="propositionVisible question1">
+			<p class="question">Combien de collaborateurs notre filière IT comporte-t-elle ?</p>
+			<div class="jeuReponse" data-derniere-question="false">
+				<div class="choixMultiple choix1">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">22000</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				</br>
+				<div class="choixMultiple choix2">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">1300</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				</br>
+				<div class="choixMultiple choix3">
+					<div class="squaredImage" data-reponse="vrai" data-value="Nous employons 13000 collaborateurs dans notre filière aille ti">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">13000</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				</br>
+                <img class="submitAnswers" src="../images/verify.png"></img>
+			</div>
+		</div>
+		
+		<div class="propositionVisible question2">
+		
+			<p class="question">Notre application a été téléchargée ?</p>
+			<div class="jeuReponse" data-derniere-question="false">
+				<div class="choixMultiple choix1">
+					<div class="squaredImage" data-reponse="vrai" data-value="4 millions de fois">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">4 millions de fois</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix2">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">6 millions de fois</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix3">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">5 millions de fois</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix4">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">10 millions de fois</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<br/>
+				<img class="submitAnswers" src="../images/enter-arrow.png"></img>
+			</div>
+		</div>
+		
+		<div class="propositionVisible question3">
+			<p class="question">De quel incububateur d'innovation sommes-nous partenaires ?</p>
+			<div class="jeuReponse" data-derniere-question="false">
+				<div class="choixMultiple choix1">
+					<div class="squaredImage" data-reponse="fausse" >
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Paris&Co incubateurs</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix2">
+					<div class="squaredImage" data-reponse="vrai" data-value="Liberté Living Lab">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Liberté Living Lab</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix3">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">La ruche</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<br/>
+				<img class="submitAnswers" src="../images/enter-arrow.png"></img>
+			</div>
+		</div>
+		
+		
+		<div class="propositionVisible question4">
+			<p class="question">Quel pourcentage de collaborateurs au sein de Société Générale ont moins de 30 ans ?</p>
+			<div class="jeuReponse" data-derniere-question="false">
+				<div class="choixMultiple choix1">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">31%</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix2">
+					<div class="squaredImage" data-reponse="vrai" data-value="24%">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">24%</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix3">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">56%</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix4">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">10%</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<img class="submitAnswers" src="../images/enter-arrow.png"></img>
+			</div>
+		</div>
+		
+		<div class="propositionVisible question5">
+		
+			<p class="question">Quel est le pourcentage de femmes parmi les managers du Groupe ?</p>
+			<div class="jeuReponse" data-derniere-question="false">
+				<div class="choixMultiple choix1">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">15%</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix2">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">50%</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix3">
+					<div class="squaredImage" data-reponse="vrai" data-value="43%">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">43%</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix4">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">53%</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<img class="submitAnswers" src="../images/enter-arrow.png"></img>		
+			</div>
+		</div>
+		
+		<div class="propositionVisible question6">		
+			<p class="question">Combien de temps nous faut-il pour répondre sur Twitter ?</p>
+			<div class="jeuReponse" data-derniere-question="false">
+				<div class="choixMultiple choix1">
+					<div class="squaredImage" data-reponse="vrai" data-value="30 minutes">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">30 minutes</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix2">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">5 minutes</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix3">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">45 minutes</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix4">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">60 minutes</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<img class="submitAnswers" src="../images/enter-arrow.png"></img>
+			</div>
+		</div>
+		
+		<div class="propositionVisible question7">
+			<p class="question">Quelle proportion de collaborateurs Société Générale ne travaille pas en France ?</p>
+			<div class="jeuReponse" data-derniere-question="true">
+				<div class="choixMultiple choix1">
+					<div class="squaredImage" data-reponse="vrai" data-value="60%">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">60%</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix2">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">40%</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix3">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">80%</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<br/>
+				<img class="submitAnswers" src="../images/enter-arrow.png"></img>
+			</div>
+		</div>
+		<span id="next"></span>
+		<!-- <a href="../informations.html"> -->
+			<img id="out" redirection="listeInformations.html" dialog="listeInformation" src="../images/logout.png"></img>
+		<!-- </a> -->
+	 </body>
+ </html>

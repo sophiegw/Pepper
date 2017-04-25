@@ -1,0 +1,174 @@
+﻿ <! DOCTYPE html>
+ 
+ <html lang = "fr">
+	 <head>
+		<meta charset="UTF-8"/>
+		<script src="../js/jquery-3.1.1.min.js"></script>
+		<script src = "../js/reponseMultiple.js"></script>
+		<script src = "../js/tools.js"></script>
+		<script src="/libs/qimessaging/2/qimessaging.js"></script>
+		<link rel="stylesheet" type="text/css" href="../css/commun.css">
+		<link rel="stylesheet" type="text/css" href="../css/quizzDataScience.css">
+        <!-- CREDITS GOES TO: Icons made by http://www.flaticon.com/authors/eleonor-wang Eleonor Wang from http://www.flaticon.com Flaticon, licensed by http://creativecommons.org/licenses/by/3.0/ Creative Commons BY 3.0 -->
+	 </head>
+	 <title>Quizz sécurité</title>
+	 <body data-nbquestions="4" data-metier="securite">
+		<img id="selonVous" src="../images/entete.png"></img>
+		<img data-quizz="securite" class="sortieQuestionnaire" redirection="domaines/listeDomaineIT.html" dialog="listeDomaineIT" src="../images/out.png"></img>
+		<div class="propositionVisible question1">
+			<p class="question">Qu'est ce qu'une "APT" ?</p>
+			<div class="jeuReponse" data-derniere-question="false">
+				<div class="choixMultiple choix1">
+					<div class="squaredImage" data-reponse="vrai" data-value="toutes les réponses sont vraies">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Une commune française du Sud</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				</br>
+				<div class="choixMultiple choix2">
+					<div class="squaredImage" data-reponse="vrai">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Une menace informatique</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				</br>
+				<div class="choixMultiple choix3">
+					<div class="squaredImage" data-reponse="vrai">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Un fusil d'assaut soviétique</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				</br>
+				<div class="choixMultiple choix4">
+					<div class="squaredImage" data-reponse="vrai">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Une école d'ingénieurs française</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+                <img class="submitAnswers" src="../images/verify.png"></img>
+			</div>
+		</div>
+		
+		<div class="propositionVisible question2">
+		
+			<p class="question">Parmi ces noms de malwares, lequel n'est pas un ransomware (malware chiffrant des fichiers et demandant une rançon) ?</p>
+			<div class="jeuReponse" data-derniere-question="false">
+				<div class="choixMultiple choix1">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Apocalyse, un nom trop cool qui fait peur</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix2">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Flocker, manque d'imagination de l'auteur du malware</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix3">
+					<div class="squaredImage" data-reponse="vrai" data-value="C'était babar !">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Babar, un gentil petit éléphant avec de grandes oreilles</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix4">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Cerber, avec un nom comme ça ils vont tous payer</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>			
+				<img class="submitAnswers" src="../images/enter-arrow.png"></img>
+			</div>
+		</div>
+		
+		<div class="propositionVisible question3">
+			<p class="question">Une bonne sécurité c'est d'abord?</p>
+			<div class="jeuReponse" data-derniere-question="false">
+				<div class="choixMultiple choix1">
+					<div class="squaredImage" data-reponse="vrai" data-value="Toutes les réponses sont vraies, mais la première est la plus importante">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple" style="margin-top:0;">Des référentiels à jour, on ne sécurise bien que ce que l’on connait (© Sun Tzu, L’art de la guerre)</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix2">
+					<div class="squaredImage" data-reponse="vrai">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Ça n’existe pas, la sécurité est vouée à l’échec c’est bien connu </span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix3">
+					<div class="squaredImage" data-reponse="vrai">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Une bonne protection périmétrique, des firewall partout</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix4">
+					<div class="squaredImage" data-reponse="vrai">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple" style="margin-top:0;">Des patchs déployés régulièrement, bouchez  ces trous que je ne saurais voir</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				<img class="submitAnswers" src="../images/enter-arrow.png"></img>
+			</div>
+		</div>
+		
+		
+		<div class="propositionVisible question4">
+			<p class="question">Combien d'équipements (serveurs, équipements réseau) sont analysés automatiquement chaque mois à la recherche de vulnérabilités ?</p>
+			<div class="jeuReponse" data-derniere-question="true">
+				<div class="choixMultiple choix1">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple" style="margin-top:0;">~500 : on n’analyse que nos serveurs sur internet (les hackers ne sont que sur internet après tout)</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix2">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple" style="margin-top:0;">~2000 : On choisit aléatoirement quelques cibles pour nos analyses et on change tous les mois</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix3">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple" style="margin-top:0;">~20 000 c’est suffisant pour avoir une idée du risque pesant sur notre infrastructure</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix4">
+					<div class="squaredImage" data-reponse="vrai" data-value="Pas de repos pour la sécurité">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">~ 100 000 : Full scans FTW</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				<img class="submitAnswers" src="../images/enter-arrow.png"></img>
+			</div>
+		</div>
+		<span id="next"></span>
+			<img id="out" redirection="domaines/listeDomaineIT.html" dialog="listeDomaineIT" src="../images/logout.png"></img>
+	 </body>
+ </html>

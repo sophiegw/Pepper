@@ -1,0 +1,227 @@
+<! DOCTYPE html>
+ <html lang = "fr">
+ <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link rel="stylesheet" type="text/css" href="css/commun.css">
+	<link rel="stylesheet" type="text/css" href="css/calculette.css">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
+
+	<script src = "js/jquery-3.1.1.min.js"></script>
+	<script src = "js/calculetteLight.js"></script>
+	<script src = "js/tools.js"></script>
+	<script src = "js/qi.js"></script>
+
+	<script src="/libs/qimessaging/2/qimessaging.js"></script>
+ </head>
+ <title>Calculette</title>
+  <header>
+	<div class="header">
+		<!-- <a href="informations.html"> -->
+			<div id="lienOut" class="sortieQuestionnaire" redirection="listeInformationsSG.html" dialog="listeInformation">
+				<img id="flecheLien" src="images/rightArrow.png"></img><span id="textOut">Sortir du test</span>
+			</div>
+		<!-- </a> -->
+	</div>
+ </header>
+ <body>
+ 	<div class="bloc">
+		<p class="blockName">A. S'informer et comprendre</p>
+		<table>
+			<th>Question</th>
+			<th>Réponse</th>
+			<th>Score</th>
+			<th>Avancement</th>
+			<tr>
+				<td class="question">J'ai consulté attentivement le portail de l'entreprise dans laquelle je candidate</td>
+				<td class="answer">
+					<select>
+						<option value="notAnswered" data-score="--">Sélectionner une réponse</option>
+						<option value="yes" data-score="2">Oui</option>
+						<option value="no" data-score="-1">Non</option>
+						<option value="wantTo" data-score="0.5">Je veux le faire</option>
+					</select>
+				</td>
+				<td class="score">--</td>
+				<td class="avancement">--</td>
+			</tr>
+			
+			<tr>
+				<td class="question">Je maîtrise les points clefs de l'annonce et la description du poste</td>
+				<td class="answer">
+					<select>
+						<option value="notAnswered" data-score="--">Sélectionner une réponse</option>
+						<option value="yes" data-score="1">Oui</option>
+						<option value="no" data-score="0">Non</option>
+						<option value="wantTo" data-score="0.5">Je veux le faire</option>
+					</select>
+				</td>
+				<td class="score">--</td>
+				<td class="avancement">--</td>
+			</tr>
+
+				<td class="question">Je connais les valeurs de l'entreprise et je peux expliquer en quoi elles m'interpellent dans un contexte professionnel</td>
+				<td class="answer">
+					<select class="companyValue">
+						<option value="notAnswered" data-score="--">Sélectionner une réponse</option>
+						<option value="yes" data-score="2">Oui</option>
+						<option value="no" data-score="-1">Non</option>
+						<option value="wantTo" data-score="0.5">Je veux le faire</option>
+					</select>
+				</td>
+				<td class="score">--</td>
+				<td class="avancement">--</td>
+			</tr>
+
+			<tr>
+				<td class="emptyCell"></td>
+				<td class="smiley"></td>
+				<td class="finalScore">--</td>
+				<td colspan="3" class="finalAvancement">--</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div class="bloc">
+		<p class="blockName">B. Analyser son parcours</p>
+		<table>
+		<th>Question</th>
+		<th>Réponse</th>
+		<th>Score</th>
+		<th>Avancement</th>
+			<tr>
+			<td class="question">J'ai réfléchi à mon projet professionnel à trois ans</td>
+			<td class="answer">
+				<select>
+					<option value="notAnswered" data-score="--">Sélectionner une réponse</option>
+					<option value="yes" data-score="2">Oui</option>
+					<option value="no" data-score="0">Non</option>
+					<option value="wantTo" data-score="1">Je veux le faire</option>
+				</select>
+			</td>
+			<td class="score">--</td>
+			<td class="avancement">--</td>
+			</tr>
+			<tr><td class="question">Je peux parler de la façon dont cette expérience s'inscrit dans mon parcours professionnel</td>
+				<td class="answer">
+				<select>
+					<option value="notAnswered" data-score="--">Sélectionner une réponse</option>
+					<option value="yes" data-score="2">Oui</option>
+					<option value="no" data-score="0">Non</option>
+					<option value="wantTo" data-score="0.5">Je veux le faire</option>
+				</select>
+				</td>
+				<td class="score">--</td>
+				<td class="avancement">--</td>
+			</tr>
+			<tr><td class="question">J'ai fait des stages très différents mais je peux leur donner de la cohérence ou expliquer ce goût de la diversité</td>
+				<td class="answer">
+				<select class="experience">
+					<option value="notAnswered" data-score="--">Sélectionner une réponse</option>
+					<option value="yes" data-score="2">Oui</option>
+					<option value="no" data-score="-0.5">Non</option>
+					<option value="wantTo" data-score="1">Je veux le faire</option>
+				</select>
+				</td>
+				<td class="score">--</td>
+			<td class="avancement">--</td>
+			</tr>
+			<tr>
+				<td class="emptyCell"></td>
+				<td class="smiley"></td>
+				<td class="finalScore">--</td>
+				<td colspan="3" class="finalAvancement">--</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div class="bloc">
+		<p class="blockName">C. Se connaître</p>
+		<table>
+		<th>Question</th>
+		<th>Réponse</th>
+		<th>Score</th>
+		<th>Avancement</th>
+			
+			<tr><td class="question">J'ai déjà mis en œuvre des actions correctrices sur les points qui m'ont été signifiés dans mon parcours éducatif ou mes expériences précédentes</td>
+				<td class="answer">
+				<select>
+					<option value="notAnswered" data-score="--">Sélectionner une réponse</option>
+					<option value="yes" data-score="2">Oui</option>
+					<option value="no" data-score="0">Non</option>
+					<option value="wantTo" data-score="1">Je veux le faire</option>
+				</select>
+				</td>
+				<td class="score">--</td>
+			<td class="avancement">--</td>
+			</tr>
+			
+			<tr><td class="question">Je peux expliquer clairement comment mes qualités peuvent servir le poste sur lequel je candidate </td>
+				<td class="answer">
+				<select class="quality">
+					<option value="notAnswered" data-score="--">Sélectionner une réponse</option>
+					<option value="yes" data-score="2">Oui</option>
+					<option value="no" data-score="0">Non</option>
+					<option value="wantTo" data-score="1">Je veux le faire</option>
+				</select>
+				</td>
+				<td class="score">--</td>
+			<td class="avancement">--</td>
+			</tr>
+			<tr><td class="question">Je peux présenter mon parcours et mes expériences avec clarté et de façon structurée</td>
+				<td class="answer">
+				<select class="experience">
+					<option value="notAnswered" data-score="--">Sélectionner une réponse</option>
+					<option value="yes" data-score="2">Oui</option>
+					<option value="no" data-score="-1">Non</option>
+					<option value="wantTo" data-score="1">Je veux le faire</option>
+				</select>
+				</td>
+				<td class="score">--</td>
+			<td class="avancement">--</td>
+			</tr>
+			<tr><td class="question">Je peux répondre de façon précise et organisée à la question : pourquoi avez-vous candidaté sur cette offre ?</td>
+				<td class="answer">
+				<select class="experience">
+					<option value="notAnswered" data-score="--">Sélectionner une réponse</option>
+					<option value="yes" data-score="2">Oui</option>
+					<option value="no" data-score="-1">Non</option>
+					<option value="wantTo" data-score="0.5">Je veux le faire</option>
+				</select>
+				</td>
+				<td class="score">--</td>
+			<td class="avancement">--</td>
+			</tr>
+			<tr>
+				<td class="emptyCell"></td>
+				<td class="smiley"></td>
+				<td class="finalScore">--</td>
+				<td colspan="3" class="finalAvancement">--</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div id="totaux" class="bloc">
+		Scores totaux <span id='finalSmiley'></span>
+		<table>
+			<tr>
+				<td class="statGenerale">Score général : <span id="totalScore"></span></td>
+				<td class="statGenerale">Avancement général : <span id="totalProgress"></span></td>
+			</tr>
+		</table>
+	</div>
+	<span id="warning">Vous devez répondre à toutes les questions pour accéder aux résultats</span><br/>
+	<div id="toAdvices" class="bloc">
+	<i id="arrowResults" class="fa fa-arrow-right" aria-hidden="true"></i>
+		Voir mes conseils personnalisés
+	</div>
+	
+	<div id="advices">
+		<span id="conseil0" class="test"></span><br/>
+		<span id="conseil1" class="test"></span><br/>
+		<span id="conseil2" class="test"></span><br/>
+		<span id="conseil3" class="test"></span><br/>
+		<span id="conseil4" class="test"></span><br/>
+		<span id="conseil5" class="test"></span>
+	</div>
+ </body>
+ </html>

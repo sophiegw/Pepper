@@ -1,0 +1,140 @@
+body{
+	text-align: center;
+	margin-top: 5%;
+}
+
+.question{
+	padding: 15 5 15 20;
+	width:45%;
+	text-align: left;
+}
+
+th{
+	border:1px solid black;
+	color: black;
+	background-color: #ff3333;
+}
+
+table{
+	font-size: 25pt;
+	color: black;
+	background-color:white;
+}
+
+.answer{
+	width: 15%;
+	text-align: center;
+}
+
+.score, .avancement, .finalScore, .finalAvancement, .smiley{
+	width:8%;
+	text-align: center;
+}
+
+select {
+    font-size:23pt;
+    letter-spacing:0.07em;
+    background:transparent;
+    border: solid 1px black;
+    border-radius:3px;
+    padding:3px;
+}
+
+option{
+	color:black;
+	font-size: 23pt;
+}
+
+tr:not(:first-child){
+	height: 165px;
+}
+
+tr:nth-child(odd){
+	background-color: #ffcccc;
+}
+
+td{
+	border-radius: 8px;
+}
+
+.bloc{
+	text-align: left;
+	font-size: 45pt;
+	margin-top:10;
+}
+
+.blockName{
+	margin-bottom:3;
+}
+
+.emptyCell{
+	visibility: hidden;
+}
+
+.smiley{
+	font-size: 60pt;
+}
+
+.statGenerale{
+	padding: 15 5 15 20;
+	width:1%;
+}
+
+#toAdvices{
+	display: inline-block;
+	margin-top: 20px;
+	margin-left: auto;
+	border: 5px solid red;
+	border-radius:25px;
+	padding: 10 20 10 20;
+	width: auto;
+	background-color:white;
+}
+
+#arrowResults{
+	color: red;
+}
+
+#advices{
+	font-size: 40pt;
+	text-align: left;
+}
+
+#finalSmiley{
+	font-size: 90pt;
+}
+
+#warning{
+	display: none;
+	font-size: 40pt;
+	color: red;
+}
+
+.header{
+	width: 100%;
+	height: 0;
+	position: fixed;
+	top: 0;
+	background-color: white;
+}
+
+#lienOut{
+	display: flex;
+	align-items:center;
+	font-size: 40pt;
+	float: right;
+	padding: 8px;
+	margin: 1% 5% 1% 0%;
+	height: 60px;
+	border: 5px solid #E52442;
+    border-radius: 5px;
+    background-color: white;
+}
+
+#flecheLien{
+	display: inline;
+}
+
+#textOut{
+	height: 60px;
+}

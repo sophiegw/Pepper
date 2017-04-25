@@ -1,0 +1,155 @@
+ <! DOCTYPE html>
+ <html lang = "fr">
+	 <head>
+		<meta charset="UTF-8"/>
+		<script src="../js/jquery-3.1.1.min.js"></script>
+		<script src = "../js/reponseMultiple.js"></script>
+		<script src = "../js/tools.js"></script>
+		<script src="/libs/qimessaging/2/qimessaging.js"></script>
+		<link rel="stylesheet" type="text/css" href="../css/commun.css">
+		<link rel="stylesheet" type="text/css" href="../css/quizzDataScience.css">
+	 </head>
+	 <title>Quizz MOA</title>
+	 <body data-nbquestions="5" data-metier="it">
+		<img id="selonVous" src="../images/entete.png"></img>
+		<img data-quizz="it" class="sortieQuestionnaire" redirection="domaines/listeDomaineIT.html" dialog="listeDomaineIT" src="../images/out.png"></img>
+		<div class="propositionVisible question1">
+			<p class="question">la Maîtrise d’Ouvrage à t'elle sa place dans l’innovation ?</p>
+			<div class="jeuReponse" data-derniere-question="false">
+				<div class="choixMultiple choix1">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">L’innovation est un processus consistant à améliorer constamment l’existant de façon radicale, le Maître d’Ouvrage n’exprimant qu’un besoin, il n’a pas sa part dans ce processus</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				</br>
+				<div class="choixMultiple choix2">
+					<div class="squaredImage" data-reponse="vrai" data-value="oui elle l'a">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">L’innovation se traduisant par un projet à part entière, le Maître d’Ouvrage y a sa place par nature</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				</br>
+				</br>
+				</br>
+                <img class="submitAnswers" src="../images/verify.png"></img>
+			</div>
+		</div>
+		
+		<div class="propositionVisible question2">
+		
+			<p class="question">Quel est le rôle de la Maîtrise d’Ouvrage dans un projet ?</p>
+			<div class="jeuReponse" data-derniere-question="false">
+				<div class="choixMultiple choix1">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Son rôle central consiste à concevoir et réaliser le projet pour s’assurer de la satisfaction du client</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix2">
+					<div class="squaredImage" data-reponse="vrai" data-value="le Maître d’Ouvrage définit et suit l’ensemble des activités répondant au besoin">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Dans le cadre d’un budget et d’un délai fixés, le Maître d’Ouvrage définit et suit l’ensemble des activités répondant au besoin</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				<br/>
+				<div class="choixMultiple choix3">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Il structure, planifie, pilote et manage l’équipe projet dans une démarche qualité</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				</br>
+				</br>
+				</br>
+				
+				<img class="submitAnswers" src="../images/enter-arrow.png"></img>
+			</div>
+		</div>
+		
+		<div class="propositionVisible question3">
+			<p class="question">La Maîtrise d’Ouvrage a-t-elle un rôle dans la méthodologie agile (réalisation du projet par itérations successives)  ?</p>
+			<div class="jeuReponse" data-derniere-question="false">
+				<div class="choixMultiple choix1">
+					<div class="squaredImage" data-reponse="vrai" data-value="oui celui de product owner">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">C’est le « Product Owner ». Toujours disponible, il représente le client auprès de l’équipe, fait partager la vision du produit à réaliser, établit les fonctionnalités et les priorise, rédige les spécifications du projet, participe ou anime les démonstrations et réunions d’avancement et accepte ou refuse le travail réalisé</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				<br/>
+				</br>
+				</br>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<div class="choixMultiple choix2">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">La notion de Maître d’Ouvrage n’a pas sa place dans la méthodologie de conduite de projet agile</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<br/>
+				</br>
+				</br>
+				<div class="choixMultiple choix3">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">C’est le « Scrum Master ». Garant du cadre méthodologique, il accompagne l’équipe qu’il implique et les aide à franchir les différents obstacles qu’ils rencontrent dans la recherche de solutions. Il doit s’assurer de la bonne compréhension des besoins fonctionnels qu’il traduit en besoins techniques</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<img class="submitAnswers" src="../images/enter-arrow.png"></img>
+			</div>
+		</div>
+		
+		
+		<div class="propositionVisible question4">
+			<p class="question">Comment définiriez-vous le rôle de Maîtrise d’Ouvrage (alias Business Analyst) ?</p>
+			<div class="jeuReponse" data-derniere-question="true">
+				<div class="choixMultiple choix1">
+					<div class="squaredImage" data-reponse="vrai" data-value="C’est le commanditaire il est dans le  quoi faire ">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">C’est le commanditaire, il est dans le « quoi faire », donne les objectifs à atteindre du projet, le calendrier et le budget associé. Il s’assure que les moyens sont employés à bon escient et vérifie que les objectifs sont atteints</span>
+					<img class="icon" src="../images/checked.png"></img>
+				</div>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<div class="choixMultiple choix2">
+					<div class="squaredImage" data-reponse="fausse">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Il est dans le « comment faire » et se charge de réaliser le projet. Il traduit en termes techniques le besoin</span>
+					<img class="icon" src="../images/cancel.png"></img>
+				</div>
+				<br/>
+				<br/>
+				<br/>
+				<img class="submitAnswers" src="../images/enter-arrow.png"></img>		
+			</div>
+		</div>
+        
+		<span id="next"></span>
+			<img id="out" redirection="domaines/listeDomaineIT.html" dialog="listeDomaineIT" src="../images/logout.png"></img>
+	 </body>
+ </html>

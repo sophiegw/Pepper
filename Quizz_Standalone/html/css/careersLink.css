@@ -1,0 +1,19 @@
+#qrcode{
+	font-size: 32px;
+	width: 500px;
+	margin: auto;
+	padding-top: 8%;
+	text-align: center;
+}
+
+#lienRetour {
+	display: flex;
+	align-items: center;
+	border: 5px solid #E52442;
+	border-radius: 5px;
+	font-size: 40px;
+	float: left;
+	margin: 2% 0% 1% 1%;
+	padding: 5px 10px 5px 0px;
+	background-color: white;
+}

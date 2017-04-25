@@ -1,0 +1,55 @@
+topic: ~listeDomaineIT()
+language: frf
+
+
+concept:(careers) ["vers careers.com" "car irze" "carirze" "carirze point comme" "lien carirze" "carirze" "careers"]
+concept:(securite) ["Sécurité" "securite"]
+concept:(BI) ["bi aille" "b i" "bi"]
+concept:(dataScientist) ["Data scientist" "data saille en tiste" "datascientist"]
+concept:(IT) ["IT" "aye ti" "ail ti"  "aille ti"]
+concept:(innovation) ["inno vassion" "innovation"]
+concept:(infrastructure) ["infra" "infrastructure"]
+concept:(businnessAnalyst) ["business analiste" "business" "analiste" "businessanalyst"]
+concept:(MOAMOE) ["aime o a"  "aime o e" "m o a" "m o e" "moamoe" "aimoa" "aimoeu" "aimoa aimoeu"]
+concept:(retour) ["retour" "précédent" "reutour"]
+concept:(quizz) ["quizz" "cuize" "cuize" "couize"]
+concept:(securiteQuizz)["securiteQuizz" ~quizz]
+concept:(dataScientistQuizz)["dataScientistQuizz" ~quizz]
+concept:(itQuizz)["itQuizz" ~quizz]
+concept:(innovationQuizz)["innoQuizz" ~quizz]
+concept:(merci) ["merci" "je te remercie"]
+concept:(quitter) ["quitter" "kitai" "fermer"]
+concept:(oui) [Oui Ouais Yep Ouaip "d’accord" "Ok"]
+concept:(non) [non nope nan "non merci" bof "je sais pas" "je ne sais pas" "arrète" "stop"]
+
+## Repondre au quizz à l'oral, proposer un retour dialogue (ou ne pas le quitter ?)??????
+u:(~careers) $dialogURL=[1;domaines/careersLink.html] Vous pouvez flashé ce q r code ! 
+    u1:(~retour) $dialogURL=[1;domaines/listeDomaineIT.html] retour
+
+u:(~securite) $dialogURL=[1;quizzs/securite.html] Voici le quizz sécurité $dialogEngaged=[00;listeDomaineIT]
+
+## REQUIERT QUIZZ BI
+u:(~bi) Voici le domaine bi aille
+
+u:(~dataScientist) $dialogURL=[1;quizzs/dataScientist.html] Voici le quizz data saille en tiste $dialogEngaged=[00;listeDomaineIT]
+
+
+u:(~IT) $dialogURL=[1;quizzs/it.html] Voici le quizz aille ti ! $dialogEngaged=[00;listeDomaineIT]
+
+    
+u:(~innovation) $dialogURL=[1;quizzs/innovation.html] Voici le quizz innovation $dialogEngaged=[00;listeDomaineIT]
+
+## REQUIERT QUIZZ infrastructure
+u:(~infrastructure)  Voici le domaine infrastructure
+
+## REQUIERT QUIZZ businnessAnalyst
+u:(~businnessAnalyst)  Voici le domaine bize naisse analiste !
+
+## REQUIERT QUIZZ MOAMOE
+u:(~MOAMOE) $dialogURL=[1;quizzs/moa.html] Voici le quizz aime o a e! $dialogEngaged=[00;listeDomaineIT]
+
+u:(~retour) $dialogURL=[1;domaines/ItFinance.html] retour $dialogEngaged=[2;listeDomaineIT;ITFinance]
+
+u:(~quitter) $dialogURL=[1;OuiNon.html] Je vais fermer l'application vous êtes sur ? 
+    u1:(~oui) Bien compris$robotState=777
+    u1:(~non) $dialogURL=[1;domaines/listeDomaineIT.html] Ok je te laisse continuer

@@ -1,0 +1,49 @@
+body {
+    overflow: hidden;
+}
+
+.pastilleChoix:active, .pastilleChoix:focus{
+    background-color: rgba(255, 0, 0, 1);
+}
+
+#exitApplication{
+    display: inline;
+    transform: scale(0.35);
+    transform-origin: 100% 0%;
+    float: right;
+    cursor: pointer;
+    margin: 1% 5% 0% 0%;
+}
+
+#SG{
+    margin: 7% 0% 0% 38%;
+}
+
+.pastilleChoix{
+    /* background-color: rgba(255, 0, 0, 0.6); */
+    background-color: #E60028 ;
+    display: table;
+    border: 5px solid black;
+    padding: 50px;
+    text-align: center;
+    border-radius: 20px;
+    width:300px;
+}
+
+.boutons{
+    display: inline-block;
+    font-size: 70pt;
+}
+
+.pays{
+    margin: 15% 1% 0 8%;
+}
+
+.yesNo{
+    display: inline-block;
+	margin: 25% 15% 0 15%;
+}
+
+.itfinance{
+    margin: 13% 0% 0% 20%;
+}

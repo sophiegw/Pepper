@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheProject xmlns="http://www.aldebaran-robotics.com/schema/choregraphe/project.xsd" xar_version="3">
+    <Box name="root" id="-1" localization="8" tooltip="Root box of Choregraphe&apos;s behavior. Highest level possible." x="0" y="0">
+        <bitmap>media/images/box/root.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+        <Input name="FrontTactilTouched" type="0" type_size="1" nature="4" stm_value_name="FrontTactilTouched" inner="1" tooltip="FrontTactilTouched desc" id="4" />
+        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="5" />
+        <Timeline enable="0">
+            <BehaviorLayer name="behavior_layer1">
+                <BehaviorKeyframe name="keyframe1" index="1">
+                    <Diagram scale="100">
+                        <Box name="Greet" id="11" localization="8" tooltip="Greet people and m anage behavior" x="243" y="10">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+
+
+        ## Topics
+        self.allTopicsPath = [
+                    "Domaines/ITFinance.top",
+                    "Domaines/listeDomaineFinance.top",
+                    "Domaines/listeDomaineIT.top",
+                    "Informations/listeInformation_frf.top"
+                    ]
+        self.allTopicsName = [
+                    "ITFinance",
+                    "listeDomaineFinance",
+                    "listeDomaineIT",
+                    "listeInformation"
+                    ]
+        ## Proxies
+        try:
+            import time
+            import os
+
+            self.TabletService = self.session().service("ALTabletService")
+            self.AutonomousLife = ALProxy("ALAutonomousLife")
+            self.RobotPosture = ALProxy("ALRobotPosture")
+            #self.Motion = ALProxy("ALMotion")
+            self.FrameManager = ALProxy("ALFrameManager")
+            #self.UserSession = ALProxy("ALUserSession")
+            #self.Zone = ALProxy("ALEngagementZones")
+            self.Speech = ALProxy("ALTextToSpeech")
+            #self.Tracker = ALProxy("ALTracker")
+            self.Memory = ALProxy("ALMemory")
+            #self.People = ALProxy("ALPeoplePerception")
+            #self.Awareness = ALProxy("ALBasicAwareness")
+            self.Dialog = ALProxy("ALDialog")
+            #self.Watcher = ALProxy("ALExpressionWatcher")
+
+        except Exception as e:
+            self.logger.error("Proxies initialization failed")
+            self.logger.error(e)
+
+        ## Initialization
+
+        self.uid = self.packageUid()
+        self.ip = self.session().service('ALTabletService').robotIp()
+
+        self.isSubscribed = False
+        self.Memory.declareEvent('dialogEngaged')
+        self.Memory.declareEvent('dialogURL')
+        self.Memory.declareEvent('robotState')
+        self.Memory.subscribeToEvent('dialogEngaged', self.getName(), 'managerDialog')
+        self.Memory.subscribeToEvent('dialogURL', self.getName(), 'managerURL')
+        self.Memory.subscribeToEvent('robotState', self.getName(), 'managerState')
+        self.loadListTopics(self.allTopicsPath)
+        pass
+
+
+    def onInput_onStart(self):
+        self.startTopic("ITFinance")
+        self.Memory.raiseEvent("dialogURL","1;domaines/ItFinance.html")
+        pass
+
+    def onUnload(self):
+        #put clean-up code here
+        self.stopListTopics(self.allTopicsName)
+        self.unloadListTopics(self.allTopicsName)
+        if self.isSubscribed:
+            self.Dialog.unsubscribe("quizz_rh")
+            self.logger.warning("SpeechReco UNsubscribed")
+            self.isSubscribed = False
+        self.onStopped()
+        pass
+
+    def onInput_onStop(self):
+        self.onUnload() #it is recommended to reuse the clean-up as the box is stopped
+        self.onStopped() #activate the output of the box
+
+    ## Callback of event: robotState, change state of robot
+    def managerState(self):
+        self.logger.info("managerState %s", self.Memory.getData('robotState'))
+        key = self.Memory.getData('robotState').split(";")
+        ## 0 = Stopped, nothing
+        if (key[0] == "0"):
+            self.Awareness.setStimulusDetectionEnabled('Sound', False)
+        ## 1 = Welcome mode, waiting for people
+        elif(key[0] == "1"):
+            self.RobotPosture.goToPosture("Stand",0.5)
+            self.Awareness.setStimulusDetectionEnabled('Sound', True)
+        ## Start listening
+        elif(key[0] == "2"):
+            self.Awareness.setStimulusDetectionEnabled('Sound', True)
+        ## Exit application
+        elif(key[0] == "777"):
+            self.onUnload()
+
+    ## Callback of event: dialogEngaged, manage subscribing/dialogs
+    def managerDialog(self):
+        self.logger.info("managerDialog %s", self.Memory.getData('dialogEngaged'))
+        key = self.Memory.getData('dialogEngaged').split(";")
+        self.logger.info("managerDialog key: %s", key)
+        ## 00/topicToStop = Dialog ended, end dialog and NO tracking
+        if(key[0] == "00"):
+            self.stopTopic(key[1])
+            self.Memory.raiseEvent("robotState","0")
+        ## 01/topicToStop = Dialog ended, end dialog and restart tracking
+        elif(key[0] == "01"):
+            self.stopTopic(key[1])
+            self.Memory.raiseEvent("robotState","1")
+        ## 1/pathToLaunch = Dialog launch called, then stop tracking and start dialog
+        elif (key[0] == "1"):
+            self.startTopic(key[1])
+            self.Memory.raiseEvent("robotState","2")
+        ## 2/topicToStop/pathTolaunch = stop previous dialog, launch the new one
+        elif(key[0] == "2"):
+            self.stopTopic(key[1])
+            self.startTopic(key[2])
+        ## 666 = stop all loaded dialogs
+        elif(key[0] == "666"):
+            self.stopAllTopics()
+
+    def managerURL(self):
+        self.logger.info("managerURL event: %s", self.Memory.getData('dialogURL'))
+        key = self.Memory.getData('dialogURL').split(";")
+        ## 0 = ? stop ?
+        if(key[0] == "0"):
+            self.TabletService.hideWebview()
+        ## 1 = Load URL
+        if(key[0] == "1"):
+            self.loadURL(key[1])
+
+    def loadURL(self, path):
+        self.url = 'http://' + self.ip + '/apps/' + self.uid + '/' + path
+        try:
+            if not self.TabletService.showWebview(self.url):
+                raise ValueError('LoadURL: TabletService.ShowWebView %s Failed', self.url)
+        except Exception as e:
+            self.logger.warning("Load URL failed")
+            self.logger.warning(e)
+
+
+### DIALOG ###
+
+    def loadTopic(self, path):
+        self.logger.info("LoadTopic %s", path)
+        self.dialog_path = os.path.abspath(
+                        os.path.join(self.FrameManager.getBehaviorPath(self.behaviorId), '../' + path))
+        self.logger.info("LoadTopic dialog path %s", self.dialog_path)
+        try:
+            self.dialog_topic = self.Dialog.loadTopic(str(self.dialog_path))
+        except Exception as e:
+            self.logger.warning("loadTopic failed for %s", path)
+            self.logger.warning(e)
+
+    def startTopic(self, topic):
+        self.logger.info("startTopic %s", topic)
+        loadedtopics = self.Dialog.getAllLoadedTopics()
+        if topic in loadedtopics:
+            try:
+                self.dialog_topic = self.Dialog.activateTopic(topic)
+                if self.isSubscribed == False:
+                    self.Dialog.subscribe("quizz_rh")
+                    self.logger.warning("SpeechReco Subscribed")
+                    self.isSubscribed = True
+            except Exception as e:
+                self.logger.warning("startTopic %s failed", topic)
+                self.logger.warning(e)
+        else:
+            self.logger.warning("startTopic failed, %s not pre-loaded",topic)
+            self.logger.warning(e)
+
+    def unloadTopic(self, topic):
+        self.logger.info("unloadTopic %s", topic)
+        try:
+            self.dialog_topic = self.Dialog.unloadTopic(topic)
+
+        except Exception as e:
+            self.logger.warning("unloadTopic failed for %s", topic)
+            self.logger.warning(e)
+
+    def stopTopic(self, topic):
+        self.logger.info("stopTopic %s", topic)
+        activatedtopics = self.Dialog.getActivatedTopics()
+        if topic in activatedtopics:
+            try:
+                self.dialog_topic = self.Dialog.deactivateTopic(topic)
+            except Exception as e:
+                self.logger.warning("stopTopic failed")
+                self.logger.warning(e)
+        else:
+            self.logger.warning("stopTopic failed, topic not active or loaded")
+
+    def loadListTopics(self, pathslist):
+        for path in pathslist :
+            self.loadTopic(path)
+
+    def stopListTopics(self, topicslist):
+        for topic in topicslist :
+            self.stopTopic(topic)
+
+    def unloadListTopics(self, topicslist):
+        for topic in topicslist :
+            self.unloadTopic(topic)
+
+    def unloadAllTopics(self):
+        self.logger.info("unloadAllTopics")
+        topicslist = self.Dialog.getAllLoadedTopics()
+        for topic in topicslist:
+            self.unloadTopic(topic)
+
+    def stopAllTopics(self):
+        self.logger.info("stopAllTopics")
+        topicslist = self.Dialog.getActivatedTopics()
+        for topic in topicslist:
+            self.stopTopic(topic)]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                        </Box>
+                        <Link inputowner="11" indexofinput="2" outputowner="0" indexofoutput="2" />
+                        <Link inputowner="0" indexofinput="5" outputowner="11" indexofoutput="4" />
+                    </Diagram>
+                </BehaviorKeyframe>
+            </BehaviorLayer>
+        </Timeline>
+    </Box>
+</ChoregrapheProject>
