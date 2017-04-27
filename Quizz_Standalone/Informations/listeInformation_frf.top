@@ -10,7 +10,7 @@ concept:(retour)["reutour" "retour" "précédent" "arrière"]
 
 u:(~quizzSG) $dialogURL=[1;quizzs/soge.html] Je vous lance le quizz société générale ! $dialogEngaged=[00;listeInformation]
 
-u:(~careers) $dialogURL=[1;domaines/careersLink.html] Vous pouvez flashé ce q r code ! 
+u:(~careers) $dialogURL=[1;domaines/careersLink.html] Vous pouvez flashé ce q r code pour être redirigé vers le site carirze! 
     u1:(~retour) $dialogURL=[1;listeInformationsSG.html] retour
 
 u:(~calculatrice) $dialogURL=[1;calculetteChoix.html] Je vous laisse choisir la longueure du test

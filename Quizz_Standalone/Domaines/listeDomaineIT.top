@@ -23,7 +23,7 @@ concept:(oui) [Oui Ouais Yep Ouaip "d’accord" "Ok"]
 concept:(non) [non nope nan "non merci" bof "je sais pas" "je ne sais pas" "arrète" "stop"]
 
 ## Repondre au quizz à l'oral, proposer un retour dialogue (ou ne pas le quitter ?)??????
-u:(~careers) $dialogURL=[1;domaines/careersLink.html] Vous pouvez flashé ce q r code ! 
+u:(~careers) $dialogURL=[1;domaines/careersLink.html] Vous pouvez flashé ce q r code pour être redirigé vers le site carirze! 
     u1:(~retour) $dialogURL=[1;domaines/listeDomaineIT.html] retour
 
 u:(~securite) $dialogURL=[1;quizzs/securite.html] Voici le quizz sécurité $dialogEngaged=[00;listeDomaineIT]

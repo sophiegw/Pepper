@@ -33,7 +33,7 @@ function init(){
 		var _this = $(this);
 		var derniereQuestion = _this.parent().data('derniere-question');
 		var reponses = _this.parent('div').find('.coche:visible');
-				
+		
 		var discours = _this.parent().find('[data-reponse=vrai]').data('value');
 		var bonnesReponses = _this.parent().find('[data-reponse=vrai]');
 		var nbBonnesRep = bonnesReponses.length;
@@ -59,7 +59,9 @@ function init(){
 				bonneRep++;
 			}
             $('.submitAnswers').attr('src','../images/enter-arrow.png');
-			sayAnswer(discours);
+			if(session){
+				sayAnswer(discours);
+			}
 		}   
 		else{
 			$('#next').click();
@@ -67,7 +69,7 @@ function init(){
 		}
 		if(derniereQuestion){
 			$('#out').css('display', 'inline');
-			$('.redirection').css('display', 'inline-block');
+			// $('.redirection').css('display', 'inline-block');
 			_this.hide();
 		}
 	});
@@ -86,7 +88,7 @@ function init(){
 	});
 	
 	$('#out').on('click', function(){
-		sayAnswer("Vous avez répondu correctement à " + bonneRep + " sur " + nbQuestions + "questions, soit un résultat de " + ((bonneRep/nbQuestions) * 100).toFixed(2) + " pourcents");
+		sayAnswer("Vous avez répondu correctement à " + bonneRep + " sur " + nbQuestions + "questions, soit un résultat de " + ((bonneRep/nbQuestions) * 100).toFixed(0) + " pourcents");
         backDialog( $(this) );
     });
 	

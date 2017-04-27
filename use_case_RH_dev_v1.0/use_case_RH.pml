@@ -119,7 +119,6 @@
         <File name="Thumbs" src="html/images/Thumbs.db" />
         <File name="Thumbs" src="html/images/photos_RH/Thumbs.db" />
         <File name="dataScientistfinance" src="html/quizzs/dataScientistfinance.html" />
-        <File name="listeInformations" src="html/listeInformations.html" />
         <File name="ItFinance" src="html/domaines/ItFinance.html" />
         <File name="listeDomaine" src="html/domaines/listeDomaine.html" />
         <File name="listeDomaineFinance" src="html/domaines/listeDomaineFinance.html" />
@@ -170,6 +169,7 @@
         <File name="font-awesome" src="html/css/font-awesome-4.7.0/scss/font-awesome.scss" />
         <File name="calculetteLight" src="html/js/calculetteLight.js" />
         <File name="calculetteChoix" src="html/calculetteChoix.html" />
+        <File name="listeInformationsSG" src="html/listeInformationsSG.html" />
     </Resources>
     <Topics>
         <Topic name="Informations_frf" src="Informations/Informations_frf.top" topicName="Informations" language="fr_FR" />
