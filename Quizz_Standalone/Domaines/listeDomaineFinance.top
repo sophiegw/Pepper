@@ -2,43 +2,27 @@ topic: ~listeDomaineFinance()
 language: frf
 
 
-concept:(careers) ["careers" "vers careers.com" "car irze" "carirze" "carirze point comme" "lien carirze" "carirze"]
-concept:(dataScientist) ["datascientist" "Data scientist" "data saille en tiste"]
-concept:(analysequantitative) ["analysequantitative" "analyse" "analyse quantitative"]
-concept:(structuration) ["structuration" "praille sigue" "praille sigue" "Pricing"]
-concept:(trading) ["trading" "trèdigue" "traille digue" "très dinegue"]
-concept:(ventemarche) ["ventemarche" "Vente Marchés Financiers" "vente" "marchés financiers"]
-concept:(financements) ["financements" "Financements structurés"]
-concept:(fusions) ["fusions" "Fusions Acquisitions" "e c m"]
-concept:(gestionactif) ["gestionactif" "Gestion d'actifs" "gestion" "actif"]
-concept:(risques) ["risques"]
-concept:(audit) ["audit" "Audit interne"]
-concept:(conseil) [ "conseil" "Conseil interne" "Inspection Générale"]
-concept:(autre) ["autrechose" "je cherche autre chose" "autre chose" "autre"]
-concept:(retour) ["retour"]
+concept:(careers) ["vers careers.com" "car irze" "carirze" "carirze point comme" "lien carirze" "carirze" "careers"]
+
+concept:(businessanalyst) ["business analiste" "business" "analiste" "businessanalyst"]
+concept:(modelisateur) ["modelisateur" "modélisateur"]
+concept:(retour) ["retour" "précédent" "reutour"]
+concept:(merci) ["merci" "je te remercie"]
 concept:(quitter) ["quitter" "kitai" "fermer"]
 concept:(oui) [Oui Ouais Yep Ouaip "d’accord" "Ok"]
 concept:(non) [non nope nan "non merci" bof "je sais pas" "je ne sais pas" "arrète" "stop"]
 
-## Repondre au quizz à l'oral, proposer un retour dialogue (ou ne pas le quitter ?)??????
-u:(~careers) $dialogURL=[1;domaines/careersLink.html] Vous pouvez flashé ce q r code pour être redirigé vers le site carirze!
-    u1:(~retour) $dialogURL=[1;domaines/listeDomaineFinance.html]
 
-u:(~dataScientist) $dialogURL=[1;domaines/infos/dataScientistfinance.html] Voici le domaine data saille en tiste $dialogEngaged=[00;listeDomaineFinance]
-## REQUIERT TOUS LES LIENS
-u:(~analysequantitative) Voici le domaine d'analyse quantitative
-u:(~structuration) Voici le domaine de structuration
-u:(~trading) Voici le domaine du très dinegue
-u:(~ventemarche) Voici le domaine des ventes sur marchés financiers
-u:(~financements) Voici le domaine des financements structurés
-u:(~fusions) Voici le domaine des fusions et acquisitions # ou ECM
-u:(~gestionactif) Voici le domaine de gestion d'actifs
-u:(~risques) Voici le domaine des risques
-u:(~audit) Voici le domaine de l'audit interne
-u:(~conseil) Voici le domaine de conseil interne
+u:(~careers) $dialogURL=[1;domaines/careersLink.html] Vous pouvez flashé ce q r code pour être redirigé vers le site carirze! 
+    u1:(~retour) $dialogURL=[1;domaines/listeDomaineFinance.html] retour
 
-u:(~retour) $dialogURL=[1;domaines/ItFinance.html] retour $dialogEngaged=[2;listeDomaineIT;ITFinance]
+u:(~businessanalyst) $dialogURL=[1;quizzs/businnessAnalyst.html] Voici le quizz business analyste $dialogEngaged=[00;listeDomaineFinance]
 
-u:(~quitter) Je vais fermer l'application vous êtes sur ? 
+u:(~modelisateur) $dialogURL=[1;quizzs/modelisateur.html] Voici le quizz modélisateur $dialogEngaged=[00;listeDomaineFinance]
+
+u:(~retour) $dialogURL=[1;domaines/ItFinance.html] retour $dialogEngaged=[2;listeDomaineFinance;ITFinance]
+
+u:(~quitter) $dialogURL=[1;OuiNon.html] Je vais fermer l'application vous êtes sur ? 
     u1:(~oui) Bien compris$robotState=777
-    u1:(~non) Ok je te laisse continuer
+    u1:(~non) $dialogURL=[1;domaines/listeDomaineFinance.html] Ok je te laisse continuer
+

@@ -7,12 +7,10 @@ body{
 	display: inline;
 	transform: scale(0.5);
 	transform-origin: 0% 0%;
-	/*! float: left; */
 	cursor: pointer;
 	position: absolute;
 	top: 0;
 	left: 0;
-	/*! margin-top: 2%; */
 	margin: 2% 0% 0% 2%;
 }
 
@@ -31,18 +29,16 @@ body{
 }
 
 .squaredImage{
-	display: inline-block;
+	/*display: inline-block;*/
     overflow:hidden;
-    min-width:125px;
-    min-height:125px;
+    min-width:128px;
+    max-width:128px;
+    min-height:128px;
+    max-height:128px;
 	background-color: white;
 }
 
 .coche{
-	transform: scale(0.4, 0.4);
-	transform-origin: 0 0;
-	margin-left: 9%;
-	margin-top: 9%;
 	display: none;
 }
 
@@ -57,19 +53,19 @@ body{
 
 .icon{
 	visibility:hidden;
-	display: inline-block;
     position: absolute;
-    margin-top: 1.5%;
     margin-left: 1.5%;
+    align-self: center
 }
 
 .choixMultiple{
 	display:flex;
+	/*position:relative;*/
 	margin-left: 6%;
 }
 
 .reponseMultiple{
-	display: inline;
+	/*display: inline;*/
 	font-weight: bold;
 	font-size: 40pt;
 	margin-left: 3%;

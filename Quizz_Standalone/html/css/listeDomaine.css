@@ -35,6 +35,11 @@ footer{
 	margin-bottom: 60px;
 	background-color: white;
 }
+.middle{
+    float:left;
+    width: 35%;
+    margin-left:30%;
+}
 
 .right{
 	float: right;

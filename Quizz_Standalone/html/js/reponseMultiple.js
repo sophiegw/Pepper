@@ -15,7 +15,18 @@ $(document).ready(function(){
 	  console.log("Make sure you load this page from the robots server.");
 	}
     init();
+    // overflowing();
+// $("#element").overflown();
+// $.fn.overflown=function(){
+//     var e=this[0];
+//     return e.scrollHeight>e.clientHeight||e.scrollWidth>e.clientWidth;}
+
+
 });
+
+function overflowing(){
+if ( $(window).height() <= $(document).height() ) { alert("too small")}
+}
 
 function init(){
 	

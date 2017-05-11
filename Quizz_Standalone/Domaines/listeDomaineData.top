@@ -1,0 +1,25 @@
+topic: ~listeDomaineData()
+language: frf
+
+
+concept:(careers) ["vers careers.com" "car irze" "carirze" "carirze point comme" "lien carirze" "carirze" "careers"]
+concept:(securite) ["Sécurité" "securite"]
+concept:(dataScientist) ["Data scientist" "data saille en tiste" "datascientist"]
+concept:(retour) ["retour" "précédent" "reutour"]
+concept:(merci) ["merci" "je te remercie"]
+concept:(quitter) ["quitter" "kitai" "fermer"]
+concept:(oui) [Oui Ouais Yep Ouaip "d’accord" "Ok"]
+concept:(non) [non nope nan "non merci" bof "je sais pas" "je ne sais pas" "arrète" "stop"]
+
+u:(~careers) $dialogURL=[1;domaines/careersLink.html] Vous pouvez flashé ce q r code pour être redirigé vers le site carirze! 
+    u1:(~retour) $dialogURL=[1;domaines/listeDomaineData.html] retour
+
+u:(~dataScientist) $dialogURL=[1;quizzs/dataScientist.html] Voici le quizz data saille en tiste $dialogEngaged=[00;listeDomaineData]
+
+u:(~retour) $dialogURL=[1;domaines/ItFinance.html] retour $dialogEngaged=[2;listeDomaineData;ITFinance]
+
+u:(~quitter) $dialogURL=[1;OuiNon.html] Je vais fermer l'application vous êtes sur ? 
+    u1:(~oui) Bien compris$robotState=777
+    u1:(~non) $dialogURL=[1;domaines/listeDomaineData.html] Ok je te laisse continuer
+    
+

@@ -21,12 +21,12 @@ body {
 
 .pastilleChoix{
     /* background-color: rgba(255, 0, 0, 0.6); */
-    background-color: #E60028 ;
+    background-color: white ;
     display: table;
-    border: 5px solid black;
+    border: 3px solid #E52442;
+    border-radius: 20px;    
     padding: 50px;
     text-align: center;
-    border-radius: 20px;
     width:300px;
 }
 

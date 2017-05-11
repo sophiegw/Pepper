@@ -107,6 +107,10 @@
         <File name="exitB" src="html/images/exitB.png" />
         <File name="BlueBlur_by_Rick_Doble_Opa60" src="html/images/BlueBlur_by_Rick_Doble_Opa60.jpg" />
         <File name="BlueBlur_by_Rick_Doble_Opa60_Model" src="html/images/BlueBlur_by_Rick_Doble_Opa60_Model.png" />
+        <File name="circle1" src="html/images/circle1.png" />
+        <File name="businessAnalyst" src="html/quizzs/businessAnalyst.html" />
+        <File name="listeDomaineData" src="html/domaines/listeDomaineData.html" />
+        <File name="listeDomaineFinanceOLD" src="html/domaines/listeDomaineFinanceOLD.html" />
     </Resources>
     <Topics>
         <Topic name="listeDomaineFinance" src="Domaines/listeDomaineFinance.top" topicName="listeDomaineFinance" language="fr_FR" />
@@ -114,6 +118,7 @@
         <Topic name="ITFinance" src="Domaines/ITFinance.top" topicName="ITFinance" language="fr_FR" />
         <Topic name="Quizz_frf" src="Quizzs/Quizz_frf.top" topicName="" language="" />
         <Topic name="listeInformation_frf" src="Informations/listeInformation_frf.top" topicName="listeInformation" language="fr_FR" />
+        <Topic name="listeDomaineData" src="Domaines/listeDomaineData.top" topicName="listeDomaineData" language="fr_FR" />
     </Topics>
     <IgnoredPaths />
 </Package>

@@ -32,12 +32,14 @@
                     "Domaines/ITFinance.top",
                     "Domaines/listeDomaineFinance.top",
                     "Domaines/listeDomaineIT.top",
+                    "Domaines/listeDomaineData.top",
                     "Informations/listeInformation_frf.top"
                     ]
         self.allTopicsName = [
                     "ITFinance",
                     "listeDomaineFinance",
                     "listeDomaineIT",
+                    "listeDomaineData",
                     "listeInformation"
                     ]
         ## Proxies
