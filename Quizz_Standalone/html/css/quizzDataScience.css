@@ -1,5 +1,5 @@
 body{
-	background-color: #91A5D3;
+	background-color: whitesmoke;
 	background-image:none;
 }
 
@@ -9,15 +9,15 @@ body{
 	transform-origin: 0% 0%;
 	cursor: pointer;
 	position: absolute;
-	top: 0;
-	left: 0;
 	margin: 2% 0% 0% 2%;
+	top:0px;
+	left:0px;
 }
 
 .question{
 	margin-top:0;
 	margin-bottom:0.6em;
-	color: white;
+	color: black;
 	font-size: 55pt;
 	text-align: center;
 	margin: 0% 1% 3% 1%;
@@ -35,7 +35,7 @@ body{
     max-width:128px;
     min-height:128px;
     max-height:128px;
-	background-color: white;
+	background-color: #E60028;
 }
 
 .coche{
@@ -54,7 +54,8 @@ body{
 .icon{
 	visibility:hidden;
     position: absolute;
-    margin-left: 1.5%;
+    margin-left: 1.60%;
+    margin-top: 1.60%;
     align-self: center
 }
 

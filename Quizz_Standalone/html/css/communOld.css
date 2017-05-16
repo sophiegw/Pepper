@@ -1,0 +1,79 @@
+body{
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+	/*background-image: url("../images/BlueBlur_by_Rick_Doble_Opa60.jpg");*/
+	background-color: whitesmoke;
+}
+
+#lienretour{
+	background-color:white;
+}
+
+.rotated{
+	-webkit-transform: rotate(-65deg);
+    -moz-transform: rotate(-65deg);
+    -o-transform: rotate(-65deg);
+    -ms-transform: rotate(-65deg);
+    transform: rotate(-65deg);
+}
+
+#credits{
+	display:none;
+}
+
+#logo{
+    width: 100%;
+	display: inline;
+}
+
+.rougeSoge{
+	color: #E60028;
+}
+
+a, a:link, a:visited, a:hover{
+	text-decoration: none;
+	color: black;
+}
+
+#centered{
+    text-align: center;
+}
+
+.centered{
+    text-align: center;
+}
+
+.header{
+	width: 100%;
+	height: 13%;
+	position: fixed;
+	top: 0;
+	/*background-color: white;*/
+}
+
+#lienCareers{
+	display: flex;
+	align-items:center;
+	font-size: 40pt;
+	float: right;
+	padding: 8px;
+	margin: 1% 5% 1% 0%;
+	height: 60px;
+	border: 5px solid #E52442;
+    border-radius: 5px;
+}
+
+#flecheLien{
+	display: inline;
+}
+
+#textLink{
+	height: 60px;
+}
+
+#videoPresentation{
+	  min-width: 100%; min-height: 100%;
+}
+
+.content{
+	display: none;
+}

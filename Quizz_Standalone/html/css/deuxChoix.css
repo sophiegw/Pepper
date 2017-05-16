@@ -13,6 +13,9 @@ body {
     float: right;
     cursor: pointer;
     margin: 1% 5% 0% 0%;
+    padding:20px;
+    border-radius: 50px;
+    background-color:lightgray;
 }
 
 #SG{

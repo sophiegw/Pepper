@@ -22,6 +22,7 @@ concept:(non) [non nope nan "non merci" bof "je sais pas" "je ne sais pas" "arr�
 #concept:(dataScientistQuizz)["dataScientistQuizz" ~quizz]
 #concept:(itQuizz)["itQuizz" ~quizz]
 #concept:(innovationQuizz)["innoQuizz" ~quizz]
+concept:(easteregg) ["isteure ègue" "isteur aig"]
 
 u:(~careers) $dialogURL=[1;domaines/careersLink.html] Vous pouvez flashé ce q r code pour être redirigé vers le site carirze! 
     u1:(~retour) $dialogURL=[1;domaines/listeDomaineIT.html] retour
@@ -38,6 +39,8 @@ u:(~quitter) $dialogURL=[1;OuiNon.html] Je vais fermer l'application vous êtes 
     u1:(~oui) Bien compris$robotState=777
     u1:(~non) $dialogURL=[1;domaines/listeDomaineIT.html] Ok je te laisse continuer
     
+u:(~easteregg) Salsifii ! \pau=500\ Arthour ! \pau=500\ toi pas changé assiète pour fromage !
+
     
 ## REQUIERT QUIZZ BI
 #u:(~bi) Voici le domaine bi aille

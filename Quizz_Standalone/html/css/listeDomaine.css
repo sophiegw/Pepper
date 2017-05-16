@@ -35,6 +35,7 @@ footer{
 	margin-bottom: 60px;
 	background-color: white;
 }
+
 .middle{
     float:left;
     width: 35%;
@@ -122,6 +123,9 @@ a, a:hover, a:visited{
 	float: right;
 	cursor: pointer;
 	margin: 0% 5% 0% 0%;
+	padding:20px;
+	border-radius: 50px;
+	background-color:lightgray;
 }
 
 #flecheLien{

@@ -111,6 +111,9 @@
         <File name="businessAnalyst" src="html/quizzs/businessAnalyst.html" />
         <File name="listeDomaineData" src="html/domaines/listeDomaineData.html" />
         <File name="listeDomaineFinanceOLD" src="html/domaines/listeDomaineFinanceOLD.html" />
+        <File name="analyseQuantitative" src="html/quizzs/analyseQuantitative.html" />
+        <File name="ingenierieFinanciere" src="html/quizzs/ingenierieFinanciere.html" />
+        <File name="trading" src="html/quizzs/trading.html" />
     </Resources>
     <Topics>
         <Topic name="listeDomaineFinance" src="Domaines/listeDomaineFinance.top" topicName="listeDomaineFinance" language="fr_FR" />
@@ -121,4 +124,7 @@
         <Topic name="listeDomaineData" src="Domaines/listeDomaineData.top" topicName="listeDomaineData" language="fr_FR" />
     </Topics>
     <IgnoredPaths />
+    <Translations auto-fill="fr_FR">
+        <Translation name="translation_fr_FR" src="translations/translation_fr_FR.ts" language="fr_FR" />
+    </Translations>
 </Package>

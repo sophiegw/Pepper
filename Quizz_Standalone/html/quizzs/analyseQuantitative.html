@@ -1,0 +1,176 @@
+﻿ <! DOCTYPE html>
+ <html lang = "fr">
+	 <head>
+		<meta charset="UTF-8"/>
+		<script src="../js/jquery-3.1.1.min.js"></script>
+		<script src = "../js/reponseMultiple.js"></script>
+		<script src = "../js/tools.js"></script>
+		<script src="/libs/qimessaging/2/qimessaging.js"></script>
+		<link rel="stylesheet" type="text/css" href="../css/commun.css">
+		<link rel="stylesheet" type="text/css" href="../css/quizzDataScience.css">
+        <!-- CREDITS GOES TO: Icons made by http://www.flaticon.com/authors/eleonor-wang Eleonor Wang from http://www.flaticon.com Flaticon, licensed by http://creativecommons.org/licenses/by/3.0/ Creative Commons BY 3.0 -->
+	 </head>
+	 <title>Quizz Analyse Qantitative</title>
+	 <body data-nbquestions="4" data-metier="analyseQuantitative">
+		<div class="centered">
+			<img id="selonVous" src="../images/entete.png"></img>
+		</div>
+		<img data-quizz="trading" class="sortieQuestionnaire"  redirection="domaines/listeDomaineFinance.html" dialog="listeDomaineFinance" src="../images/out.png"></img>
+		<div class="propositionVisible question1">
+			<p class="question">Un quant passe l’essentiel de son temps à</p>
+			<div class="jeuReponse" data-derniere-question="false">
+				<div class="choixMultiple choix1">
+					<img class="icon" src="../images/cancel.png"></img>
+					<div class="squaredImage" data-reponse="false">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Boire du café</span>
+				</div>
+				</br>
+				<div class="choixMultiple choix2">
+					<img class="icon" src="../images/cancel.png"></img>
+					<div class="squaredImage" data-reponse="false">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Lire des papiers</span>
+				</div>
+				</br>
+				<div class="choixMultiple choix3">
+					<img class="icon" src="../images/checked.png"></img>
+					<div class="squaredImage" data-reponse="vrai" data-value="à Coder">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Coder</span>
+				</div>
+				</br>
+				<div class="choixMultiple choix4">
+					<img class="icon" src="../images/cancel.png"></img>
+					<div class="squaredImage" data-reponse="false">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Réfléchir sur les modèles</span>
+				</div>
+                <img class="submitAnswers" src="../images/verify.png"></img>
+			</div>
+		</div>
+		
+		<div class="propositionVisible question2">
+			<p class="question">Un bon quant réfléchit</p>
+			<div class="jeuReponse" data-derniere-question="false">
+				<div class="choixMultiple choix1">
+					<img class="icon" src="../images/cancel.png"></img>
+					<div class="squaredImage" data-reponse="false">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">En vendeur</span>
+				</div>
+				<br/>
+				<div class="choixMultiple choix2">
+					<img class="icon" src="../images/cancel.png"></img>
+					<div class="squaredImage" data-reponse="false">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">En structureur</span>
+				</div>
+				<br/>
+				<div class="choixMultiple choix3">
+					<img class="icon" src="../images/checked.png"></img>
+					<div class="squaredImage" data-reponse="vrai" data-value="en trèdeure">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">En trader</span>
+				</div>
+				<br/>
+				<div class="choixMultiple choix4">
+					<img class="icon" src="../images/cancel.png"></img>
+					<div class="squaredImage" data-reponse="false">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">En quant</span>
+				</div>
+				<img class="submitAnswers" src="../images/enter-arrow.png"></img>
+			</div>
+		</div>
+		
+		<div class="propositionVisible question3">
+			<p class="question">Face à une question nouvelle, un bon quant trouve l’inspiration</p>
+			<div class="jeuReponse" data-derniere-question="false">
+				<div class="choixMultiple choix1">
+					<img class="icon" src="../images/cancel.png"></img>
+					<div class="squaredImage" data-reponse="false">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Dans les polys des cours de M2</span>
+				</div>
+				<br/>
+				<div class="choixMultiple choix2">
+					<img class="icon" src="../images/checked.png"></img>
+					<div class="squaredImage" data-reponse="vrai" data-value="tu n'as pas de processeur mais ton cerveau fera l'affaire">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">En utilisant son cerveau</span>
+				</div>
+				<br/>
+				<div class="choixMultiple choix3">
+					<img class="icon" src="../images/cancel.png"></img>
+					<div class="squaredImage" data-reponse="false">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">En cherchant sur Wikipedia</span>
+				</div>
+				<br/>
+				<div class="choixMultiple choix3">
+					<img class="icon" src="../images/cancel.png"></img>
+					<div class="squaredImage" data-reponse="false">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">En surfant sur les forums</span>
+				</div>
+				<br/>
+				<img data-quizz="analyseQuantitative" class="sortieQuestionnaire" src="../images/out.png"></img>
+				<img class="submitAnswers" src="../images/enter-arrow.png"></img>
+			</div>
+		</div>
+
+		<div class="propositionVisible question4">
+			<p class="question">Pourquoi les dérivés sont-ils pricés en proba risque-neutre et non en proba historique ?</p>
+			<div class="jeuReponse" data-derniere-question="true">
+				<div class="choixMultiple choix1">
+					<img class="icon" src="../images/cancel.png"></img>
+					<div class="squaredImage" data-reponse="false">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Parce qu’il faut bien se mettre d’accord sur un drift – on choisit le taux sans risque</span>
+				</div>
+				<br/>
+				<div class="choixMultiple choix2">
+					<img class="icon" src="../images/checked.png"></img>
+					<div class="squaredImage" data-reponse="vrai" data-value="le èdge supprime l'exposition au drifte historique">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Parce que le hedge supprime l’exposition au drift historique</span>
+				</div>
+				<br/>
+				<div class="choixMultiple choix3">
+					<img class="icon" src="../images/cancel.png"></img>
+					<div class="squaredImage" data-reponse="false">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Parce que la proba historique est trop subjective</span>
+				</div>
+				<br/>
+				<div class="choixMultiple choix4">
+					<img class="icon" src="../images/cancel.png"></img>
+					<div class="squaredImage" data-reponse="false">
+						<img class="coche" src="../images/circle.png"></img>
+					</div>
+					<span class="reponseMultiple">Parce que le lemme de Girsanov fait disparaître le drift historique</span>
+				</div>
+				<img data-quizz="securite" class="sortieQuestionnaire" src="../images/out.png"></img>
+				<img class="submitAnswers" src="../images/enter-arrow.png"></img>
+			</div>
+		</div>
+		<span id="next"></span>
+			<img id="out"  redirection="domaines/listeDomaineFinance.html" dialog="listeDomaineFinance" src="../images/logout.png"></img>
+	 </body>
+ </html>
