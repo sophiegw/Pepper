@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<package uuid="quizz_rh" version="0.0.0">
+<package version="0.0.0" uuid="quizz_rh">
  <names>
   <name lang="en_US">quizz_rh</name>
   <name lang="fr_FR">quizz_rh</name>

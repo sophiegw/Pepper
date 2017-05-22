@@ -1,11 +1,11 @@
 body {
     overflow: hidden;
 }
-
+/*
 .pastilleChoix:active, .pastilleChoix:focus{
-    background-color: rgba(255, 0, 0, 1);
+    background-color: rgba(235,223,225,0.4);
 }
-
+*/
 #exitApplication{
     display: inline;
     transform: scale(0.35);

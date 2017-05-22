@@ -10,7 +10,6 @@
         <File name="commun" src="html/css/commun.css" />
         <File name="infosQuizzs" src="html/css/infosQuizzs.css" />
         <File name="listeDomaine" src="html/css/listeDomaine.css" />
-        <File name="quizzDataScience" src="html/css/quizzDataScience.css" />
         <File name="quizzMetier" src="html/css/quizzMetier.css" />
         <File name="test" src="html/css/test.png" />
         <File name="arrow-down-sign-to-navigate" src="html/images/arrow-down-sign-to-navigate.png" />
@@ -19,7 +18,6 @@
         <File name="checked" src="html/images/checked.png" />
         <File name="circle" src="html/images/circle.png" />
         <File name="enter-arrow" src="html/images/enter-arrow.png" />
-        <File name="entete" src="html/images/entete.png" />
         <File name="leftArrow" src="html/images/leftArrow.png" />
         <File name="logout" src="html/images/logout.png" />
         <File name="out" src="html/images/out.png" />
@@ -49,7 +47,6 @@
         <File name="listeDomaineFinance" src="html/domaines/listeDomaineFinance.html" />
         <File name="listeDomaineIT" src="html/domaines/listeDomaineIT.html" />
         <File name="soge" src="html/quizzs/soge.html" />
-        <File name="work_in_progress" src="html/images/work_in_progress.jpg" />
         <File name="travaux" src="html/travaux.html" />
         <File name="verify" src="html/images/verify.png" />
         <File name="moa" src="html/quizzs/moa.html" />
@@ -103,10 +100,7 @@
         <File name="calculetteChoix" src="html/calculetteChoix.html" />
         <File name="listeInformationsSG" src="html/listeInformationsSG.html" />
         <File name="OuiNon" src="html/OuiNon.html" />
-        <File name="BlueBlur_by_Rick_Doble" src="html/images/BlueBlur_by_Rick_Doble.jpg" />
         <File name="exitB" src="html/images/exitB.png" />
-        <File name="BlueBlur_by_Rick_Doble_Opa60" src="html/images/BlueBlur_by_Rick_Doble_Opa60.jpg" />
-        <File name="BlueBlur_by_Rick_Doble_Opa60_Model" src="html/images/BlueBlur_by_Rick_Doble_Opa60_Model.png" />
         <File name="circle1" src="html/images/circle1.png" />
         <File name="businessAnalyst" src="html/quizzs/businessAnalyst.html" />
         <File name="listeDomaineData" src="html/domaines/listeDomaineData.html" />
@@ -114,6 +108,18 @@
         <File name="analyseQuantitative" src="html/quizzs/analyseQuantitative.html" />
         <File name="ingenierieFinanciere" src="html/quizzs/ingenierieFinanciere.html" />
         <File name="trading" src="html/quizzs/trading.html" />
+        <File name="test" src="html/comm/test.html" />
+        <File name="communOld" src="html/css/communOld.css" />
+        <File name="quizzDataScienceOld" src="html/css/quizzDataScienceOld.css" />
+        <File name="circleOld" src="html/images/circleOld.png" />
+        <File name="enter-arrowOld" src="html/images/enter-arrowOld.png" />
+        <File name="header" src="html/images/header.png" />
+        <File name="logoutOld" src="html/images/logoutOld.png" />
+        <File name="verifyOld" src="html/images/verifyOld.png" />
+        <File name="comm" src="html/quizzs/comm.css" />
+        <File name="entete" src="html/images/entete.png" />
+        <File name="quizzDataScienceBckp" src="html/css/quizzDataScienceBckp.css" />
+        <File name="quizzDataScience" src="html/css/quizzDataScience.css" />
     </Resources>
     <Topics>
         <Topic name="listeDomaineFinance" src="Domaines/listeDomaineFinance.top" topicName="listeDomaineFinance" language="fr_FR" />

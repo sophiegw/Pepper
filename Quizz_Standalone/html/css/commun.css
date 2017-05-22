@@ -2,8 +2,15 @@ body{
 	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 	/*background-image: url("../images/BlueBlur_by_Rick_Doble_Opa60.jpg");*/
 	background-color: whitesmoke;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+*.dialogable:active, *.dialogable:focus {
+    background-color: rgba(235,223,225,0.4)!important; 
 }
 
+}
 #lienretour{
 	background-color:white;
 }

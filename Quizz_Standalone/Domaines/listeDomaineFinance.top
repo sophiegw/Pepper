@@ -4,7 +4,6 @@ language: frf
 
 concept:(careers) ["vers careers.com" "car irze" "carirze" "carirze point comme" "lien carirze" "carirze" "careers"]
 
-concept:(businessanalyst) ["businessanalyst" "business analiste" "business" "analiste"]
 concept:(modelisateur) ["modelisateur" "modélisateur"]
 concept:(analysequantitative) ["analysequantitative" "analyse" "quantitative"]
 concept:(trading)["trading" "trèdinegue" "trèdine"]
@@ -19,8 +18,6 @@ concept:(easteregg) ["isteure ègue" "isteur aig"]
 
 u:(~careers) $dialogURL=[1;domaines/careersLink.html] Vous pouvez flashé ce q r code pour être redirigé vers le site carirze! 
     u1:(~retour) $dialogURL=[1;domaines/listeDomaineFinance.html] retour
-
-u:(~businessanalyst) $dialogURL=[1;quizzs/businessAnalyst.html] Voici le quizz business analyste $dialogEngaged=[00;listeDomaineFinance]
 
 u:(~modelisateur) $dialogURL=[1;quizzs/modelisateur.html] Voici le quizz modélisateur $dialogEngaged=[00;listeDomaineFinance]
 

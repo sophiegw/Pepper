@@ -14,7 +14,6 @@ body{
 	background-color:#bc162e;
 	font-size:55pt;
 }
-
 .sortieQuestionnaire{
 	display: inline;
 	transform: scale(0.5);
@@ -31,8 +30,8 @@ body{
 	margin-bottom:0.6em;
 	color: black;
 	font-size: 55pt;
-	/*text-align: justify;*/
-	margin: 3% 3% 3% 10%;
+	text-align: center;
+	margin: 0% 1% 3% 10%;
 }
 
 #selonVous, .nextQuestion{

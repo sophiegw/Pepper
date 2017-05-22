@@ -3,7 +3,7 @@ var ip = "192.168.8.103";
 
 $(document).ready(function(){
     createSession()
-    var idleSeconds = 45;
+    var idleSeconds = 60;
 
     $(function(){
       var idleTimer;
