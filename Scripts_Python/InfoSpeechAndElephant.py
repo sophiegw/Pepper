@@ -55,3 +55,6 @@ behavior.runBehavior("elephant")
 
 ## Si le behavior n'est pas reconnu on peut essayer de chercher la liste des installés:
 # print(behavior.getInstalledBehaviors())
+
+RobotPosture = ALProxy("ALRobotPosture", ip, port)
+RobotPosture.goToPosture("Stand",0.5)
