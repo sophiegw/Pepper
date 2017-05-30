@@ -23,7 +23,7 @@ RobotPosture_4 = ALProxy("ALRobotPosture", ip_4, port)
 #DEFINE CLASS THREAD
 class c_thr(Thread):
 #BEGIN Class
-    '''Thread de lancement dune action'''
+    '''Thread de lancement des choregraphies'''
     def __init__(self, ev):
     #BEGIN INIT
         Thread.__init__(self)
@@ -33,7 +33,7 @@ class c_thr(Thread):
     def run(self):
     #BEGIN RUN
         self.event.wait()
-        '''action run prog peeper'''
+        '''inserer la choregraphie'''
         print("set %c %d\n" % (self.name, time.time()))
     #END RUN
 #END Class
