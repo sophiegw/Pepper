@@ -13,9 +13,6 @@ ip_2 = "192.168.8.105"
 ip_3 = "192.168.8.112"
 ip_4 = "192.168.8.105"
 
-#print(behavior_1.getInstalledBehaviors())
-#print(RobotPosture_1.getPostureList())
-
 #DEFINE CLASS THREAD
 class c_thr(Thread):
 #BEGIN Class
@@ -24,21 +21,21 @@ class c_thr(Thread):
     #BEGIN INIT
         Thread.__init__(self)
         self.event = ev
-        self.name = 'A'
+        self.connected = False
         self.port = port
         self.connected = False
     #END INIT
     def run(self):
     #BEGIN RUN
-        try:
+        try: #CHECK CONNECTION
             self.behavior = ALProxy("ALBehaviorManager", self.ip, self.port)
             self.RobotPosture = ALProxy("ALRobotPosture", self.ip, self.port)
             self.speech = ALProxy("ALTextToSpeech", self.ip, self.port)
             self.connected = True
-            print("GOOD CONNECT\n")
+            print("Connection Completed\n")
         except:
             self.connected = False
-            print("BAD TRY\n")
+            print("Connection Failed\n")
             sys.exit()
         self.event.wait()
         '''inserer la choregraphie'''
@@ -69,7 +66,6 @@ thrd_1.start()
 thrd_2.start()
 thrd_3.start()
 #thrd_4.start()
-print("before set\n")
 print("1", thrd_1.connected)
 print("2", thrd_2.connected)
 print("3", thrd_3.connected)
@@ -78,9 +74,7 @@ print("3", thrd_3.connected)
 if (thrd_1.connected == True and thrd_2.connected == True and thrd_3.connected == True):
     ev.set()
     print("after set\n")
-
-
-#thrd_1.join()
-#thrd_2.join()
-#thrd_3.join()
-#thrd_4.join()
+    thrd_1.join()
+    thrd_2.join()
+    thrd_3.join()
+    thrd_4.join()
