@@ -18,7 +18,7 @@ class c_thr(Thread):
     #BEGIN INIT
         Thread.__init__(self)
         self.event = ev
-        self.name = 'A'
+        self.connected = False
         self.port = port
     #END INIT
     def run(self):
@@ -27,7 +27,9 @@ class c_thr(Thread):
             self.behavior = ALProxy("ALBehaviorManager", self.ip, self.port)
             self.RobotPosture = ALProxy("ALRobotPosture", self.ip, self.port)
             self.speech = ALProxy("ALTextToSpeech", self.ip, self.port)
+            self.connected = True
         except:
+            self.connected = False
             self.name = msg
             exit()
         #CHOREGRAPHIE
@@ -55,9 +57,9 @@ thrd_1.start()
 thrd_2.start()
 thrd_3.start()
 thrd_4.start()
-if (thrd_1.name != msg and thrd_2 != msg and thrd_3 != msg and thrd_4 != msg):
+if (thrd_1.connected == True and thrd_2.connected == True and thrd_3.connected == True and thrd_4.connected == True):
     ev.set()
-thrd_1.join()
-thrd_2.join()
-thrd_3.join()
-thrd_4.join()
+    thrd_1.join()
+    thrd_2.join()
+    thrd_3.join()
+    thrd_4.join()
