@@ -1,120 +1,127 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 import sys
 import naoqi
 from naoqi import ALProxy
 import time
 from threading import Thread, Event
 
-port = 9559
+PORT = 9559
+allConnected = True
+names = ["Superman","GrineLanterne","FlashGordone","Batman"]
+ips = ["192.168.8.105","192.168.8.101", "192.168.8.112", "192.168.8.115"]
+#/!\ IP PLUS BAS
 
-#DEFINE CLASS THREAD
 class c_thr(Thread):
 #BEGIN Class
-    '''Thread de lancement des choregraphies'''
-    def __init__(self, ev):
+    def __init__(self):
     #BEGIN INIT
         Thread.__init__(self)
         self.name = "Default"
-        self.event = ev
         self.connected = False
-        self.port = port
+        self.port = PORT
+        self.ip = 0
+        #self.allConnected = allConnected
     #END INIT
+    def dancing(self):
+        self.behavior.runBehavior("techweek/behavior_1")
+    def stop(self):
+    #BEGIN STOP
+        if (self.behavior.isBehaviorRunning("techweek/behavior_1")):
+            self.behavior.stopBehavior("techweek/behavior_1")
+    #END STOP
+    def reset(self):
+    #BEGIN RESET
+        self.stop()
+        if self.AutonomousLife.getState() != "disabled":
+            self.AutonomousLife.setState("disabled")
+        self.Motion.rest()
+    #END RESET
     def run(self):
     #BEGIN RUN
         try: #CHECK CONNECTION
+        #BEGIN TRY
             self.AutonomousLife = ALProxy("ALAutonomousLife", self.ip, self.port)
             self.behavior = ALProxy("ALBehaviorManager", self.ip, self.port)
             self.RobotPosture = ALProxy("ALRobotPosture", self.ip, self.port)
             self.speech = ALProxy("ALTextToSpeech", self.ip, self.port)
+            self.Motion = ALProxy("ALMotion", self.ip, self.port)
             self.connected = True
-            print "Connection to " + self.ip + " Completed\n"
+            print "Connection to " + self.ip + " Completed on " + self.name + ".\n"
+        #END TRY
         except:
+        #BEGIN EXCEPT
             self.connected = False
-            print "Connection to " + self.ip + " Failed\n"
-            sys.exit()
-        self.event.wait()
-        '''inserer la choregraphie'''
-        self.RobotPosture.goToPosture("Crouch", 0.5)
-        #self.RobotPosture.goToPosture("StandZero", 0.5)
-        self.RobotPosture.goToPosture("StandInit", 0.5)
-        #tosay = "Bonjour, je suis" + self.name
-        #self.speech.say(tosay)
-
-        ### UNCOMMENT THE FONCTION YOU WANT TO USE BELOW:
-
-        # self.dancing()
-        # self.stop()
-        # self.reset()
-    def dancing(self):
-        self.behavior.runBehavior("techweek/behavior_1")
-
-    def stop(self):
-        if (self.behavior.isBehaviorRunning("techweek/behavior_1")):
-            self.behavior.stopBehavior("techweek/behavior_1")
-
-    def reset(self):
-        self.stop()
-        if self.AutonomousLife.getState() != "disabled":
-            self.AutonomousLife.setState("disabled")
-        if self.RobotPosture.getPosture() != "Crouch":
-            self.RobotPosture.goToPosture("Crouch", 0.5)
-
+            print "Connection to " + self.ip + " Failed on " + self.name + ".\n"
+        #END EXCEPT
+        ev.wait()
+        if (self.allConnected == True):
+        #BEGIN CHOREGRAPHIE
+            '''INSERT CHOREGRAPHIE (uncomment for play)'''
+            #self.RobotPosture.goToPosture("Crouch", 0.5)
+            #self.RobotPosture.goToPosture("StandZero", 0.5)
+            #self.RobotPosture.goToPosture("StandInit", 0.5)
+            #tosay = "Bonjour, je suis" + self.name
+            #self.speech.say(tosay)
+            self.stop()
+            self.dancing()
+            self.reset()
+        #END CHOREGRAPHIE
     #END RUN
 #END Class
+
 def get_on_all(seq, method, *args, **kwargs):
+#BEGIN START NETHOD IN >= 1 OBJ
     if isinstance(seq, list):
         for obj in seq:
              getattr(obj, method)(*args, **kwargs)
     else:
         getattr(seq, method)(*args, **kwargs)
+#END GET_ON_ALL
 
 def set_on_all(seq, attribute, values):
-    # for index, obj in range(0, len(seq)):
+#BEGIN CHANGE VAR IN >= 1 OBJ
     if isinstance(seq, list):
         for index, obj in enumerate(seq):
             setattr(obj, attribute, values[index])
     else:
         setattr(seq, attribute, values[0])
+#END set_on_all
+
+
+#DEL IN FINAL VERSION
+ips = ["192.168.8.101","192.168.8.1105", "192.168.8.112", "192.168.8.115"]
+
 
 ev = Event()
-thrd_1 = c_thr(ev)
-thrd_2 = c_thr(ev)
-thrd_3 = c_thr(ev)
-thrd_4 = c_thr(ev)
-
+thrd_1 = c_thr()
+thrd_2 = c_thr()
+thrd_3 = c_thr()
+thrd_4 = c_thr()
 allThreads = [thrd_1, thrd_2, thrd_3, thrd_4]
-thrds = allThreads[1:4] #Beware: Last element not included
-names = ["Superman","GrineLanterne","FlashGordone","Batman"]
-ips = ["192.168.8.105","192.168.8.112", "192.168.8.101", "192.168.8.115"]
-
+thrds = allThreads[1:2] #Beware: Last element not included
 set_on_all(thrds, "name", names)
 set_on_all(thrds, "ip", ips)
-# for index, x in enumerate(thrds):
-#     x.name = names[index]
 get_on_all(thrds,"start")
-
-
-time.sleep(2)
-
-## Need "proper and clean" trick to allow for single element (which is not iterable)
+time.sleep(1)
 for x in thrds:
-    print x.name + " " + str(x.connected) + "\n"
-
-
-
-allConnected = True
-for thrd in thrds:
-    if thrd.connected == False :
+#BEGIN EACH THREADS
+    if x.connected == False:
         allConnected = False
-
-if (allConnected):
-    print "All connected"
+#END EACH THREADS
+for x in thrds:
+    x.allConnected = allConnected
+if (allConnected == True):
+#BEGIN EVENT
+    print "All connected."
     ev.set()
-    print "Event sent"
+    print "Event sent.\nChoreography in progress..."
     get_on_all(thrds, "join")
-
+    print("END")
+#END EVENT
 else:
-    print("Not connected")
-    sys.exit()
+#BEGIN KILL THREADS
+    ev.set()
+    print("Not all connected.\n")
+    print("END")
+#END
