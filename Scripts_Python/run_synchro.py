@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import sys
 import naoqi
 from naoqi import ALProxy
 import time
@@ -39,8 +38,8 @@ class c_thr(Thread):
     #END RESET
     def run(self):
     #BEGIN RUN
-        try: #CHECK CONNECTION
-        #BEGIN TRY
+        try:
+        #BEGIN TRY CONNECT
             self.AutonomousLife = ALProxy("ALAutonomousLife", self.ip, self.port)
             self.behavior = ALProxy("ALBehaviorManager", self.ip, self.port)
             self.RobotPosture = ALProxy("ALRobotPosture", self.ip, self.port)
@@ -63,7 +62,6 @@ class c_thr(Thread):
             #self.RobotPosture.goToPosture("StandInit", 0.5)
             #tosay = "Bonjour, je suis" + self.name
             #self.speech.say(tosay)
-            self.stop()
             self.dancing()
             self.reset()
         #END CHOREGRAPHIE
@@ -90,7 +88,7 @@ def set_on_all(seq, attribute, values):
 
 
 #DEL IN FINAL VERSION
-ips = ["192.168.8.101","192.168.8.1105", "192.168.8.112", "192.168.8.115"]
+ips = ["192.168.8.101","192.168.8.105", "192.168.8.112", "192.168.8.115"]
 
 
 ev = Event()
@@ -99,7 +97,7 @@ thrd_2 = c_thr()
 thrd_3 = c_thr()
 thrd_4 = c_thr()
 allThreads = [thrd_1, thrd_2, thrd_3, thrd_4]
-thrds = allThreads[1:2] #Beware: Last element not included
+thrds = allThreads[1:3] #Beware: Last element not included
 set_on_all(thrds, "name", names)
 set_on_all(thrds, "ip", ips)
 get_on_all(thrds,"start")
@@ -116,6 +114,8 @@ if (allConnected == True):
     print "All connected."
     ev.set()
     print "Event sent.\nChoreography in progress..."
+    time.sleep(33)              #SAFETY ON BUG
+    get_on_all(thrds, "reset")  #SAFETY ON BUG
     get_on_all(thrds, "join")
     print("END")
 #END EVENT
