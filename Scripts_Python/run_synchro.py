@@ -36,9 +36,9 @@ class c_thr(Thread):
             sys.exit()
         self.event.wait()
         '''inserer la choregraphie'''
-        #self.RobotPosture.goToPosture("Crouch", 0.5)
+        self.RobotPosture.goToPosture("Crouch", 0.5)
         #self.RobotPosture.goToPosture("StandZero", 0.5)
-        #self.RobotPosture.goToPosture("StandInit", 0.5)
+        self.RobotPosture.goToPosture("StandInit", 0.5)
         #tosay = "Bonjour, je suis" + self.name
         #self.speech.say(tosay)
 
