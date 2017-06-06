@@ -5,6 +5,7 @@ from naoqi import ALProxy
 import time
 from threading import Thread, Event
 
+NB_BOTS = 4
 PORT = 9559
 allConnected = True
 names = ["Superman","GrineLanterne","FlashGordone","Batman"]
@@ -36,6 +37,11 @@ class c_thr(Thread):
             self.AutonomousLife.setState("disabled")
         self.Motion.rest()
     #END RESET
+    def debug(self):
+        if (self.behavior.isBehaviorRunning("techweek/behavior_1")):
+            self.behavior.stopBehavior("techweek/behavior_1")
+            print self.name + " IS DEAD INSIDE, KILL HIM NOW !"
+            self.reset()
     def run(self):
     #BEGIN RUN
         try:
@@ -89,7 +95,7 @@ def set_on_all(seq, attribute, values):
 
 #DEL IN FINAL VERSION
 ips = ["192.168.8.101","192.168.8.105", "192.168.8.112", "192.168.8.115"]
-
+NB_BOTS = 2
 
 ev = Event()
 thrd_1 = c_thr()
@@ -97,7 +103,7 @@ thrd_2 = c_thr()
 thrd_3 = c_thr()
 thrd_4 = c_thr()
 allThreads = [thrd_1, thrd_2, thrd_3, thrd_4]
-thrds = allThreads[1:3] #Beware: Last element not included
+thrds = allThreads[1:NB_BOTS + 1] #Beware: Last element not included
 set_on_all(thrds, "name", names)
 set_on_all(thrds, "ip", ips)
 get_on_all(thrds,"start")
@@ -115,13 +121,12 @@ if (allConnected == True):
     ev.set()
     print "Event sent.\nChoreography in progress..."
     time.sleep(33)              #SAFETY ON BUG
-    get_on_all(thrds, "reset")  #SAFETY ON BUG
+    get_on_all(thrds, "debug")  #SAFETY ON BUG
     get_on_all(thrds, "join")
     print("END")
 #END EVENT
 else:
 #BEGIN KILL THREADS
     ev.set()
-    print("Not all connected.\n")
-    print("END")
+    print("Not all connected.\nEND")
 #END
